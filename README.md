@@ -16,4 +16,5 @@ The project is being developed by a team of full-stack web developers at Unity O
 - [ ] Menu Page
 - [ ] Delivery Request Page
 - [ ] Admin Page
-- [x] Wala nay dignity
+- [x] Wala nang dignity
+
