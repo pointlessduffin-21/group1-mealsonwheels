@@ -16,6 +16,18 @@ public class Member {
 	private String contact;
 	private String health_issue;
 	
+	public Member {
+		
+	}
+	
+	public Member(int mem_id, String name, String address, String contact, String health_issue) {
+		this.mem_id =mem_id;
+		this.name =name;
+		this.address =address;
+		this.contact =contact;
+		this.health_issue =health_issue;
+	}
+	
 	public int getMem_id() {
 		return mem_id;
 	}
