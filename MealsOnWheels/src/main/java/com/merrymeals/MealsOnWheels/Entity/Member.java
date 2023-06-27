@@ -16,7 +16,7 @@ public class Member {
 	private String contact;
 	private String health_issue;
 	
-	public Member {
+	public Member() {
 		
 	}
 	
