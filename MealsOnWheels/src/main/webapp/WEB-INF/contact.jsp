@@ -1,30 +1,16 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Contact</title>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-  <style>  
-    body{
-        background-image: url("/pics/bg.jpg");
-        background-size: cover;
-        background-position: center;
-        background-attachment: fixed;
-        margin: 0;
-        padding: 0;
-    }
+<%@ page contentType="text/html; charset=US-ASCII"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec"
+           uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 
-    .rounded-borders {
-    background-color: #f5f5f5;
-    border-radius: 10px;
-    padding: 20px;
-  }
-</style>
-</head>
-<body>
+<!--
+    Contact Us Page
+    by BustinMeksmefilgud (Sebastian Seth Esacrro)
+-->
+
+<%@ include file="header.jsp"%>
+
 <div class="container">
 
     <h2 class="mt-5 text-danger">Contact Us</h2>
@@ -60,7 +46,6 @@
     Secret! but empty... Like my Soul
   </div>
 
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+<%@ include file="footer.jsp"%>
 </body>
 </html>
