@@ -8,7 +8,7 @@ public class MainController {
  
 	@GetMapping("/")
 	public String landing() {
-		return "index";
+		return "index.jsp";
 	}
 	
 	@GetMapping("/dashboard")
