@@ -52,6 +52,19 @@ public class Funds {
 	public void setDate(String date) {
 		this.date = date;
 	}
-	
+
+	public double addDonation(double donation) {
+		return this.donation += donation;
+	}
+
+	public double subtractDonation(double donation) {
+		return this.donation -= donation;
+	}
+
+	@Override
+	public String toString() {
+		return "Funds [f_id=" + f_id + ", donation=" + donation + ", u_id=" + u_id + ", date=" + date + "]";
+	}
+
 	
 }
