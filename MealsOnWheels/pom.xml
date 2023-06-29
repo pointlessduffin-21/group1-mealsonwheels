@@ -12,7 +12,7 @@
 	<artifactId>MealsOnWheels</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>MealsOnWheels</name>
-	<description>A Spring Boot application for Meals on Wheels</description>
+	<description>Does meals do be on wheels</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
