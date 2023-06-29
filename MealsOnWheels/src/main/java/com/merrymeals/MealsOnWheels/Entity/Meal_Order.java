@@ -85,5 +85,7 @@ public class Meal_Order {
 		Volunteer = volunteer;
 	}
 	
-	
+	public String toString() {
+		return "Meal Order: " + ml_id + " " + meal_details + " " + date + " " + Member + " " + Partner + " " + Volunteer;
+	}
 }
