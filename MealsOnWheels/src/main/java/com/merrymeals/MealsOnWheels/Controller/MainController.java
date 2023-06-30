@@ -6,32 +6,32 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class MainController {
  
-	@GetMapping("/")
+	@GetMapping("")
 	public String landing() {
 		return "index";
 	}
 	
-	@GetMapping("/dashboard")
+	@GetMapping("dashboard")
 	public String homePage() {
 		return "home";
 	}
 	
-	@GetMapping("/login")
+	@GetMapping("login")
 	public String loginPage() {
 		return "login";
 	}
 	
-	@GetMapping("/register")
+	@GetMapping("register")
 	public String registerPage() {
 		return "register";
 	}
 	
-	@GetMapping("/contact")
+	@GetMapping("contact")
 	public String contactUsPage() {
 		return "contact";
 	}
 	
-	@GetMapping("/about")
+	@GetMapping("about")
 	public String aboutUsPage() {
 		return "about";
 	}
