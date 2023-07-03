@@ -1,4 +1,4 @@
-package com.merrymeals.MealsOnWheels.Controller;
+package com.merrymeals.mealsonwheels.Controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +14,7 @@ public class MainController {
 
     @RequestMapping("/dashboard")
     public String homePage() {
-        return "home";
+        return "index";
     }
 
     @RequestMapping("/login")
