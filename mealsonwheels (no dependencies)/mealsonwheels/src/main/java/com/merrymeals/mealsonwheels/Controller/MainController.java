@@ -9,12 +9,12 @@ public class MainController {
 
     @RequestMapping("/")
     public String landing() {
-        return "index";
+        return "Innnnndex";
     }
 
     @RequestMapping("/dashboard")
     public String homePage() {
-        return "index";
+        return "Innnnndex";
     }
 
     @RequestMapping("/login")
@@ -40,5 +40,26 @@ public class MainController {
     @RequestMapping("/volunteer")
     public String volunteerPage() {
         return "volunteer";
+    }
+  
+    =======
+    @RequestMapping("/admin")
+    public String adminPage() {
+        return "admin";
+    }
+
+    @RequestMapping("/member")
+    public String memPage() {
+        return "member";
+    }
+
+    @RequestMapping("/donator")
+    public String donatePage() {
+        return "donator";
+    }
+
+    @RequestMapping("/kitchen")
+    public String kitPage() {
+        return "kitchen";
     }
 }
