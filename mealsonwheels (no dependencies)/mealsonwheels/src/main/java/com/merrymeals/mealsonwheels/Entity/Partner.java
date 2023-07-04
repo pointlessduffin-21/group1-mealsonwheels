@@ -3,13 +3,16 @@ package com.merrymeals.mealsonwheels.Entity;
 import java.util.HashSet;
 import java.util.Set;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
+@Entity
 public class Partner {
 
 	@Id
@@ -21,11 +24,9 @@ public class Partner {
 	private String address;
 	private String contact;
 	
-	@OneToMany
-	@JoinTable( name="partner_volunteer",
-	            joinColumns = @JoinColumn(name = "p_id"),
-	            inverseJoinColumns = @JoinColumn(name = "u_id"))
-	private Set<User> volunteer = new HashSet<>();
+	@ManyToOne
+    @JoinColumn(name = "user_id")
+    private User volunteer;
 
 	
 	public Partner() {
@@ -35,7 +36,7 @@ public class Partner {
 	
 	
 	public Partner(Long p_id, String email, String password, String name, String address, String contact,
-			Set<User> volunteer) {
+			User volunteer) {
 		super();
 		this.p_id = p_id;
 		this.email = email;
@@ -96,11 +97,11 @@ public class Partner {
 		this.contact = contact;
 	}
 
-	public Set<User> getVolunteer() {
+	public User getVolunteer() {
 		return volunteer;
 	}
 
-	public void setVolunteer(Set<User> volunteer) {
+	public void setVolunteer(User volunteer) {
 		this.volunteer = volunteer;
 	}
 
