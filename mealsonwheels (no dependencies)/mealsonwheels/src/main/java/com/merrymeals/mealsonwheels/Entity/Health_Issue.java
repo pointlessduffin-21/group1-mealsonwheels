@@ -9,6 +9,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 
 @Entity
@@ -20,11 +23,10 @@ public class Health_Issue {
 	private String issueDetails;
 	private String allergies;
 	
-	@OneToOne
-	@JoinTable( name="user_issue",
-	            joinColumns = @JoinColumn(name = "hi_id"),
-	            inverseJoinColumns = @JoinColumn(name = "u_id"))
-	private Set<User> user = new HashSet<>();
+	@ManyToOne
+    @JoinColumn(name = "u_id")
+    private User user;
+    
 
 	public Health_Issue() {
 		
@@ -32,7 +34,7 @@ public class Health_Issue {
 	
 	
 	
-	public Health_Issue(Long hi_id, String issueDetails, String allergies, Set<User> user) {
+	public Health_Issue(Long hi_id, String issueDetails, String allergies, User user) {
 		super();
 		this.hi_id = hi_id;
 		this.issueDetails = issueDetails;
@@ -66,11 +68,11 @@ public class Health_Issue {
 		this.allergies = allergies;
 	}
 
-	public Set<User> getUser() {
+	public User getUser() {
 		return user;
 	}
 
-	public void setUser(Set<User> user) {
+	public void setUser(User user) {
 		this.user = user;
 	}
 

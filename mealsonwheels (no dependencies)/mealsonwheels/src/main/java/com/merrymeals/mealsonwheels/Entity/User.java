@@ -34,8 +34,8 @@ public class User {
 	            inverseJoinColumns = @JoinColumn(name = "r_id"))
 	private Set<Role> roles = new HashSet<>();
 	
-	@OneToOne(mappedBy = "user")
-	private Set<Health_Issue> issue = new HashSet<>();
+	@OneToMany(mappedBy = "user")
+    private Set<Health_Issue> issues = new HashSet<>();
 	
 	@OneToMany(mappedBy = "volunteer")
 	private Set<Partner> partner = new HashSet<>();
@@ -58,7 +58,7 @@ public class User {
 		this.address = address;
 		this.contact = contact;
 		this.roles = roles;
-		this.issue = issue;
+		this.issues = issue;
 		this.partner = partner;
 	}
 
@@ -106,12 +106,12 @@ public class User {
 	}
 
 	public Set<Health_Issue> getIssue() {
-		return issue;
+		return issues;
 	}
 
 
 	public void setIssue(Set<Health_Issue> issue) {
-		this.issue = issue;
+		this.issues = issue;
 	}
 
 	public Set<Partner> getPartner() {
@@ -137,7 +137,7 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [u_id=" + u_id + ", email=" + email + ", password=" + password + ", name=" + name + ", address="
-				+ address + ", contact=" + contact + ", roles=" + roles + ", issue=" + issue + ", partner=" + partner
+				+ address + ", contact=" + contact + ", roles=" + roles + ", issue=" + issues + ", partner=" + partner
 				+ "]";
 	}
 
