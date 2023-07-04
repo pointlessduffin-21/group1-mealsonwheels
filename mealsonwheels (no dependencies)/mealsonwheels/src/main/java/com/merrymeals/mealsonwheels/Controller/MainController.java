@@ -9,12 +9,12 @@ public class MainController {
 
     @RequestMapping("/")
     public String landing() {
-        return "Innnnndex";
+        return "index";
     }
 
     @RequestMapping("/dashboard")
     public String homePage() {
-        return "Innnnndex";
+        return "index";
     }
 
     @RequestMapping("/login")
