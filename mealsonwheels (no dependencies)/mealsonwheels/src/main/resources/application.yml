@@ -11,3 +11,6 @@ spring:
     url: jdbc:mysql://100.110.13.2:3306/mow-db
     username: yeems214
     password: roelfrancis100
+jpa:
+  hibernate:
+    ddl-auto: create-drop
