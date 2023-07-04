@@ -1,5 +1,11 @@
+<%--   <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   --%>
+<%-- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> --%>
+<%@ page import="com.merrymeals.mealsonwheels.Entity.Meal" %>
+<%@ page import="java.util.List" %>
+
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
+
 
 <head>
     <meta charset="utf-8">
@@ -11,6 +17,11 @@
     <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    
+    <!-- JSTL -->
+    <%-- <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>  --%>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jstl/1.2/jstl.min.js"></script>
+    
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <!-- Font Awesome icons (free version)-->
@@ -20,9 +31,20 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="css/styles.css" rel="stylesheet" />
+    
 </head>
 
 <body>
+
+<div class="col-4 d-flex justify-content-start ps-5" style="position: relative; top: 150px">
+	<form action="/search" method="get" class="w-75 my-auto ms-3">
+		<input type="text" class="form-control" placeholder="Search someone..." name="searchKey" autocomplete="off" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-title="Tips" data-bs-content="Press enter to continue">
+	</form>
+</div>
+
+<div class="col-12 text-center mt-4" style="position: relative; top: 150px">
+    <h4>Search Key: <%= request.getParameter("searchKey") %></h4>
+</div>
 
 <!-- Navigation-->
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top mb-5" id="mainNav" style="background-color: black;">
@@ -101,6 +123,81 @@
                                     </div>
                                 </div>
                             </div>
+                            
+                            
+<%--   <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+<c:forEach items="${mealResult}" var="meal">
+    <!-- Access individual meal properties using 'meal' variable -->
+    <p>${meal.meal_name}</p>
+    <p>${meal.nutrition}</p>
+    <!-- Add more code here -->
+</c:forEach>  --%>
+
+<% List<Meal> mealResult = (List<Meal>) request.getAttribute("mealResult"); %>
+ 
+<% if (mealResult != null && !mealResult.isEmpty()) { %>
+    <% for (Meal meal : mealResult) { %>
+        <p>Meal Name: <%= meal.getMeal_name() %></p>
+        <p>Nutrition: <%= meal.getNutrition() %></p>
+        <p>Ingredients: <%= meal.getIngredients() %></p>
+        <!-- Add more code here -->
+    <% } %>
+<% } %>
+
+                            
+                            
+                       
+	  
+                            
+                          <%-- <div>
+                          	<%
+    // Accessing mealResult object using scriptlet
+    Meal mealResult = (Meal) request.getAttribute("mealResult");
+%>
+
+<p>Name: <%= mealResult.getMeal_name() %></p>
+<p>Price: <%= mealResult.getIngredients() %></p>
+<p>Description: <%= mealResult.getNutrition() %></p>
+                          </div> --%>
+                            
+                            
+		<div class="container">
+			  	<!--  PEOPLE  -->
+			  	
+				<div class="border p-5 my-5 tab-pane active" id="peopleFeed">
+					<h3 class="mb-4">People</h3>
+			    	<h4>${noMealResult == false ? "No results found for this category." : ""}</h4>
+				   	<c:forEach var="meal" items="${mealResult}">
+				       <div class="row d-flex align-items-center px-5">
+				       			<div style="height: 100px; width: 100px;"
+									class="rounded-circle bg-primary mx-auto col-2">
+									<div class="h-100 fs-1 text-white d-flex justify-content-center"
+										style="width: 100px;position:relative;right:12px">
+										<span style="font-size: 1em;" class="my-auto">${meal.getMeal_name().charAt(0)}</span> 
+										<span style="font-size: 1em;" class="my-auto">${meal.getMeal_name().charAt(1)}</span>
+									</div>
+								</div>
+				           <div class="col-8">
+					           
+					           <div>
+					           		<h4>${meal.getMeal_name()}</h4>
+					           		<p>${meal.getIngredients()}</p>
+					           </div>
+				           </div>
+				           <form action="result" method="post" class="ms-auto col-2">
+				           		<input type="hidden" name="uId" value="${s.getUserId()}">
+					           	<button type="submit" class="btn btn-outline-info ms-auto">View Profile</button>
+						   </form>
+				       	 <hr class="mt-3">
+				       </div>
+			     	</c:forEach>
+				</div>
+		</div> 
+                            
+                            
+                            
+                            
+                            
                         </div>
                         <div class="col-md-2 col-lg-2 col-xl-2 col-xxl-2 mb-4">
                             <div class="d-flex justify-content-between align-items-center mb-3">
@@ -199,6 +296,6 @@
 <script src="https://cdn.reflowhq.com/v2/toolkit.min.js"></script>
 <script src="assets/js/bs-init.js"></script>
 <script src="assets/js/theme.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-
 </html>
