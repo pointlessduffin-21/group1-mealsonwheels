@@ -12,7 +12,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 
 import com.merrymeals.mealsonwheels.Entity.Role;
 
@@ -34,7 +33,7 @@ public class User {
 	            inverseJoinColumns = @JoinColumn(name = "r_id"))
 	private Set<Role> roles = new HashSet<>();
 	
-	@OneToOne(mappedBy = "user")
+	@OneToMany(mappedBy = "user")
 	private Set<Health_Issue> issue = new HashSet<>();
 	
 	@OneToMany(mappedBy = "volunteer")

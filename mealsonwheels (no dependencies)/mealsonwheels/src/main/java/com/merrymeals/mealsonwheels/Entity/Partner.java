@@ -3,6 +3,7 @@ package com.merrymeals.mealsonwheels.Entity;
 import java.util.HashSet;
 import java.util.Set;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -10,6 +11,9 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.OneToMany;
 
+import com.merrymeals.mealsonwheels.Entity.User;
+
+@Entity
 public class Partner {
 
 	@Id

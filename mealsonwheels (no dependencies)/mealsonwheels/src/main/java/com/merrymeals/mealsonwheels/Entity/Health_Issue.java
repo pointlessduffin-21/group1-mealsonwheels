@@ -9,7 +9,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.OneToMany;
+
+import com.merrymeals.mealsonwheels.Entity.User;
 
 @Entity
 public class Health_Issue {
@@ -20,7 +22,7 @@ public class Health_Issue {
 	private String issueDetails;
 	private String allergies;
 	
-	@OneToOne
+	@OneToMany
 	@JoinTable( name="user_issue",
 	            joinColumns = @JoinColumn(name = "hi_id"),
 	            inverseJoinColumns = @JoinColumn(name = "u_id"))
