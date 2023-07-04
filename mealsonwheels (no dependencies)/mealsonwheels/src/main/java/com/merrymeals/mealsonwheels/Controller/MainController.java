@@ -36,4 +36,9 @@ public class MainController {
     public String aboutUsPage() {
         return "about";
     }
+    
+    @RequestMapping("/volunteer")
+    public String volunteerPage() {
+        return "volunteer";
+    }
 }
