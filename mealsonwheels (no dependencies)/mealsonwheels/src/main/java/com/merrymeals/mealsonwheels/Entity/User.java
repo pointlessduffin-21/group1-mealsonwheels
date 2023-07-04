@@ -27,6 +27,7 @@ public class User {
 	private String name;
 	private String address;
 	private String contact;
+	private String age;
 	
 	@ManyToMany
 	@JoinTable( name="user_role",
@@ -40,16 +41,13 @@ public class User {
 	@OneToMany(mappedBy = "volunteer")
 	private Set<Partner> partner = new HashSet<>();
 	
-	
-	
+
 	public User() {
 		
 	}
-	
-	
-	
-	public User(Long u_id, String email, String password, String name, String address, String contact, Set<Role> roles,
-			Set<Health_Issue> issue, Set<Partner> partner) {
+
+	public User(Long u_id, String email, String password, String name, String address, String contact, String age,
+			Set<Role> roles, Set<Health_Issue> issues, Set<Partner> partner) {
 		super();
 		this.u_id = u_id;
 		this.email = email;
@@ -57,10 +55,12 @@ public class User {
 		this.name = name;
 		this.address = address;
 		this.contact = contact;
+		this.age = age;
 		this.roles = roles;
-		this.issues = issue;
+		this.issues = issues;
 		this.partner = partner;
 	}
+
 
 
 
@@ -97,21 +97,30 @@ public class User {
 		this.email = email;
 	}
 
+	
+	
+	public String getAge() {
+		return age;
+	}
+
+	public void setAge(String age) {
+		this.age = age;
+	}
+
+	public Set<Health_Issue> getIssues() {
+		return issues;
+	}
+
+	public void setIssues(Set<Health_Issue> issues) {
+		this.issues = issues;
+	}
+
 	public Set<Role> getRoles(){
 		return roles;
 	}
 
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
-	}
-
-	public Set<Health_Issue> getIssue() {
-		return issues;
-	}
-
-
-	public void setIssue(Set<Health_Issue> issue) {
-		this.issues = issue;
 	}
 
 	public Set<Partner> getPartner() {
@@ -134,12 +143,17 @@ public class User {
 
 
 
+
 	@Override
 	public String toString() {
 		return "User [u_id=" + u_id + ", email=" + email + ", password=" + password + ", name=" + name + ", address="
-				+ address + ", contact=" + contact + ", roles=" + roles + ", issue=" + issues + ", partner=" + partner
-				+ "]";
+				+ address + ", contact=" + contact + ", age=" + age + ", roles=" + roles + ", issues=" + issues
+				+ ", partner=" + partner + "]";
 	}
+
+
+
+	
 
 	
 
