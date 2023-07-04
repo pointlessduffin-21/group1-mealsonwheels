@@ -32,8 +32,6 @@ public class Health_Issue {
 		
 	}
 	
-	
-	
 	public Health_Issue(Long hi_id, String issueDetails, String allergies, User user) {
 		super();
 		this.hi_id = hi_id;
