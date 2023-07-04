@@ -101,104 +101,35 @@
                             </div>
                             <!-- Make it -->
                         </div>
-                        <div class="col-md-8 col-lg-8 col-xl-8 col-xxl-8 mb-4">
-                            <div data-reflow-type="product-search" style="margin: 6px;"></div>
-                            <div class="card-group" style="margin: 16px;">
-                                <div class="card"><img class="card-img-top w-100 d-block" style="max-width: 400px; max-height: 400px;" src="assets/img/air-fryer-crispy-chicken-sandwhich.jpg">
-                                    <div class="card-body">
-                                        <h4 class="card-title">Air Fryer Crispy Chicken Sandwhich</h4>
-                                        <p class="card-text">Yummy chicken and healthy for you</p><button class="btn btn-primary" type="button">Add to cart</button>
-                                    </div>
-                                </div>
-                                <div class="card"><img class="card-img-top w-100 d-block" style="max-width: 400px; max-height: 400px;" src="assets/img/vegan-pizza.jpg">
-                                    <div class="card-body">
-                                        <h4 class="card-title">Vegan Pizza</h4>
-                                        <p class="card-text">Pizza but for people who don't eat meat</p><button class="btn btn-primary" type="button">Add to cart</button>
-                                    </div>
-                                </div>
-                                <div class="card"><img class="card-img-top w-100 d-block" style="max-width: 400px; max-height: 400px;" src="assets/img/healthy-chicken-caserole.jpg">
-                                    <div class="card-body">
-                                        <h4 class="card-title">Healthy Chicken Caserole</h4>
-                                        <p class="card-text">It's chicken, but healthy</p><button class="btn btn-primary" type="button">Add to cart</button>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="col-md-9 col-lg-8 col-xl-8 col-xxl-8 mb-4">
+                           
+                            <% List<Meal> mealResult = (List<Meal>) request.getAttribute("mealResult"); %>
+                            <div style="margin: 16px;">
+						    <% if (mealResult != null && !mealResult.isEmpty()) { %>
+						        <% int count = 0; %>
+						        <% for (Meal meal : mealResult) { %>
+						            <% if (count % 3 == 0) { %>
+						                <div class="row">
+						            <% } %>
+						            <div class="col-sm-4 px-0">
+						                <div class="card"><img class="card-img-top w-100 d-block" style="max-width: 400px; max-height: 400px;" src="assets/img/healthy-chicken-caserole.jpg">
+						                    <div class="card-body">
+						                        <h4 class="card-title"><%= meal.getMeal_name() %></h4>
+						                        <p class="card-text">Nutrition: <%= meal.getNutrition() %></p>
+						                        <p class="card-text">Ingredients: <%= meal.getIngredients() %></p>
+						                        <button class="btn btn-primary" type="button">Add to cart</button>
+						                    </div>
+						                </div>
+						            </div>
+						            <% if (count % 3 == 2 || count == mealResult.size() - 1) { %>
+						                </div>
+						            <% } %>
+						            <% count++; %>
+						        <% } %>
+						    <% } %>
+						</div>             
                             
-                            
-<%--   <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
-<c:forEach items="${mealResult}" var="meal">
-    <!-- Access individual meal properties using 'meal' variable -->
-    <p>${meal.meal_name}</p>
-    <p>${meal.nutrition}</p>
-    <!-- Add more code here -->
-</c:forEach>  --%>
-
-<% List<Meal> mealResult = (List<Meal>) request.getAttribute("mealResult"); %>
- 
-<% if (mealResult != null && !mealResult.isEmpty()) { %>
-    <% for (Meal meal : mealResult) { %>
-        <p>Meal Name: <%= meal.getMeal_name() %></p>
-        <p>Nutrition: <%= meal.getNutrition() %></p>
-        <p>Ingredients: <%= meal.getIngredients() %></p>
-        <!-- Add more code here -->
-    <% } %>
-<% } %>
-
-                            
-                            
-                       
-	  
-                            
-                          <%-- <div>
-                          	<%
-    // Accessing mealResult object using scriptlet
-    Meal mealResult = (Meal) request.getAttribute("mealResult");
-%>
-
-<p>Name: <%= mealResult.getMeal_name() %></p>
-<p>Price: <%= mealResult.getIngredients() %></p>
-<p>Description: <%= mealResult.getNutrition() %></p>
-                          </div> --%>
-                            
-                            
-		<div class="container">
-			  	<!--  PEOPLE  -->
-			  	
-				<div class="border p-5 my-5 tab-pane active" id="peopleFeed">
-					<h3 class="mb-4">People</h3>
-			    	<h4>${noMealResult == false ? "No results found for this category." : ""}</h4>
-				   	<c:forEach var="meal" items="${mealResult}">
-				       <div class="row d-flex align-items-center px-5">
-				       			<div style="height: 100px; width: 100px;"
-									class="rounded-circle bg-primary mx-auto col-2">
-									<div class="h-100 fs-1 text-white d-flex justify-content-center"
-										style="width: 100px;position:relative;right:12px">
-										<span style="font-size: 1em;" class="my-auto">${meal.getMeal_name().charAt(0)}</span> 
-										<span style="font-size: 1em;" class="my-auto">${meal.getMeal_name().charAt(1)}</span>
-									</div>
-								</div>
-				           <div class="col-8">
-					           
-					           <div>
-					           		<h4>${meal.getMeal_name()}</h4>
-					           		<p>${meal.getIngredients()}</p>
-					           </div>
-				           </div>
-				           <form action="result" method="post" class="ms-auto col-2">
-				           		<input type="hidden" name="uId" value="${s.getUserId()}">
-					           	<button type="submit" class="btn btn-outline-info ms-auto">View Profile</button>
-						   </form>
-				       	 <hr class="mt-3">
-				       </div>
-			     	</c:forEach>
-				</div>
-		</div> 
-                            
-                            
-                            
-                            
-                            
-                        </div>
+                     </div>
                         <div class="col-md-2 col-lg-2 col-xl-2 col-xxl-2 mb-4">
                             <div class="d-flex justify-content-between align-items-center mb-3">
                                 <h1 style="color: var(--bs-emphasis-color);width: 50px;">Cart</h1>
