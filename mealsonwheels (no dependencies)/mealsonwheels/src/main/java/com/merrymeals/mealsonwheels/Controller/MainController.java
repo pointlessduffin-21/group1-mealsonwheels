@@ -37,6 +37,12 @@ public class MainController {
         return "about";
     }
     
+    @RequestMapping("/volunteer")
+    public String volunteerPage() {
+        return "volunteer";
+    }
+  
+    =======
     @RequestMapping("/admin")
     public String adminPage() {
         return "admin";
@@ -55,10 +61,5 @@ public class MainController {
     @RequestMapping("/kitchen")
     public String kitPage() {
         return "kitchen";
-    }
-
-    @RequestMapping("/volunteer")
-    public String volPage() {
-        return "volunteer";
     }
 }
