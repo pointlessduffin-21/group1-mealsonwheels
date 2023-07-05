@@ -26,10 +26,23 @@ public class MainController {
         return "index";
     }
 
-    @RequestMapping("/distancematrix")
+    // For Testing purposes (palihug ko remove ani once naa na sa main pages) - Roel
+    @RequestMapping("/distancematrixniroel")
     public String distance() {
-        return "distancematrix";
+        return "distancematrixniroel";
     }
+
+    @RequestMapping("/addfundsniroel")
+    public String funds() {
+        return "addfundsniroel";
+    }
+
+    @RequestMapping("/tablefundsniroel")
+    public String tablefunds() {
+        return "tablefundsniroel";
+    }
+
+    // Diri rni kutob - Roel
 
     @RequestMapping("/dashboard")
     public String homePage() {

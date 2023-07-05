@@ -5,12 +5,13 @@ import com.merrymeals.mealsonwheels.Repository.FundsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/funds")
@@ -37,8 +38,6 @@ public class FundsController {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
-
-
     @PutMapping("/update/{id}")
     public ResponseEntity<Funds> updateFunds(@PathVariable Long id, @RequestBody Funds funds) {
         Funds existingFunds = fundsRepository.findById(id).orElse(null);
@@ -54,7 +53,6 @@ public class FundsController {
         Funds updatedFunds = fundsRepository.save(existingFunds);
         return new ResponseEntity<>(updatedFunds, HttpStatus.OK);
     }
-
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteFunds(@PathVariable Long id) {
