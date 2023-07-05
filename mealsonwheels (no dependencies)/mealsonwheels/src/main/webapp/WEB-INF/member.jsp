@@ -1,5 +1,11 @@
+<%--   <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   --%>
+<%-- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> --%>
+<%@ page import="com.merrymeals.mealsonwheels.Entity.Meal" %>
+<%@ page import="java.util.List" %>
+
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
+
 
 <head>
     <meta charset="utf-8">
@@ -11,6 +17,11 @@
     <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    
+    <!-- JSTL -->
+    <%-- <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>  --%>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jstl/1.2/jstl.min.js"></script>
+    
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <!-- Font Awesome icons (free version)-->
@@ -20,9 +31,20 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="css/styles.css" rel="stylesheet" />
+    
 </head>
 
 <body>
+
+<div class="col-4 d-flex justify-content-start ps-5" style="position: relative; top: 150px">
+	<form action="/search" method="get" class="w-75 my-auto ms-3">
+		<input type="text" class="form-control" placeholder="Search someone..." name="searchKey" autocomplete="off" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-title="Tips" data-bs-content="Press enter to continue">
+	</form>
+</div>
+
+<div class="col-12 text-center mt-4" style="position: relative; top: 150px">
+    <h4>Search Key: <%= request.getParameter("searchKey") %></h4>
+</div>
 
 <!-- Navigation-->
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top mb-5" id="mainNav" style="background-color: black;">
@@ -79,29 +101,35 @@
                             </div>
                             <!-- Make it -->
                         </div>
-                        <div class="col-md-8 col-lg-8 col-xl-8 col-xxl-8 mb-4">
-                            <div data-reflow-type="product-search" style="margin: 6px;"></div>
-                            <div class="card-group" style="margin: 16px;">
-                                <div class="card"><img class="card-img-top w-100 d-block" style="max-width: 400px; max-height: 400px;" src="assets/img/air-fryer-crispy-chicken-sandwhich.jpg">
-                                    <div class="card-body">
-                                        <h4 class="card-title">Air Fryer Crispy Chicken Sandwhich</h4>
-                                        <p class="card-text">Yummy chicken and healthy for you</p><button class="btn btn-primary" type="button">Add to cart</button>
-                                    </div>
-                                </div>
-                                <div class="card"><img class="card-img-top w-100 d-block" style="max-width: 400px; max-height: 400px;" src="assets/img/vegan-pizza.jpg">
-                                    <div class="card-body">
-                                        <h4 class="card-title">Vegan Pizza</h4>
-                                        <p class="card-text">Pizza but for people who don't eat meat</p><button class="btn btn-primary" type="button">Add to cart</button>
-                                    </div>
-                                </div>
-                                <div class="card"><img class="card-img-top w-100 d-block" style="max-width: 400px; max-height: 400px;" src="assets/img/healthy-chicken-caserole.jpg">
-                                    <div class="card-body">
-                                        <h4 class="card-title">Healthy Chicken Caserole</h4>
-                                        <p class="card-text">It's chicken, but healthy</p><button class="btn btn-primary" type="button">Add to cart</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <div class="col-md-9 col-lg-8 col-xl-8 col-xxl-8 mb-4">
+                           
+                            <% List<Meal> mealResult = (List<Meal>) request.getAttribute("mealResult"); %>
+                            <div style="margin: 16px;">
+						    <% if (mealResult != null && !mealResult.isEmpty()) { %>
+						        <% int count = 0; %>
+						        <% for (Meal meal : mealResult) { %>
+						            <% if (count % 3 == 0) { %>
+						                <div class="row">
+						            <% } %>
+						            <div class="col-sm-4 px-0">
+						                <div class="card"><img class="card-img-top w-100 d-block" style="max-width: 400px; max-height: 400px;" src="assets/img/healthy-chicken-caserole.jpg">
+						                    <div class="card-body">
+						                        <h4 class="card-title"><%= meal.getMeal_name() %></h4>
+						                        <p class="card-text">Nutrition: <%= meal.getNutrition() %></p>
+						                        <p class="card-text">Ingredients: <%= meal.getIngredients() %></p>
+						                        <button class="btn btn-primary" type="button">Add to cart</button>
+						                    </div>
+						                </div>
+						            </div>
+						            <% if (count % 3 == 2 || count == mealResult.size() - 1) { %>
+						                </div>
+						            <% } %>
+						            <% count++; %>
+						        <% } %>
+						    <% } %>
+						</div>             
+                            
+                     </div>
                         <div class="col-md-2 col-lg-2 col-xl-2 col-xxl-2 mb-4">
                             <div class="d-flex justify-content-between align-items-center mb-3">
                                 <h1 style="color: var(--bs-emphasis-color);width: 50px;">Cart</h1>
@@ -199,6 +227,6 @@
 <script src="https://cdn.reflowhq.com/v2/toolkit.min.js"></script>
 <script src="assets/js/bs-init.js"></script>
 <script src="assets/js/theme.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-
 </html>
