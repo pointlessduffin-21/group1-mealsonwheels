@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
@@ -26,14 +27,17 @@ public class FundsController {
 
     @PostMapping("/create")
     public ResponseEntity<Map<String, Object>> createFunds(@RequestBody Funds funds) {
+        funds.setDateTime(LocalDateTime.now());
         Funds createdFunds = fundsRepository.save(funds);
         Map<String, Object> response = new HashMap<>();
         response.put("message", "Donation added");
         response.put("name", createdFunds.getName());
         response.put("amount", createdFunds.getAmount());
-        response.put("date", createdFunds.getDate());
+        response.put("date", createdFunds.getDateTime());
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
+
+
 
     @PutMapping("/update/{id}")
     public ResponseEntity<Funds> updateFunds(@PathVariable Long id, @RequestBody Funds funds) {
@@ -45,11 +49,12 @@ public class FundsController {
         }
         existingFunds.setName(funds.getName());
         existingFunds.setAmount(funds.getAmount());
-        existingFunds.setDate(funds.getDate());
+        existingFunds.setDateTime(funds.getDateTime());
         response.put("message", "Donation updated");
         Funds updatedFunds = fundsRepository.save(existingFunds);
         return new ResponseEntity<>(updatedFunds, HttpStatus.OK);
     }
+
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteFunds(@PathVariable Long id) {

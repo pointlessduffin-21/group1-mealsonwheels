@@ -5,6 +5,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 @Entity
 public class Funds {
     @Id
@@ -13,18 +16,18 @@ public class Funds {
     private Long f_id;
     private String name;
     private String amount;
-    private String date;
+    private LocalDateTime dateTime;
 
     public Funds() {
 
     }
 
-    public Funds(Long f_id, String name, String amount, String date) {
+    public Funds(Long f_id, String name, String amount, LocalDateTime dateTime) {
         super();
         this.f_id = f_id;
         this.name = name;
         this.amount = amount;
-        this.date = date;
+        this.dateTime = dateTime;
     }
 
     public Long getF_id() {
@@ -51,15 +54,37 @@ public class Funds {
         this.amount = amount;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public LocalDateTime getDateTime() {
+        return dateTime;
     }
 
-    public String getDate() {
-        return date;
+    public void setDateTime(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
+    }
+
+    public Funds(String name, String amount, LocalDateTime dateTime) {
+        this.name = name;
+        this.amount = amount;
+        this.dateTime = dateTime;
+    }
+
+    public Funds(String name, String amount) {
+        this.name = name;
+        this.amount = amount;
+    }
+
+    public Funds(String name) {
+        this.name = name;
+    }
+
+    public Funds(String name, LocalDateTime dateTime) {
+        this.name = name;
+        this.dateTime = dateTime;
     }
 
     public String toString() {
-    	return "Funds [f_id=" + f_id + ", name=" + name + ", amount=" + amount + ", date=" + date + "]";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String formattedDate = dateTime.format(formatter);
+        return "Funds [f_id=" + f_id + ", name=" + name + ", amount=" + amount + ", date=" + formattedDate + "]";
     }
 }
