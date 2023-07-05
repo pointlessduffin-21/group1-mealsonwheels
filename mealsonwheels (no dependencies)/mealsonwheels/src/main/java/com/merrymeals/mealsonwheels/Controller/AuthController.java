@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.merrymeals.mealsonwheels.Entity.User;
 import com.merrymeals.mealsonwheels.Service.UserService;
 
+import com.merrymeals.mealsonwheels.Service.UserService;
+
 @Controller
 public class AuthController {
 
@@ -22,6 +24,4 @@ public class AuthController {
 	    	return user ;
 	    	
 	    }
-	 
-	 
 }
