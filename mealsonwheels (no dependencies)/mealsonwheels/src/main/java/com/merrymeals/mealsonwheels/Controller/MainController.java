@@ -23,7 +23,12 @@ public class MainController {
 
     @RequestMapping("/")
     public String landing() {
-        return "Innnnndex";
+        return "index";
+    }
+
+    @RequestMapping("/distancematrix")
+    public String distance() {
+        return "distancematrix";
     }
 
     @RequestMapping("/dashboard")

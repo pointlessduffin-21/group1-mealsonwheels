@@ -14,7 +14,7 @@ import java.util.Map;
 public class DistanceMatrixController {
     private final String API_KEY = "AIzaSyBKwt4NuTqH__0QG_rq7MYeVFCNnvX4tVc";
 
-    @GetMapping("/{origin}/{destination}")
+    @PostMapping("/{origin}/{destination}")
     public Object getDistance(@PathVariable String origin, @PathVariable String destination) {
         String url = "https://maps.googleapis.com/maps/api/distancematrix/json?origins="
                 + origin + "&destinations=" + destination + "&key=" + API_KEY;
