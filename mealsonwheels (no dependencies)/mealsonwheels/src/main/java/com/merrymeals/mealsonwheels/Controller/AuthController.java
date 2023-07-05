@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.merrymeals.mealsonwheels.Entity.User;
 import com.merrymeals.mealsonwheels.Service.UserService;
 
-import com.merrymeals.mealsonwheels.Service.UserService;
-
 @Controller
 public class AuthController {
 
@@ -18,10 +16,17 @@ public class AuthController {
 	public UserService us;
 	
 	 @PostMapping("/register_user")
-	    public User registration(@RequestBody User user, @RequestParam("userRole") String role) {
-	    	
+	    public String registration(@RequestBody User user, @RequestParam("userRole") String role) {
 		 us.saveUser(user,role);	
-	    	return user ;
+	    	return "login" ;
 	    	
 	    }
+	 
+	 @PostMapping("/sign")
+	 	public String login(@RequestBody User user) {
+		 if (us.loginUser(user.getEmail(), user.getPassword())) {
+	    		return "Succ";
+	    	}
+	    	return "Failure";
+	 }
 }
