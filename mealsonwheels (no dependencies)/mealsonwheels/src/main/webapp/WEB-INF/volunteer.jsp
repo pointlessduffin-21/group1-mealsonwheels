@@ -47,15 +47,15 @@
 						<div class="col-md-6 col-xl-6 col-xxl-6 mb-4">
 							<div class="card shadow border-start-primary py-2">
 								<div class="card-body">
-									<div class="row align-items-center no-gutters">
+									<div class="row align-items-center no-gutters ps-3">
 										<div class="col-auto">
 											<img src="assets/img/avatars/avatar3.jpeg">
 										</div>
-										<div class="col me-2">
-											<div class="text-uppercase text-primary fw-bold text-xs mb-1">
-												<span>VOLUNTEER</span>
+										<div class="col me-2 ps-3">
+											<div class="text-uppercase text-secondary fw-bold text-xs mb-1 fs-5">
+												<span>Allan Doe</span>
 											</div>
-											<span>Allan Doe</span>
+											<span>Volunteer</span>
 											<div class="text-dark fw-bold h5 mb-0"></div>
 										</div>
 									</div>
@@ -65,7 +65,7 @@
 						<div class="col-md-6 col-xl-6 col-xxl-6 offset-xxl-0 mb-4">
 							<div class="card shadow border-start-success py-2">
 								<div class="card-body">
-									<div class="row align-items-center no-gutters">
+									<div class="row align-items-center no-gutters ps-3">
 										<div class="col-auto">
 											<i class="fas fa-user-check fa-2x text-gray-300"></i>
 										</div>
@@ -76,7 +76,7 @@
 											<div class="text-dark fw-bold h5 mb-0">
 												<div class="dropdown">
 													<button id="status-btn"
-														class="btn btn-primary dropdown-toggle"
+														class="btn text-white dropdown-toggle"
 														aria-expanded="false" data-bs-toggle="dropdown"
 														type="button"
 														style="height: 41px; background: #5ec58f; font-size: 18px;">Available</button>
@@ -116,7 +116,7 @@
 										<h6 class="text-secondary fw-bold m-0"
 											style="color: rgb(45, 237, 42);">Incoming</h6>
 									</div>
-									<ul class="list-group list-group-flush">
+									<ul class="list-group list-group-flush ps-3">
 										<!-- Order 1 -->
 										<li class="list-group-item">
 											<div class="row align-items-center no-gutters">
@@ -130,13 +130,13 @@
 													<p>1pcs 12" Pizza</p>
 												</div>
 												<div class="col-xxl-4 offset-xxl-0">
-													<button class="btn btn-primary" type="button"
-														style="background: rgb(121, 195, 147); width: 126.037px; padding: 6px 12px; margin: 10px;">Accept
-														Order</button>
-													<button class="btn btn-primary" type="button"
-														style="background: rgb(195, 125, 121); width: 127.438px; padding: 6px 12px; margin: 9px;"
+													<button class="btn btn-success" type="button"
+														style="width: 126.037px; padding: 6px 12px; margin: 10px;">Accept
+														</button>
+													<button class="btn btn-danger" type="button"
+														style="width: 127.438px; padding: 6px 12px; margin: 9px;"
 														data-bs-toggle="modal" data-bs-target="#declineModal1">Decline
-														Order</button>
+														</button>
 												</div>
 											</div>
 										</li>
@@ -153,13 +153,13 @@
 													<p>1pcs 12" Pizza</p>
 												</div>
 												<div class="col-xxl-4 offset-xxl-0">
-													<button class="btn btn-primary" type="button"
-														style="background: rgb(121, 195, 147); width: 126.037px; padding: 6px 12px; margin: 10px;">Accept
-														Order</button>
-													<button class="btn btn-primary" type="button"
-														style="background: rgb(195, 125, 121); width: 127.438px; padding: 6px 12px; margin: 9px;"
-														data-bs-toggle="modal" data-bs-target="#declineModal2">Decline
-														Order</button>
+													<button class="btn btn-success" type="button"
+														style="width: 126.037px; padding: 6px 12px; margin: 10px;">Accept
+														</button>
+													<button class="btn btn-danger" type="button"
+														style="width: 127.438px; padding: 6px 12px; margin: 9px;"
+														data-bs-toggle="modal" data-bs-target="#declineModal1">Decline
+														</button>
 												</div>
 											</div>
 										</li>
@@ -176,13 +176,13 @@
 													<p>1pcs 12" Pizza</p>
 												</div>
 												<div class="col-xxl-4 offset-xxl-0">
-													<button class="btn btn-primary" type="button"
-														style="background: rgb(121, 195, 147); width: 126.037px; padding: 6px 12px; margin: 10px;">Accept
-														Order</button>
-													<button class="btn btn-primary" type="button"
-														style="background: rgb(195, 125, 121); width: 127.438px; padding: 6px 12px; margin: 9px;"
-														data-bs-toggle="modal" data-bs-target="#declineModal3">Decline
-														Order</button>
+													<button class="btn btn-success" type="button"
+														style="width: 126.037px; padding: 6px 12px; margin: 10px;">Accept
+														</button>
+													<button class="btn btn-danger" type="button"
+														style="width: 127.438px; padding: 6px 12px; margin: 9px;"
+														data-bs-toggle="modal" data-bs-target="#declineModal1">Decline
+														</button>
 												</div>
 											</div>
 										</li>
@@ -265,7 +265,7 @@
 									<div class="card-header py-3">
 										<h6 class="text-secondary fw-bold m-0">Ongoing</h6>
 									</div>
-									<ul class="list-group list-group-flush">
+									<ul class="list-group list-group-flush ps-3">
 										<!-- Order 1 -->
 										<li class="list-group-item">
 											<div class="row align-items-center no-gutters">
@@ -279,8 +279,8 @@
 													<p>1pcs 12" Pizza</p>
 												</div>
 												<div class="col-xxl-4 offset-xxl-0">
-													<button class="btn btn-primary" type="button"
-														style="background: rgb(195, 125, 121); width: 127.438px; padding: 6px 12px; margin: 9px;"
+													<button class="btn btn-danger" type="button"
+														style="width: 127.438px; padding: 6px 12px; margin: 9px;"
 														data-bs-toggle="modal" data-bs-target="#declineModal1">Cancel
 														Order</button>
 												</div>
@@ -299,9 +299,9 @@
 													<p>1pcs 12" Pizza</p>
 												</div>
 												<div class="col-xxl-4 offset-xxl-0">
-													<button class="btn btn-primary" type="button"
-														style="background: rgb(195, 125, 121); width: 127.438px; padding: 6px 12px; margin: 9px;"
-														data-bs-toggle="modal" data-bs-target="#declineModal2">Cancel
+													<button class="btn btn-danger" type="button"
+														style="width: 127.438px; padding: 6px 12px; margin: 9px;"
+														data-bs-toggle="modal" data-bs-target="#declineModal1">Cancel
 														Order</button>
 												</div>
 											</div>
@@ -319,9 +319,9 @@
 													<p>1pcs 12" Pizza</p>
 												</div>
 												<div class="col-xxl-4 offset-xxl-0">
-													<button class="btn btn-primary" type="button"
-														style="background: rgb(195, 125, 121); width: 127.438px; padding: 6px 12px; margin: 9px;"
-														data-bs-toggle="modal" data-bs-target="#declineModal3">Cancel
+													<button class="btn btn-danger" type="button"
+														style="width: 127.438px; padding: 6px 12px; margin: 9px;"
+														data-bs-toggle="modal" data-bs-target="#declineModal1">Cancel
 														Order</button>
 												</div>
 											</div>
@@ -405,7 +405,7 @@
 									<div class="card-header py-3">
 										<h6 class="text-secondary fw-bold m-0">History</h6>
 									</div>
-									<ul class="list-group list-group-flush">
+									<ul class="list-group list-group-flush ps-3">
 										<!-- Order 1 -->
 										<li class="list-group-item">
 											<div class="row align-items-center no-gutters">
@@ -419,7 +419,7 @@
 													<p>1pcs 12" Pizza</p>
 												</div>
 												<div class="col-xxl-4 offset-xxl-0">
-													<button class="btn btn-primary" type="button"
+													<button class="btn text-white" type="button"
 														style="background: rgb(86, 114, 216); width: 126.037px; padding: 6px 12px; margin: 10px;"
 														data-bs-toggle="modal" data-bs-target="#orderModal1">
 														View Order</button>
@@ -439,9 +439,9 @@
 													<p>1pcs 12" Pizza</p>
 												</div>
 												<div class="col-xxl-4 offset-xxl-0">
-													<button class="btn btn-primary" type="button"
+													<button class="btn text-white" type="button"
 														style="background: rgb(86, 114, 216); width: 126.037px; padding: 6px 12px; margin: 10px;"
-														data-bs-toggle="modal" data-bs-target="#orderModal2">
+														data-bs-toggle="modal" data-bs-target="#orderModal1">
 														View Order</button>
 												</div>
 											</div>
@@ -459,9 +459,9 @@
 													<p>1pcs 12" Pizza</p>
 												</div>
 												<div class="col-xxl-4 offset-xxl-0">
-													<button class="btn btn-primary" type="button"
+													<button class="btn text-white" type="button"
 														style="background: rgb(86, 114, 216); width: 126.037px; padding: 6px 12px; margin: 10px;"
-														data-bs-toggle="modal" data-bs-target="#orderModal3">
+														data-bs-toggle="modal" data-bs-target="#orderModal1">
 														View Order</button>
 												</div>
 											</div>

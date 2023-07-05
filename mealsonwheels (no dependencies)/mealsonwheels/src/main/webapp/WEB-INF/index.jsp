@@ -34,7 +34,7 @@
 			<div class="masthead-subheading">Welcome To Meals On Wheels</div>
 			<div class="masthead-heading text-uppercase" style="font-size: 60px;">Deliver
 				Food In Your Doorstep!</div>
-			<a class="btn btn-secondary btn-xl text-uppercase" href="/register">Regsiter
+			<a class="btn btn-secondary btn-xl text-uppercase" href="/register">Register
 				Now!</a>
 		</div>
 	</header>
