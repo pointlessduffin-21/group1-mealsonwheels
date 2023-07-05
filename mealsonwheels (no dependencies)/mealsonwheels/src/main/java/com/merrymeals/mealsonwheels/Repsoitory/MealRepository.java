@@ -14,7 +14,8 @@ public interface MealRepository extends JpaRepository<Meal, Long>{
 	@Query(value = "SELECT * FROM meal"
 	 		+ " WHERE meal_name LIKE '%' || :key || '%'"
 	 		+ " OR ingredients LIKE '%' || :key || '%'"
-	 		+ " OR nutrition LIKE '%' || :key || '%'")
+	 		+ " OR nutrition LIKE '%' || :key || '%'",
+			 nativeQuery = true)
 	public List<Meal> searchByKey(@Param("key") String key);
 	
 }

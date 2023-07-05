@@ -8,7 +8,7 @@ spring:
       suffix: .jsp
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://100.110.13.2:3306/mow-db
+    url: jdbc:mysql://100.110.13.2:3306/mow_db
     username: yeems214
     password: roelfrancis100
   jpa:
@@ -18,3 +18,4 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+
