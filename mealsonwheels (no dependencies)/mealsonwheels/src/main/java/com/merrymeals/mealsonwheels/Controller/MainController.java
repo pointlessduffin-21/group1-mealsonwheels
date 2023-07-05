@@ -42,7 +42,6 @@ public class MainController {
         return "volunteer";
     }
   
-    =======
     @RequestMapping("/admin")
     public String adminPage() {
         return "admin";

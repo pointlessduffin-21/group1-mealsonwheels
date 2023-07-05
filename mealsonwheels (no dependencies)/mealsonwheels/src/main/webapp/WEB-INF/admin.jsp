@@ -1,194 +1,333 @@
 <!DOCTYPE html>
-<html lang="en">
+<html data-bs-theme="light" lang="en">
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-    <title>Meals On Wheels</title>
-    <!-- Favicon-->
-    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-    <!-- Font Awesome icons (free version)-->
-    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-    <!-- Google fonts-->
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
-    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
-    <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="css/styles.css" rel="stylesheet" />
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+<title>Admin Dashboard</title>
+<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
+<link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<!-- Favicon-->
+<link href="https://cdn-icons-png.flaticon.com/512/7541/7541900.png"
+	rel="icon">
+<!-- Font Awesome icons (free version)-->
+<script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
+	crossorigin="anonymous"></script>
+<!-- Google fonts-->
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700"
+	rel="stylesheet" type="text/css" />
+<link
+	href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700"
+	rel="stylesheet" type="text/css" />
+<!-- Core theme CSS (includes Bootstrap)-->
+<link href="css/styles.css" rel="stylesheet" />
 </head>
 
-<body id="page-top">
-<!-- Navigation-->
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
-    <div class="container">
-        <h1 class="text-white fs-2">MOW</h1>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
-                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            Menu
-            <i class="fas fa-bars ms-1"></i>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-                <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
-                <li class="nav-item"><a class="nav-link" href="contact.html">Contact Us</a></li>
-                <li class="nav-item"><a class="nav-link" href="register.html">Register</a></li>
-                <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
-            </ul>
-        </div>
-    </div>
-</nav>
+<body id="page-top" class="dark-mode">
 
-<!-- Masthead-->
-<header class="masthead2">
-    <div class="container">
-        <div class="masthead-heading text-uppercase">about us</div>
-    </div>
-</header>
+	<%@ include file="header.jsp"%>
 
-<section class="page-section bg-light" id="team">
-    <div class="container">
-        <div class="text-center">
-            <h2 class="section-heading text-uppercase">MerryMeals</h2>
-        </div>
-        <div class="row pb-5">
-            <div class="col-lg-8 mx-auto text-center">
-                <p class="large text-muted">MerryMeals is a compassionate and dedicated charitable organization
-                    committed to addressing the nutritional needs of vulnerable adults in our community. With a
-                    mission to provide hot lunch meals to individuals who are unable to cook for themselves due to
-                    age, disease, or disability, MerryMeals offers essential support to ensure no one goes hungry.
-                    Their unwavering dedication, combined with a team of volunteers and innovative enterprise
-                    software, allows MerryMeals to make a positive impact, improve well-being, and promote a sense
-                    of care and dignity for those they serve.</p>
-            </div>
-        </div>
-        <div class="text-center pt-5 pb-4">
-            <h2 class="section-heading text-uppercase">Founder of MerryMeals Charity</h2>
-        </div>
-        <div class="row">
-            <div class="col-lg-4">
-                <div class="team-member">
-                    <img class="mx-auto rounded-circle"
-                         src="https://www.rappler.com/tachyon/2021/08/Jocot_DeDios.jpg" />
-                    <h4>John Doe</h4>
-                    <p class="text-muted">CEO</p>
-                    <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Parveen Anand Twitter Profile"><i
-                            class="fab fa-twitter"></i></a>
-                    <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Parveen Anand Facebook Profile"><i
-                            class="fab fa-facebook-f"></i></a>
-                    <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Parveen Anand LinkedIn Profile"><i
-                            class="fab fa-linkedin-in"></i></a>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="team-member">
-                    <img class="mx-auto rounded-circle"
-                         src="https://techcrunch.com/wp-content/uploads/2017/05/joe-eazor-portrait.jpg" />
-                    <h4>Leonardo Smith</h4>
-                    <p class="text-muted">COO</p>
-                    <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Diana Petersen Twitter Profile"><i
-                            class="fab fa-twitter"></i></a>
-                    <a class="btn btn-dark btn-social mx-2" href="#!"
-                       aria-label="Diana Petersen Facebook Profile"><i class="fab fa-facebook-f"></i></a>
-                    <a class="btn btn-dark btn-social mx-2" href="#!"
-                       aria-label="Diana Petersen LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="team-member">
-                    <img class="mx-auto rounded-circle"
-                         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2__w12YzG6JgnSB_XYgNmfh_x06CvveDV7Q&usqp=CAU" />
-                    <h4>Peter Yu</h4>
-                    <p class="text-muted">Chairman</p>
-                    <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Larry Parker Twitter Profile"><i
-                            class="fab fa-twitter"></i></a>
-                    <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Larry Parker Facebook Profile"><i
-                            class="fab fa-facebook-f"></i></a>
-                    <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Larry Parker LinkedIn Profile"><i
-                            class="fab fa-linkedin-in"></i></a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+	<div id="wrapper" class="container">
+		<div class="d-flex flex-column" id="content-wrapper">
+			<div id="content">
+				<div class="container-fluid">
+					<div
+						class="d-sm-flex justify-content-between align-items-center mb-4"
+						style="margin-bottom: 0px; margin-top: 16px;">
+						<h3 class="text-dark mb-0">Dashboard</h3>
+					</div>
+					<div class="row">
+						<div class="col-md-6 col-xl-6 col-xxl-6 mb-4">
+							<div class="card shadow border-start-primary py-2">
+								<div class="card-body">
+									<div class="row align-items-center no-gutters ps-3">
+										<div class="col-auto">
+											<img src="assets/img/avatars/avatar3.jpeg">
+										</div>
+										<div class="col me-2 ps-3">
+											<div class="text-uppercase text-secondary fw-bold text-xs mb-1 fs-5">
+												<span>Harry Potter</span>
+											</div>
+											<span>Admin</span>
+											<div class="text-dark fw-bold h5 mb-0"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6 col-xl-6 col-xxl-6 mb-4">
+							<div class="card shadow border-start-primary py-2">
+								<div class="card-body">
+									<div class="row align-items-center no-gutters ps-3">
+										<div class="col me-2 ps-3 d-flex justify-content-between" style="padding-top:13px; padding-bottom:13px;">
+											<span>Total Donations:</span>
+											<span class="text-uppercase text-secondary fw-bold text-xs mb-1 fs-5 pe-3">$100,209</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
 
-<footer class="text-center text-lg-start text-muted" style="background-color: black;">
+						<script>
+							function changeStatus(status) {
+								document.getElementById("status-btn").innerHTML = status;
+								if (status === "Available") {
+									document.getElementById("status-btn").style.backgroundColor = "#5ec58f";
+								} else if (status === "Busy") {
+									document.getElementById("status-btn").style.backgroundColor = "orange";
+								} else if (status === "Offline") {
+									document.getElementById("status-btn").style.backgroundColor = "grey";
+								}
+							}
+						</script>
+						<div class="row">
+							<div class="col-lg-6 col-xxl-4 mb-4">
+								<div class="card shadow mb-4"></div>
+								<div class="card shadow mb-4">
+								    <div class="card-header py-3">
+										<h6 class="text-secondary fw-bold m-0"
+											style="color: rgb(45, 237, 42);">Notification</h6>
+									</div>
+								     <div>
+					                    <div class="alert alert-info">New order received</div>
+					                    <div class="alert alert-info">Delivery scheduled</div>
+					                    <!-- Add more notifications here -->
+					                </div>
+								</div>
+							</div>
+							<div class="col-lg-6 col-xxl-4 mb-4">
+								<div class="card shadow mb-4"></div>
+								<div class="card shadow mb-4">
+									<div class="card-header py-3">
+										<h6 class="text-secondary fw-bold m-0"
+											style="color: rgb(45, 237, 42);">Orders To Approve</h6>
+									</div>
+									<ul class="list-group list-group-flush ps-3">
+										<!-- Order 1 -->
+										<li class="list-group-item">
+											<div class="row align-items-center no-gutters">
+												<div class="col-xxl-7 me-2">
+													<p>Order #2142</p>
+													<h6 class="mb-0">
+														<strong>Jane Doe</strong>
+													</h6>
+													<p>Cupertino, California</p>
+													<span class="text-xs">Order</span>
+													<p>1pcs 12" Pizza</p>
+												</div>
+												<div class="col-xxl-4 offset-xxl-0">
+													<button class="btn btn-success" type="button"
+														style="width: 126.037px; padding: 6px 12px; margin: 10px;">Accept
+														</button>
+													<button class="btn btn-danger" type="button"
+														style="width: 127.438px; padding: 6px 12px; margin: 9px;"
+														data-bs-toggle="modal" data-bs-target="#declineModal1">Decline
+														</button>
+												</div>
+											</div>
+										</li>
+										<!-- Order 2 -->
+										<li class="list-group-item">
+											<div class="row align-items-center no-gutters">
+												<div class="col-xxl-7 me-2">
+													<p>Order #2142</p>
+													<h6 class="mb-0">
+														<strong>Jane Doe</strong>
+													</h6>
+													<p>Cupertino, California</p>
+													<span class="text-xs">Order</span>
+													<p>1pcs 12" Pizza</p>
+												</div>
+												<div class="col-xxl-4 offset-xxl-0">
+													<button class="btn btn-success" type="button"
+														style="width: 126.037px; padding: 6px 12px; margin: 10px;">Accept
+														</button>
+													<button class="btn btn-danger" type="button"
+														style="width: 127.438px; padding: 6px 12px; margin: 9px;"
+														data-bs-toggle="modal" data-bs-target="#declineModal1">Decline
+														</button>
+												</div>
+											</div>
+										</li>
+										<!-- Order 3 -->
+										<li class="list-group-item">
+											<div class="row align-items-center no-gutters">
+												<div class="col-xxl-7 me-2">
+													<p>Order #2142</p>
+													<h6 class="mb-0">
+														<strong>Jane Doe</strong>
+													</h6>
+													<p>Cupertino, California</p>
+													<span class="text-xs">Order</span>
+													<p>1pcs 12" Pizza</p>
+												</div>
+												<div class="col-xxl-4 offset-xxl-0">
+													<button class="btn btn-success" type="button"
+														style="width: 126.037px; padding: 6px 12px; margin: 10px;">Accept
+														</button>
+													<button class="btn btn-danger" type="button"
+														style="width: 127.438px; padding: 6px 12px; margin: 9px;"
+														data-bs-toggle="modal" data-bs-target="#declineModal1">Decline
+														</button>
+												</div>
+											</div>
+										</li>
+									</ul>
+								</div>
 
-    <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
-        <div class="me-5 d-none d-lg-block">
-            <span class="text-white">Contact us through our social networking sites:</span>
-        </div>
-        <div>
-            <a href="" class="me-4 text-reset"> <i class="fab fa-facebook-f text-white"></i>
-            </a> <a href="" class="me-4 text-reset"> <i class="fab fa-twitter text-white"></i>
-        </a> <a href="" class="me-4 text-reset"> <i class="fab fa-google text-white"></i>
-        </a> <a href="" class="me-4 text-reset"> <i class="fab fa-instagram text-white"></i>
-        </a> <a href="" class="me-4 text-reset"> <i class="fab fa-linkedin text-white"></i>
-        </a> <a href="" class="me-4 text-reset"> <i class="fab fa-github text-white"></i>
-        </a>
-        </div>
+								<!-- Decline Order Modal 1 -->
+								<div class="modal fade" id="declineModal1" tabindex="-1"
+									aria-labelledby="declineModal1Label" aria-hidden="true">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title" id="declineModal1Label">Are you
+													sure you want to decline this order?</h5>
+												<button type="button" class="btn-close"
+													data-bs-dismiss="modal" aria-label="Close"></button>
+											</div>
+											<div class="modal-body">
+												<!-- Add additional information or warning message here if needed -->
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-secondary"
+													data-bs-dismiss="modal">Cancel</button>
+												<button type="button" class="btn btn-danger">Decline</button>
+											</div>
+										</div>
+									</div>
+								</div>
 
-    </section>
+								<!-- Decline Order Modal 2 -->
+								<div class="modal fade" id="declineModal2" tabindex="-1"
+									aria-labelledby="declineModal2Label" aria-hidden="true">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title" id="declineModal2Label">Are you
+													sure you want to decline this order?</h5>
+												<button type="button" class="btn-close"
+													data-bs-dismiss="modal" aria-label="Close"></button>
+											</div>
+											<div class="modal-body">
+												<!-- Add additional information or warning message here if needed -->
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-secondary"
+													data-bs-dismiss="modal">Cancel</button>
+												<button type="button" class="btn btn-danger">Decline</button>
+											</div>
+										</div>
+									</div>
+								</div>
 
-    <section class="">
-        <div class="container text-center text-md-start mt-5">
+								<!-- Decline Order Modal 3 -->
+								<div class="modal fade" id="declineModal3" tabindex="-1"
+									aria-labelledby="declineModal3Label" aria-hidden="true">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title" id="declineModal3Label">Are you
+													sure you want to decline this order?</h5>
+												<button type="button" class="btn-close"
+													data-bs-dismiss="modal" aria-label="Close"></button>
+											</div>
+											<div class="modal-body">
+												<!-- Add additional information or warning message here if needed -->
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-secondary"
+													data-bs-dismiss="modal">Cancel</button>
+												<button type="button" class="btn btn-danger">Decline</button>
+											</div>
+										</div>
+									</div>
+								</div>
 
-            <div class="row mt-3">
+							</div>
+							<div class="col-lg-6 col-xxl-4 offset-xxl-0 mb-4">
+								<div class="card shadow mb-4"></div>
+								<div class="card shadow mb-4">
+									<div class="card-header py-3">
+										<h6 class="text-secondary fw-bold m-0">Donations</h6>
+									</div>
+									<ul class="list-group list-group-flush ps-3">
+										<!-- Order 1 -->
+										<li class="list-group-item">
+											<div class="row align-items-center no-gutters">
+												<div class="col-xxl-7 me-2">
+													<p>Donation #121</p>
+													<h6 class="mb-0">
+														<strong>Jane Doe</strong>
+													</h6>
+													<p>Cupertino, California</p>
+													<p>$200</p>
+												</div>
+												<div class="col-xxl-4 offset-xxl-0">
+													<button class="btn btn-success" type="button"
+														style="width: 126.037px; padding: 6px 12px; margin: 10px;">Accept
+														</button>
+												</div>
+											</div>
+										</li>
+										<!-- Order 2 -->
+										<li class="list-group-item">
+											<div class="row align-items-center no-gutters">
+												<div class="col-xxl-7 me-2">
+													<p>Order #122</p>
+													<h6 class="mb-0">
+														<strong>Jane Doe</strong>
+													</h6>
+													<p>Cupertino, California</p>
+													<p>$300</p>
+												</div>
+												<div class="col-xxl-4 offset-xxl-0">
+													<button class="btn btn-success" type="button"
+														style="width: 126.037px; padding: 6px 12px; margin: 10px;">Accept
+														</button>
+												</div>
+											</div>
+										</li>
+										<!-- Order 3 -->
+										<li class="list-group-item">
+											<div class="row align-items-center no-gutters">
+												<div class="col-xxl-7 me-2">
+													<p>Order #123</p>
+													<h6 class="mb-0">
+														<strong>Jane Doe</strong>
+													</h6>
+													<p>Cupertino, California</p>
+													<p>$100</p>
+												</div>
+												<div class="col-xxl-4 offset-xxl-0">
+													<button class="btn btn-success" type="button"
+														style="width: 126.037px; padding: 6px 12px; margin: 10px;">Accept
+														</button>
+												</div>
+											</div>
+										</li>
+									</ul>
+								</div>
+							</div>
 
-                <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-                    <h6 class="text-uppercase fw-bold mb-4 text-white">
-                        <i class="fas fa-gem me-3 text-white"></i>Meals On Wheels
-                    </h6>
-                    <p class="text-white">Nourishing Lives: Meals on Wheels Delivers Care and Support</p>
-                </div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+		
+	<%@ include file="footer.jsp"%>
 
-                <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4" id="links">
-                    <h6 class="text-uppercase fw-bold mb-4 text-white">Meals</h6>
-                    <p>
-                        <a href="cars" class="text-white text-decoration-none">Menu</a>
-                    </p>
-                    <p>
-                        <a href="cars" class="text-white text-decoration-none">Partners</a>
-                    </p>
-                </div>
-
-                <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4" id="links">
-                    <h6 class="text-uppercase fw-bold mb-4 text-white">Meals On Wheels</h6>
-                    <p>
-                        <a href="about_us" class="text-white text-decoration-none">About Us</a>
-                    </p>
-                    <p>
-                        <a href="contact_us" class="text-white text-decoration-none">Contact Us</a>
-                    </p>
-
-                </div>
-
-                <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-                    <h6 class="text-uppercase fw-bold mb-4 text-white">Contact</h6>
-                    <p class="text-white">
-                        <i class="fas fa-home me-3 text-white"></i> Philippines, CEBU 10286, PH
-                    </p>
-                    <p class="text-white">
-                        <i class="fas fa-envelope me-3 text-white"></i> mealsonwheels.com
-                    </p>
-                    <p class="text-white">
-                        <i class="fas fa-phone me-3 text-white"></i> + 09 186 562 54
-                    </p>
-                    <p class="text-white">
-                        <i class="fas fa-print me-3 text-white"></i> + 09 825 660 09
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-    <div class="text-center p-4 text-white" style="background-color: rgba(0, 0, 0, 0.05);">
-        &copy; 2023 Copyright: <a class="text-reset fw-bold text-white" href="#">mealsonwheels.com</a>
-    </div>
-</footer>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="js/scripts.js"></script>
-<script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+		<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+		<script src="assets/js/theme.js"></script>
 </body>
 
 </html>
