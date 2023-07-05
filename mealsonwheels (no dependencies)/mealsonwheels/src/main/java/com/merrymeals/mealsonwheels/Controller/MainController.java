@@ -50,6 +50,7 @@ public class MainController {
     public String aboutUsPage() {
         return "about";
     }
+  
     @RequestMapping("/member")
     public String memberDashboard(@RequestParam(required = false) String searchKey, Model model) {
         if (searchKey != null && !searchKey.equals("")) {
@@ -94,4 +95,19 @@ public class MainController {
 		return "redirect:/member";
 		
 	}
+
+    @RequestMapping("/admin")
+    public String adminPage() {
+        return "admin";
+    }
+
+    @RequestMapping("/donator")
+    public String donatePage() {
+        return "donator";
+    }
+
+    @RequestMapping("/kitchen")
+    public String kitPage() {
+        return "kitchen";
+    }
 }
