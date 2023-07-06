@@ -17,9 +17,9 @@ public class AuthController {
 	public UserService us;
 	
 	 @PostMapping("/register_user")
-	    public String registration(@RequestBody User user, @RequestParam("userRole") String role) {
+	    public String registration(User user, @RequestParam("userRole") String role) {
 		 us.saveUser(user,role);	
-	    	return "login" ;	
+	    	return "loginPage" ;	
 	    }
 	 
 	 @PostMapping("/register_partner")
