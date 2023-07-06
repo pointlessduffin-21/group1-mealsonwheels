@@ -15,6 +15,14 @@ public class AuthController {
 
 	@Autowired
 	public UserService us;
+	 
+	 @PostMapping("/register_partner")
+	    public String registration(@RequestBody Partner partner) {
+		 us.savePartner(partner);	
+	    	return "login" ;
+	    	
+	    }
+}
 
 	@PostMapping("/register_user")
 	public String registration(User user, @RequestParam("userRole") String role) {

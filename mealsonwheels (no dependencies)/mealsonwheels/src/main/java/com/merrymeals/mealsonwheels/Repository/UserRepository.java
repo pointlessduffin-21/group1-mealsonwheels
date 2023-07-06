@@ -18,6 +18,14 @@ public interface UserRepository extends JpaRepository<User, Long>{
 	public User findUserByAddress(String address);
 
 	@Query(value="SELECT * FROM user WHERE name = :name",
+<<<<<<< bustinmealorder
+			 nativeQuery = true)
+		public User findUserByName(String name);
+	
+	User findByUserName(String userName);
+}		
+=======
 			nativeQuery = true)
 	public User findUserByName(String name);
 }
+>>>>>>> main

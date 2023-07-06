@@ -13,6 +13,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 
+
 @Entity
 public class Partner {
 
@@ -22,6 +23,7 @@ public class Partner {
 	private String email;
 	private String password;
 	private String name;
+	private String userName;
 	private String address;
 	private String contact;
 
@@ -43,6 +45,7 @@ public class Partner {
 		this.email = email;
 		this.password = password;
 		this.name = name;
+		this.userName = userName;
 		this.address = address;
 		this.contact = contact;
 		this.roles = roles;
@@ -109,6 +112,6 @@ public class Partner {
 	@Override
 	public String toString() {
 		return "Partner [p_id=" + p_id + ", email=" + email + ", password=" + password + ", name=" + name
-				+  ", address=" + address + ", contact=" + contact + ", roles=" + roles + "]";
+				+ ", userName=" + userName + ", address=" + address + ", contact=" + contact + ", roles=" + roles + "]";
 	}
 }

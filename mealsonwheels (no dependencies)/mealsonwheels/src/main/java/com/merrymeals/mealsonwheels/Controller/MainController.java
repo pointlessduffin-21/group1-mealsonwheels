@@ -2,8 +2,6 @@ package com.merrymeals.mealsonwheels.Controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,24 +28,6 @@ public class MainController {
     public String landing() {
         return "index";
     }
-
-    // For Testing purposes (palihug ko remove ani once naa na sa main pages) - Roel
-    @RequestMapping("/distancematrixniroel")
-    public String distance() {
-        return "distancematrixniroel";
-    }
-
-    @RequestMapping("/addfundsniroel")
-    public String funds() {
-        return "addfundsniroel";
-    }
-
-    @RequestMapping("/tablefundsniroel")
-    public String tablefunds() {
-        return "tablefundsniroel";
-    }
-
-    // Diri rni kutob - Roel
 
     @RequestMapping("/dashboard")
     public String homePage() {

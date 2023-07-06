@@ -1,5 +1,7 @@
 package com.merrymeals.mealsonwheels.Entity;
 
+import jakarta.persistence.Column;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,19 +17,31 @@ public class Meal {
 	private String ingredients;
 	private String nutrition;
 	private String p_id;
+  
+	@Column(nullable = true, length = 64)
+	private String photo;
+	
+	@Column(nullable = true, length = 64)
+	private String photoPath;
+	
 
 	public Meal() {
 
 	}
+	
+	public Meal(Long m_id, String meal_name, String ingredients, String nutrition, String p_id, String photo,
+			String photoPath) {
 
-	public Meal(Long m_id, String meal_name, String ingredients, String nutrition, String p_id) {
 		super();
 		this.m_id = m_id;
 		this.meal_name = meal_name;
 		this.ingredients = ingredients;
 		this.nutrition = nutrition;
 		this.p_id = p_id;
+		this.photo = photo;
+		this.photoPath = photoPath;
 	}
+
 	public Long getM_id() {
 		return m_id;
 	}
@@ -59,4 +73,11 @@ public class Meal {
 		this.p_id = p_id;
 	}
 
+	@Override
+	public String toString() {
+		return "Meal [m_id=" + m_id + ", meal_name=" + meal_name + ", ingredients=" + ingredients + ", nutrition="
+				+ nutrition + ", p_id=" + p_id + ", photo=" + photo + ", photoPath=" + photoPath + "]";
+	}
+	
+	
 }
