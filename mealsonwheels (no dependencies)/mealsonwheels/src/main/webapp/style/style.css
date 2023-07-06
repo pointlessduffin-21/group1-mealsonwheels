@@ -129,6 +129,8 @@ p{
 
 .card-detail > h4 > span{
     float: right;
+    position:relative;
+    right:10%;
 }
 
 .card-time{

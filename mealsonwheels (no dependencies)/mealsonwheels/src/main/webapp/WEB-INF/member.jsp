@@ -77,7 +77,7 @@
     <% } %>
     
 	    
-	    <div class=" mx-5">
+	    <div class="mx-5">
 
                             <% List<Meal> mealResult = (List<Meal>) request.getAttribute("mealResults"); %>
                             <div style="margin: 16px;">
@@ -91,7 +91,12 @@
 						                 <div class="dashboard-card">
                         <img class="card-image" src="https://hips.hearstapps.com/hmg-prod/images/classic-cheese-pizza-recipe-2-64429a0cb408b.jpg?crop=0.6666666666666667xw:1xh;center,top&resize=1200:*">
                         <div class="card-detail">
-                            <h4><%= meal.getMeal_name() %><span>$30</span></h4>
+                            <h4><%= meal.getMeal_name() %>
+                            <span>  <form action="result" method="post" class="ms-0 col-2" style="position:relative;left:30%;">
+						           		<input type="hidden" name="uId" value=<% meal.getM_id(); %>>
+							           	<button type="submit" class="btn btn-outline-danger" style="width:100px;font-size:0.5em;">Add to Cart</button>
+								   </form></span>
+                            </h4>
                             <p>Nutrition: <%= meal.getNutrition() %></p>
                             <p class="card-time"><span class="fas fa-carrot"></span><%= meal.getIngredients() %></p>
                         </div>
