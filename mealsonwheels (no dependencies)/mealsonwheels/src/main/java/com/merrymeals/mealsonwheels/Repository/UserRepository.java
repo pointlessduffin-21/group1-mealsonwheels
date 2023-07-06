@@ -10,16 +10,22 @@ import com.merrymeals.mealsonwheels.Entity.User;
 public interface UserRepository extends JpaRepository<User, Long>{
 
 	@Query(value="SELECT * FROM user WHERE email = :email AND password = :password",
-			 nativeQuery = true)
-		public User loginUser(String email, String password);
-	
+			nativeQuery = true)
+	public User loginUser(String email, String password);
+
 	@Query(value="SELECT * FROM user WHERE address = :address",
-			 nativeQuery = true)
-		public User findUserByAddress(String address);
-	
+			nativeQuery = true)
+	public User findUserByAddress(String address);
+
 	@Query(value="SELECT * FROM user WHERE name = :name",
+<<<<<<< bustinmealorder
 			 nativeQuery = true)
 		public User findUserByName(String name);
 	
 	User findByUserName(String userName);
 }		
+=======
+			nativeQuery = true)
+	public User findUserByName(String name);
+}
+>>>>>>> main

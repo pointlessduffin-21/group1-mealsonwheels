@@ -29,16 +29,17 @@ public class Partner {
 
 	@ManyToMany
 	@JoinTable( name="partner_role",
-	            joinColumns = @JoinColumn(name = "p_id"),
-	            inverseJoinColumns = @JoinColumn(name = "r_id"))
+			joinColumns = @JoinColumn(name = "p_id"),
+			inverseJoinColumns = @JoinColumn(name = "r_id"))
 	private Set<Role> roles = new HashSet<>();
-	
+  
 	public Partner() {
-		
+
 	}
-	
+
+
 	public Partner(Long p_id, String email, String password, String name, String userName, String address,
-			String contact, Set<Role> roles) {
+				   String contact, Set<Role> roles) {
 		super();
 		this.p_id = p_id;
 		this.email = email;
@@ -107,16 +108,10 @@ public class Partner {
 		this.roles = roles;
 	}
 
+
 	@Override
 	public String toString() {
 		return "Partner [p_id=" + p_id + ", email=" + email + ", password=" + password + ", name=" + name
 				+ ", userName=" + userName + ", address=" + address + ", contact=" + contact + ", roles=" + roles + "]";
 	}
-
-	
-
-	
-
-	
-	
 }

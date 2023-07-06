@@ -16,7 +16,7 @@ import jakarta.persistence.OneToOne;
 
 @Entity
 public class Health_Issue {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long hi_id;
@@ -24,9 +24,9 @@ public class Health_Issue {
 	private String allergies;
 
 	public Health_Issue() {
-		
+
 	}
-	
+
 	public Health_Issue(Long hi_id, String issueDetails, String allergies, User user) {
 		super();
 		this.hi_id = hi_id;
@@ -66,7 +66,7 @@ public class Health_Issue {
 		return "Health_Issue [hi_id=" + hi_id + ", issueDetails=" + issueDetails + ", allergies=" + allergies
 				+ "]";
 	}
-	
-	
-	
+
+
+
 }

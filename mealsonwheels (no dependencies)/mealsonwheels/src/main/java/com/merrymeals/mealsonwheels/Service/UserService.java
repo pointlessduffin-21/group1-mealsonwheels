@@ -21,12 +21,12 @@ public class UserService {
 
 	@Autowired
 	public RoleRepository rs;
-	
+
 	@Autowired
 	public PartnerRepository pr;
-	
-	
-//	User
+
+
+	//	User
 	public void saveUser(User u, String r) {
 
 		u.setRoles(new HashSet<>(rs.findBySpecificRoles(r)));
@@ -56,31 +56,31 @@ public class UserService {
 		return ur.findByUserName(username);
 	}
 
-	
+
 // Partner
-	
+
 	public void savePartner(Partner p) {
-		
+
 		p.setRoles(new HashSet<>(rs.findBySpecificRoles("Partner")));
 		pr.save(p);
 	}
-	
+
 	public Partner getPartner(Long id) {
 		return pr.findById(id).get();
 	}
-	
+
 	public void deletePartner(Long id) {
 		pr.deleteById(id);
 	}
-	
+
 	public Boolean loginPartner(String email, String password) {
 		Partner partUser = pr.loginPartner(email, password);
 		if (partUser != null) {
 			return true;
 		}
-		
+
 		return false;
-		
+
 	}
-	
+
 }

@@ -15,12 +15,6 @@ public class AuthController {
 
 	@Autowired
 	public UserService us;
-	
-	 @PostMapping("/register_user")
-	    public String registration(User user, @RequestParam("userRole") String role) {
-		 us.saveUser(user,role);	
-	    	return "loginPage" ;	
-	    }
 	 
 	 @PostMapping("/register_partner")
 	    public String registration(@RequestBody Partner partner) {
@@ -28,4 +22,20 @@ public class AuthController {
 	    	return "login" ;
 	    	
 	    }
+}
+
+	@PostMapping("/register_user")
+	public String registration(User user, @RequestParam("userRole") String role) {
+		us.saveUser(user,role);
+		return "login" ;
+
+	}
+
+	@PostMapping("/sign")
+	public String login(@RequestBody User user) {
+		if (us.loginUser(user.getEmail(), user.getPassword())) {
+			return "Succ";
+		}
+		return "Failure";
+	}
 }

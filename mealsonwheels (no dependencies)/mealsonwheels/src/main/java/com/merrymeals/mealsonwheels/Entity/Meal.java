@@ -17,18 +17,21 @@ public class Meal {
 	private String ingredients;
 	private String nutrition;
 	private String p_id;
+  
 	@Column(nullable = true, length = 64)
 	private String photo;
 	
 	@Column(nullable = true, length = 64)
 	private String photoPath;
 	
+
 	public Meal() {
-		
+
 	}
 	
 	public Meal(Long m_id, String meal_name, String ingredients, String nutrition, String p_id, String photo,
 			String photoPath) {
+
 		super();
 		this.m_id = m_id;
 		this.meal_name = meal_name;
