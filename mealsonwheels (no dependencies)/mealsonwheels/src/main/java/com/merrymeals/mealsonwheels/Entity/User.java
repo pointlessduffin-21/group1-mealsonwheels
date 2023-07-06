@@ -36,7 +36,6 @@ public class User {
 			inverseJoinColumns = @JoinColumn(name = "r_id"))
 	private Set<Role> roles = new HashSet<>();
 
-
 	public User() {
 
 	}
@@ -89,7 +88,6 @@ public class User {
 		this.email = email;
 	}
 
-
 	public String getUserName() {
 		return userName;
 	}
@@ -128,17 +126,4 @@ public class User {
 				+ userName + ", address=" + address + ", contact=" + contact + ", age=" + age + ", roles=" + roles
 				+ "]";
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

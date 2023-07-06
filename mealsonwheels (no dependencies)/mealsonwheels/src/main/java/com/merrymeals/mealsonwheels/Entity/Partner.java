@@ -30,10 +30,11 @@ public class Partner {
 			joinColumns = @JoinColumn(name = "p_id"),
 			inverseJoinColumns = @JoinColumn(name = "r_id"))
 	private Set<Role> roles = new HashSet<>();
-
+  
 	public Partner() {
 
 	}
+
 
 	public Partner(Long p_id, String email, String password, String name, String userName, String address,
 				   String contact, Set<Role> roles) {
@@ -94,7 +95,7 @@ public class Partner {
 	public void setContact(String contact) {
 		this.contact = contact;
 	}
-
+	
 
 	public Set<Role> getRoles() {
 		return roles;
@@ -104,16 +105,10 @@ public class Partner {
 		this.roles = roles;
 	}
 
+
 	@Override
 	public String toString() {
 		return "Partner [p_id=" + p_id + ", email=" + email + ", password=" + password + ", name=" + name
 				+  ", address=" + address + ", contact=" + contact + ", roles=" + roles + "]";
 	}
-
-
-
-
-
-
-
 }
