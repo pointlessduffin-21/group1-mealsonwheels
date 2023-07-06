@@ -38,21 +38,6 @@ public class FundsController {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<Funds> updateFunds(@PathVariable Long id, @RequestBody Funds funds) {
-        Funds existingFunds = fundsRepository.findById(id).orElse(null);
-        Map<String, Object> response = new HashMap<>();
-        if (existingFunds == null) {
-            response.put("message", "Donation not found");
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        existingFunds.setName(funds.getName());
-        existingFunds.setAmount(funds.getAmount());
-        existingFunds.setDateTime(funds.getDateTime());
-        response.put("message", "Donation updated");
-        Funds updatedFunds = fundsRepository.save(existingFunds);
-        return new ResponseEntity<>(updatedFunds, HttpStatus.OK);
-    }
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteFunds(@PathVariable Long id) {

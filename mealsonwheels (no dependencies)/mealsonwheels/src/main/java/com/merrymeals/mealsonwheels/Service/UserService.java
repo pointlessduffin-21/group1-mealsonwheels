@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.merrymeals.mealsonwheels.Entity.User;
-import com.merrymeals.mealsonwheels.Repsoitory.UserRepository;
-import com.merrymeals.mealsonwheels.Repsoitory.RoleRepository;
+import com.merrymeals.mealsonwheels.Repository.UserRepository;
+import com.merrymeals.mealsonwheels.Repository.RoleRepository;
 
 @Service
 @Transactional
