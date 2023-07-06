@@ -31,5 +31,12 @@ public class MealService {
 	public List<Meal> searchByKey(String key) {
 		return mealRepo.searchByKey(key);
 	}
+	public List<Meal> search(String key) {
+		return mealRepo.search(key);
+	}
+	
+	public List<Meal> getAllMeals() {
+		return mealRepo.findAll();
+	}
 	
 }

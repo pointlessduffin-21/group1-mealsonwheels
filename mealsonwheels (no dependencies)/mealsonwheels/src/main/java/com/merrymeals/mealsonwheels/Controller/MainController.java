@@ -35,6 +35,11 @@ public class MainController {
     public String loginPage() {
         return "login";
     }
+    
+    @RequestMapping("/admin")
+    public String adminDashboard() {
+        return "admin";
+    }
 
     @RequestMapping("/register")
     public String registerPage() {
@@ -50,32 +55,24 @@ public class MainController {
     public String aboutUsPage() {
         return "about";
     }
-    @RequestMapping("/member")
-    public String memberDashboard(@RequestParam(required = false) String searchKey, Model model) {
-        if (searchKey != null && !searchKey.equals("")) {
-            searchKey = searchKey.split(" ")[0];
-
-            List<Meal> mealResult = mealService.searchByKey(searchKey);
-			model.addAttribute("mealResult", mealResult);
-			
-			if(mealResult.size() == 0) {
-				model.addAttribute("noMealResult", true);
-			}
-        }
-
-        return "member";
-    }
-
-    @RequestMapping("/volunteer")
-    public String volunteerDashboard() {
-        return "volunteer";
+    
+    @RequestMapping("/memberTwo")
+    public String memberTwo(Model model) {
+    	
+    	List<Meal> mealResults = mealService.getAllMeals();
+        model.addAttribute("mealResults", mealResults);
+        
+        return "search";
     }
     
-	/*
-	 * @RequestMapping(value="/searchTwo") public List<Meal>
-	 * searchMeal(@RequestParam String searchKey) { List<Meal> mealResult =
-	 * mealService.searchByKey(searchKey); return mealResult; redirect "member"; }
-	 */
+    @RequestMapping("/member")
+    public String memberDashboard(Model model) {
+     
+            List<Meal> mealResults = mealService.getAllMeals();
+            model.addAttribute("mealResults", mealResults);
+			
+        return "member";
+    }
     
     @RequestMapping(value="/search")
 	public String search(@RequestParam String searchKey, Model model) throws Exception {
@@ -83,15 +80,24 @@ public class MainController {
 		if(searchKey != null && !searchKey.equals("")) {
 			searchKey = searchKey.split(" ")[0];
 			
-			List<Meal> mealResult = mealService.searchByKey(searchKey);
-			model.addAttribute("mealResult", mealResult);
+			List<Meal> mealResults = mealService.search(searchKey);
+			model.addAttribute("mealResults", mealResults);
 			
-			if(mealResult.size() == 0) {
-				model.addAttribute("noMealResult", true);
+			if(mealResults.size() == 0) {
+				model.addAttribute("noMealResult", "No results found for this search. Try browsing meals");
+				
+				mealResults = mealService.getAllMeals();
+				model.addAttribute("mealResults", mealResults);
+				return "member";
 			}
 	    }
 		
-		return "redirect:/member";
+		return "member";
 		
 	}
+
+    @RequestMapping("/volunteer")
+    public String volunteerDashboard() {
+        return "volunteer";
+    }
 }

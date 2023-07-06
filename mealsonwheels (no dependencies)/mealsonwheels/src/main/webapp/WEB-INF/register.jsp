@@ -5,6 +5,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
+
 </head>
 <body>
 	<%@ include file="header.jsp"%>
@@ -17,25 +18,33 @@
 
         <div class='row justify-content-evenly mt-5'>
             <hr class="col-3 py-2 mb-0"></hr>
-            <p type="button" class="col-6 py-2 mb-0 text-center" style="position: relative; top: -20px">Don't have an account? Register!</p>
+            <p type="button" class="col-6 py-2 mb-0 text-center" style="position: relative; top: -20px">Don't have an account? Register Now!</p>
             <hr class="col-3 py-2 mb-0"></hr>
         </div>
+        
+        <div class="row d-flex justify-content-between">
+	            <div class="dropdown-center col-6 d-grid mx-auto text-center mb-3">
+				    <label htmlFor='role'>Choose a Role:</label>
+				    <select id="user-role-dropdown" class="rounded text-center" style="padding-top:7px;padding-bottom:7px;">
+					  <option value="Member" selected>Member</option>
+					  <option value="Donator">Donator</option>
+					  <option value="Volunteer">Volunteer/Rider</option>
+					  <option value="Partner">Partner</option>
+					</select>
+					
+				</div>
+	   	</div>
+        
+        <!-- ADD ACTION ON FORMS -->
+        <!-- THIS IS USER REGISTRATION -->
 
-        <form class='m-2'>
-
-            <div class="dropdown-center col-3 mx-auto d-grid text-center mb-3">
-                <label htmlFor='role'>Choose a Role:</label>
-                <button style="height: 40px" class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    User Role
-                </button>
-                <ul class="dropdown-menu dropdown-menu-light">
-                    <li><a class="dropdown-item active" href="#">Member</a></li>
-                    <li><a class="dropdown-item" href="#">Donator</a></li>
-                    <li><a class="dropdown-item" href="#">Volunteer/Rider</a></li>
-                    <li><a class="dropdown-item" href="#">Caregiver</a></li>
-                    <li><a class="dropdown-item" href="#">Kitchen</a></li>
-                </ul>
-            </div>
+        <form class='m-2 user-reg' id="user-registration-form">
+        
+        <div class='row justify-content-evenly mt-5'>
+            <hr class="col-3 py-2 mb-0"></hr>
+            <p type="button" class="col-6 py-2 mb-0 text-center" style="position: relative; top: -20px">Registering as <span class="fw-bold" id="role-span">Member</span></p>
+            <hr class="col-3 py-2 mb-0"></hr>
+        </div>
 
             <div class='row'>
                 <div class='form-group mb-3 col-6'>
@@ -109,7 +118,102 @@
             <button type='submit' class='btn btn-outline-dark px-5 mt-3 col-12'>Register</button>
 
         </form>
+        
+        
+        
+        <!-- THIS IS PARTNER REGISTRATION -->
+        
+        <form class='m-2 partner-reg' style="display: none;" id="partner-registration-form">
+        
+        <div class='row justify-content-evenly mt-5'>
+            <hr class="col-3 py-2 mb-0"></hr>
+            <p type="button" class="col-6 py-2 mb-0 text-center" style="position: relative; top: -20px">Registering as <span class="fw-bold" id="partner-span"></span></p>
+            <hr class="col-3 py-2 mb-0"></hr>
+        </div>
+
+                <div class='form-group mb-3 col-12'>
+                    <label htmlFor='name'>Name</label>
+                    <input
+                            type='text'
+                            class='form-control'
+                            id='name'
+                    />
+                </div>
+
+            <div class="row">
+                <div class='form-group mb-3 col-6'>
+                    <label htmlFor='email'>Email Address</label>
+                    <input
+                            type='email'
+                            class='form-control'
+                            id='email'
+                    />
+                </div>
+
+                <div class='form-group mb-3 col-6'>
+                    <label htmlFor='password'>Password</label>
+                    <input
+                            type='password'
+                            class='form-control'
+                            id='password'
+                    />
+                </div>
+            </div>
+
+                <div class='form-group mb-3 col-12'>
+                    <label htmlFor='contact'>Contact</label>
+                    <input
+                            type='text'
+                            class='form-control'
+                            id='contact'
+                    />
+                </div>
+
+            <div class='form-group mb-3'>
+                <label htmlFor='address'>Address</label>
+                <input
+                        type='text'
+                        class='form-control'
+                        id='address'
+                />
+            </div>
+
+            <button type='submit' class='btn btn-outline-dark px-5 mt-3 col-12'>Register</button>
+
+        </form>
+        
     </div>
 </div>
+
+<script>
+const dropdown = document.getElementById("user-role-dropdown");
+const form1 = document.getElementById("user-registration-form");
+const form2 = document.getElementById("partner-registration-form");
+const button = document.getElementById("partner-role-button");
+const role = document.getElementById("role-span");
+const partner = document.getElementById("partner-span");
+
+dropdown.addEventListener("change", function() {
+  const selectedValue = this.value;
+  if (selectedValue === "Member") {
+    form1.style.display = "block";
+    form2.style.display = "none";
+    role.innerText = selectedValue;
+  } else if (selectedValue === "Donator") {
+	    form1.style.display = "block";
+	    form2.style.display = "none";
+	    role.innerText = selectedValue;
+  } else if (selectedValue === "Volunteer") {
+	    form1.style.display = "block";
+	    form2.style.display = "none";
+	    role.innerText = selectedValue;
+  } else if (selectedValue === "Partner"){
+	  	form1.style.display = "none";
+	  	form2.style.display = "block";
+	    partner.innerText = selectedValue;
+  }
+}); 
+
+</script>
 </body>
 </html>

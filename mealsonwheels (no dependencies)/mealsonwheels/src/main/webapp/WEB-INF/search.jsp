@@ -18,11 +18,6 @@
 <body>
 
 	<%@ include file="header.jsp"%>
-	
-	    <!-- header -->
-        <input type="checkbox" id="cart">
-    	<label for="cart" class="label-cart"><span class="fas fa-shopping-cart"></span></label>
-
     <!-- Main Dashboard -->
     <div class="dashboard">
         <div class="dashboard-banner">
@@ -61,53 +56,44 @@
 	        </div>
 	
 			<div class="col-6 d-flex justify-content-end px-5">
-				
+				<div class="row">
+					<div class="ps-0 col-10">
 						<form action="/search" method="get" class="my-auto ms-3">
 							<input style="width: 500px;" type="text" class="form-control" placeholder="Search meals..." name="searchKey" autocomplete="off" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-title="Tips" data-bs-content="Press enter to continue">
 						</form>
+					</div>
+		    	</div>
 	        </div>
 			
 		</div>
 
-    <% String noMealResult = (String) request.getAttribute("noMealResult"); %>
-    <% if (noMealResult != null) { %>
-        <div class="border rounded text-center py-3 mx-5">
-            <h6 class="fw-bold mb-0"><%= noMealResult %></h6>
-        </div>
-    <% } %>
+       
+	
+	<div class="dashboard-content mx-5">
+	<% String noMealResult = (String) request.getAttribute("noMealResult"); %>
     
-	    
-	    <div class=" mx-5">
-
-                            <% List<Meal> mealResult = (List<Meal>) request.getAttribute("mealResults"); %>
-                            <div style="margin: 16px;">
-						    <% if (mealResult != null && !mealResult.isEmpty()) { %>
-						        <% int count = 0; %>
-						        <% for (Meal meal : mealResult) { %>
-						            <% if (count % 4 == 0) { %>
-						                <div class="row mb-3">
-						            <% } %>
-						            <div class="col-sm-3 pe-1">
-						                 <div class="dashboard-card">
-                        <img class="card-image" src="https://hips.hearstapps.com/hmg-prod/images/classic-cheese-pizza-recipe-2-64429a0cb408b.jpg?crop=0.6666666666666667xw:1xh;center,top&resize=1200:*">
-                        <div class="card-detail">
-                            <h4><%= meal.getMeal_name() %><span>$30</span></h4>
-                            <p>Nutrition: <%= meal.getNutrition() %></p>
-                            <p class="card-time"><span class="fas fa-carrot"></span><%= meal.getIngredients() %></p>
-                        </div>
-                    </div>
-						            </div>
-						            <% if (count % 4 == 3 || count == mealResult.size() - 1) { %>
-						                </div>
-						            <% } %>
-						            <% count++; %>
-						        <% } %>
-						    <% } %>
-						</div>             
-
-                     </div>
-	    
-	</div>
+    <% if (noMealResult != null) { %>
+    	<div class="border rounded text-center py-3">
+			<h6 class="fw-bold"><%= noMealResult %></h6>
+		</div>
+    <% } %>
+                            
+    	<% List<Meal> mealResults = (List<Meal>) request.getAttribute("mealResults"); %>
+    	
+		 	<% if (mealResults != null && !mealResults.isEmpty()) { %>
+				<% for (Meal meals : mealResults) { %>
+		            <div class="dashboard-card">
+		                <img class="card-image" src="https://hips.hearstapps.com/hmg-prod/images/classic-cheese-pizza-recipe-2-64429a0cb408b.jpg?crop=0.6666666666666667xw:1xh;center,top&resize=1200:*">
+		                <div class="card-detail">
+		                    <h4><%= meals.getMeal_name() %><span>$30</span></h4>
+		                    <p>Nutrition: <%= meals.getNutrition() %></p>
+		                    <p class="card-time"><span class="fas fa-carrot"></span><%= meals.getIngredients() %></p>
+		                </div>
+		            </div>
+            	<% } %>
+            <% } %>
+    </div>
+	
 
 
 
