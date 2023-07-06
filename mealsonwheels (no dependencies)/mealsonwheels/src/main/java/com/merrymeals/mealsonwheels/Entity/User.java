@@ -18,7 +18,7 @@ import com.merrymeals.mealsonwheels.Entity.Role;
 
 @Entity
 public class User {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long u_id;
@@ -29,20 +29,19 @@ public class User {
 	private String address;
 	private String contact;
 	private String age;
-	
+
 	@ManyToMany
 	@JoinTable( name="user_role",
-	            joinColumns = @JoinColumn(name = "u_id"),
-	            inverseJoinColumns = @JoinColumn(name = "r_id"))
+			joinColumns = @JoinColumn(name = "u_id"),
+			inverseJoinColumns = @JoinColumn(name = "r_id"))
 	private Set<Role> roles = new HashSet<>();
-		
 
 	public User() {
-		
+
 	}
 
 	public User(Long u_id, String email, String password, String name, String userName, String address, String contact,
-			String age, Set<Role> roles, Set<Health_Issue> issues, Set<Partner> partner) {
+				String age, Set<Role> roles, Set<Health_Issue> issues, Set<Partner> partner) {
 		super();
 		this.u_id = u_id;
 		this.email = email;
@@ -89,7 +88,6 @@ public class User {
 		this.email = email;
 	}
 
-	
 	public String getUserName() {
 		return userName;
 	}
@@ -128,17 +126,4 @@ public class User {
 				+ userName + ", address=" + address + ", contact=" + contact + ", age=" + age + ", roles=" + roles
 				+ "]";
 	}
-
-
-
-
-	
-
-
-
-	
-
-	
-
-	
 }
