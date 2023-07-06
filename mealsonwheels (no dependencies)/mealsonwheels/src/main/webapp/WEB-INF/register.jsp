@@ -21,18 +21,18 @@
             <hr class="col-3 py-2 mb-0"></hr>
         </div>
 
-        <form class='m-2' action="/register_user" method="post" enctype="application/json">
+        <form class='m-2' action="/register_user" method="post">
 
-            <div class="dropdown-center col-3 mx-auto d-grid text-center mb-3">
-                <label htmlFor='userRole'>Choose a Role:</label>
-                <select name="userRole" class="form-control">
-                    <option value="Member">Member</option>
-                    <option value="Donator">Donator</option>
-                    <option value="Volunteer/Rider">Volunteer/Rider</option>
-                    <option value="Caregiver">Caregiver</option>
-                    <option value="Kitchen">Kitchen</option>
-                </select>
-            </div>
+			<div class="dropdown-center col-3 mx-auto d-grid text-center mb-3">
+			    <label htmlFor='userRole'>Choose a Role:</label>
+			    <select name="userRole" class="form-control">
+			        <option value="Member">Member</option>
+			        <option value="Donator">Donator</option>
+			        <option value="Volunteer/Rider">Volunteer/Rider</option>
+			        <option value="Caregiver">Caregiver</option>
+			        <option value="Kitchen">Kitchen</option>
+			    </select>
+			</div>
 
 
             <div class='row'>
