@@ -21,7 +21,7 @@
             <hr class="col-3 py-2 mb-0"></hr>
         </div>
 
-        <form class='m-2' action="/register_user" method="post" enctype="application/json">
+        <form class='m-2' action="/register_user" method="post">
 
             <div class="dropdown-center col-3 mx-auto d-grid text-center mb-3">
                 <label htmlFor='userRole'>Choose a Role:</label>

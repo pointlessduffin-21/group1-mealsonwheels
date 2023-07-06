@@ -2,12 +2,16 @@ package com.merrymeals.mealsonwheels.Entity;
 
 
 
+import java.util.HashSet;
+import java.util.Set;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 
 @Entity
 public class Partner {
@@ -20,20 +24,19 @@ public class Partner {
 	private String name;
 	private String address;
 	private String contact;
-	
-	@ManyToOne
-    @JoinColumn(name = "user_id")
-    private User volunteer;
 
-	
+	@ManyToMany
+	@JoinTable( name="partner_role",
+			joinColumns = @JoinColumn(name = "p_id"),
+			inverseJoinColumns = @JoinColumn(name = "r_id"))
+	private Set<Role> roles = new HashSet<>();
+
 	public Partner() {
-		
+
 	}
-	
-	
-	
-	public Partner(Long p_id, String email, String password, String name, String address, String contact,
-			User volunteer) {
+
+	public Partner(Long p_id, String email, String password, String name, String userName, String address,
+				   String contact, Set<Role> roles) {
 		super();
 		this.p_id = p_id;
 		this.email = email;
@@ -41,10 +44,8 @@ public class Partner {
 		this.name = name;
 		this.address = address;
 		this.contact = contact;
-		this.volunteer = volunteer;
+		this.roles = roles;
 	}
-
-
 
 	public Long getP_id() {
 		return p_id;
@@ -94,21 +95,25 @@ public class Partner {
 		this.contact = contact;
 	}
 
-	public User getVolunteer() {
-		return volunteer;
+
+	public Set<Role> getRoles() {
+		return roles;
 	}
 
-	public void setVolunteer(User volunteer) {
-		this.volunteer = volunteer;
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
 	}
-
-
 
 	@Override
 	public String toString() {
-		return "Partner [p_id=" + p_id + ", email=" + email + ", password=" + password + ", name=" + name + ", address="
-				+ address + ", contact=" + contact + ", volunteer=" + volunteer + "]";
+		return "Partner [p_id=" + p_id + ", email=" + email + ", password=" + password + ", name=" + name
+				+  ", address=" + address + ", contact=" + contact + ", roles=" + roles + "]";
 	}
-	
-	
+
+
+
+
+
+
+
 }

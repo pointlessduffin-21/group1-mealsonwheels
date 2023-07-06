@@ -29,6 +29,9 @@ public class Role {
     @ManyToMany(mappedBy = "roles")
     private Set<User> users = new HashSet<>();
 
+    @ManyToMany(mappedBy = "roles")
+    private Set<Partner> partner = new HashSet<>();
+
     public Role() {
     }
 
@@ -84,8 +87,8 @@ public class Role {
 
     @Override
     public String toString() {
-    	return "Role [id=" + id + ", name=" + name + ", description=" + description + ", users=" + users + "]";
+        return "Role [id=" + id + ", name=" + name + ", description=" + description + ", users=" + users + "]";
     }
 
-    
+
 }
