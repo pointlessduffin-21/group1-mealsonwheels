@@ -21,21 +21,19 @@
             <hr class="col-3 py-2 mb-0"></hr>
         </div>
 
-        <form class='m-2'>
+        <form class='m-2' action="/register_user" method="post">
 
-            <div class="dropdown-center col-3 mx-auto d-grid text-center mb-3">
-                <label htmlFor='role'>Choose a Role:</label>
-                <button style="height: 40px" class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    User Role
-                </button>
-                <ul class="dropdown-menu dropdown-menu-light">
-                    <li><a class="dropdown-item active" href="#">Member</a></li>
-                    <li><a class="dropdown-item" href="#">Donator</a></li>
-                    <li><a class="dropdown-item" href="#">Volunteer/Rider</a></li>
-                    <li><a class="dropdown-item" href="#">Caregiver</a></li>
-                    <li><a class="dropdown-item" href="#">Kitchen</a></li>
-                </ul>
-            </div>
+			<div class="dropdown-center col-3 mx-auto d-grid text-center mb-3">
+			    <label htmlFor='userRole'>Choose a Role:</label>
+			    <select name="userRole" class="form-control">
+			        <option value="Member">Member</option>
+			        <option value="Donator">Donator</option>
+			        <option value="Volunteer/Rider">Volunteer/Rider</option>
+			        <option value="Caregiver">Caregiver</option>
+			        <option value="Kitchen">Kitchen</option>
+			    </select>
+			</div>
+
 
             <div class='row'>
                 <div class='form-group mb-3 col-6'>
@@ -44,6 +42,7 @@
                             type='text'
                             class='form-control'
                             id='name'
+                            name='name'
                     />
                 </div>
 
@@ -53,6 +52,7 @@
                             type='text'
                             class='form-control'
                             id='username'
+                            name='username'
                     />
                 </div>
             </div>
@@ -64,6 +64,7 @@
                             type='email'
                             class='form-control'
                             id='email'
+                            name='email'
                     />
                 </div>
 
@@ -73,6 +74,7 @@
                             type='password'
                             class='form-control'
                             id='password'
+                            name='password'
                     />
                 </div>
             </div>
@@ -84,6 +86,7 @@
                             type='text'
                             class='form-control'
                             id='age'
+                            name='age'
                     />
                 </div>
 
@@ -93,6 +96,7 @@
                             type='text'
                             class='form-control'
                             id='contact'
+                            name='contact'
                     />
                 </div>
             </div>
@@ -103,6 +107,7 @@
                         type='text'
                         class='form-control'
                         id='address'
+                        name='address'
                 />
             </div>
 

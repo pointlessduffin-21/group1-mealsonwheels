@@ -1,4 +1,4 @@
-package com.merrymeals.mealsonwheels.Repsoitory;
+package com.merrymeals.mealsonwheels.Repository;
 
 import java.util.Set;
 

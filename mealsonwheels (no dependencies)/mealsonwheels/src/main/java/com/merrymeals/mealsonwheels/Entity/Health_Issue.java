@@ -22,11 +22,6 @@ public class Health_Issue {
 	private Long hi_id;
 	private String issueDetails;
 	private String allergies;
-	
-	@ManyToOne
-    @JoinColumn(name = "u_id")
-    private User user;
-    
 
 	public Health_Issue() {
 		
@@ -37,7 +32,6 @@ public class Health_Issue {
 		this.hi_id = hi_id;
 		this.issueDetails = issueDetails;
 		this.allergies = allergies;
-		this.user = user;
 	}
 
 
@@ -66,18 +60,11 @@ public class Health_Issue {
 		this.allergies = allergies;
 	}
 
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
 
 	@Override
 	public String toString() {
 		return "Health_Issue [hi_id=" + hi_id + ", issueDetails=" + issueDetails + ", allergies=" + allergies
-				+ ", user=" + user + "]";
+				+ "]";
 	}
 	
 	
