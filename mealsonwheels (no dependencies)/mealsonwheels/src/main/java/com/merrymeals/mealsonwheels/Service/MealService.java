@@ -15,21 +15,24 @@ public class MealService {
 
 	@Autowired
 	MealRepository mealRepo;
-	
+
 	public void save(Meal meal) {
 		mealRepo.save(meal);
 	}
-	
+
 	public Meal get(Long id) {
 		return mealRepo.findById(id).get();
 	}
-	
+
 	public void delete(Long id) {
 		mealRepo.deleteById(id);
 	}
-	
-	public List<Meal> searchByKey(String key) {
-		return mealRepo.searchByKey(key);
+	public List<Meal> search(String key) {
+		return mealRepo.search(key);
 	}
-	
+
+	public List<Meal> getAllMeals() {
+		return mealRepo.findAll();
+	}
+
 }
