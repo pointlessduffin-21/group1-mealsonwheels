@@ -15,11 +15,11 @@ public class Meal {
 	private String ingredients;
 	private String nutrition;
 	private String p_id;
-	
+
 	public Meal() {
-		
+
 	}
-	
+
 	public Meal(Long m_id, String meal_name, String ingredients, String nutrition, String p_id) {
 		super();
 		this.m_id = m_id;
@@ -58,5 +58,5 @@ public class Meal {
 	public void setP_id(String p_id) {
 		this.p_id = p_id;
 	}
-	
+
 }
