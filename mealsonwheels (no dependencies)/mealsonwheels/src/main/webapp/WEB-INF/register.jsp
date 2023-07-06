@@ -1,14 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+         pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+    <meta charset="ISO-8859-1">
+    <title>Insert title here</title>
 </head>
 <body>
-	<%@ include file="header.jsp"%>
-	<div class="align-items-center position-relative" style="height: 100vh; overflow: hidden">
+<%@ include file="header.jsp"%>
+<div class="align-items-center position-relative" style="height: 100vh; overflow: hidden">
     <img class="position-absolute" style="width:100%" src="/assets/img/pot.jpg"/>
     <h1 class="text-white text-center ps-5 pt-5 pb-0 mb-0" style="font-size: 3em; font-weight: 700; position: relative; top: 0px" >REGISTRATION</h1>
 

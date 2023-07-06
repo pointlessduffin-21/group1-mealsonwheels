@@ -16,6 +16,13 @@
     </tr>
     </thead>
     <tbody></tbody>
+    <tfoot>
+    <tr>
+        <td colspan="2">Total:</td>
+        <td id="totalAmount"></td>
+        <td></td>
+    </tr>
+    </tfoot>
 </table>
 
 <script type="text/javascript">
@@ -25,6 +32,7 @@
             type: 'GET',
             success: function(data) {
                 let tableBody = $('#fundsTable tbody');
+                let totalAmount = 0;
                 data.forEach(function(fund) {
                     let row = $('<tr></tr>');
                     row.append($('<td></td>').text(fund.f_id));
@@ -32,7 +40,9 @@
                     row.append($('<td></td>').text(fund.amount));
                     row.append($('<td></td>').text(fund.dateTime));
                     tableBody.append(row);
+                    totalAmount += parseInt(fund.amount); // Parse amount as an integer
                 });
+                $('#totalAmount').text(totalAmount);
             }
         });
     });
