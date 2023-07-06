@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="ff6f6619-11bc-4048-9262-52b136574675" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../../mealsonwheels (no dependencies)/mealsonwheels/src/main/java/com/merrymeals/mealsonwheels/Controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../mealsonwheels (no dependencies)/mealsonwheels/src/main/java/com/merrymeals/mealsonwheels/Controller/AuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../mealsonwheels (no dependencies)/mealsonwheels/src/main/java/com/merrymeals/mealsonwheels/Service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../mealsonwheels (no dependencies)/mealsonwheels/src/main/java/com/merrymeals/mealsonwheels/Service/UserService.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ProjectId" id="2SBgg2TzQsxUnoibUhe9cFNQV8i" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <created>1688625502126</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1688625502126</updated>
+      <workItem from="1688625502129" duration="3000" />
+    </task>
+    <servers />
+  </component>
+</project>
