@@ -41,16 +41,6 @@ public class UserService {
 		ur.deleteById(id);
 	}
 
-//	public Boolean loginUser(String email, String password) {
-//		User logUser = ur.login(email, password);
-//		if (logUser != null) {
-//			return true;
-//		}
-//
-//		return false;
-//
-//	}
-
 	public Boolean loginUser(String email, String password) {
 		User logUser = ur.loginUser(email, password);
 		if (logUser != null) {
@@ -58,6 +48,10 @@ public class UserService {
 		}
 
 		return false;
+	}
+	
+	public User findLoginUser(String username) {
+		return ur.findByUserName(username);
 	}
 
 
@@ -85,6 +79,10 @@ public class UserService {
 
 		return false;
 
+	}
+	
+	public Partner findLoginPartner(String username) {
+		return pr.findByUserName(username);
 	}
 
 }

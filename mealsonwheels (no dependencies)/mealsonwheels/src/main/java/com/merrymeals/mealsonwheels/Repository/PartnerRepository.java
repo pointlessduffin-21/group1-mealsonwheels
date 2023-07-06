@@ -20,4 +20,6 @@ public interface PartnerRepository extends JpaRepository<Partner, Long>{
     @Query(value="SELECT * FROM partner WHERE name = :name",
             nativeQuery = true)
     public Partner findPartnerByName(String name);
+    
+    Partner findByUserName(String userName);
 }

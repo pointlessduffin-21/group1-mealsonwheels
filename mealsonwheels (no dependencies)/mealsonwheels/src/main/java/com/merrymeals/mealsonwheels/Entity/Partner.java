@@ -22,6 +22,7 @@ public class Partner {
 	private String email;
 	private String password;
 	private String name;
+	private String userName;
 	private String address;
 	private String contact;
 
@@ -35,14 +36,14 @@ public class Partner {
 
 	}
 
-
 	public Partner(Long p_id, String email, String password, String name, String userName, String address,
-				   String contact, Set<Role> roles) {
+			String contact, Set<Role> roles) {
 		super();
 		this.p_id = p_id;
 		this.email = email;
 		this.password = password;
 		this.name = name;
+		this.userName = userName;
 		this.address = address;
 		this.contact = contact;
 		this.roles = roles;
@@ -79,6 +80,14 @@ public class Partner {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 
 	public String getAddress() {
 		return address;
@@ -105,10 +114,12 @@ public class Partner {
 		this.roles = roles;
 	}
 
-
 	@Override
 	public String toString() {
 		return "Partner [p_id=" + p_id + ", email=" + email + ", password=" + password + ", name=" + name
-				+  ", address=" + address + ", contact=" + contact + ", roles=" + roles + "]";
+				+ ", userName=" + userName + ", address=" + address + ", contact=" + contact + ", roles=" + roles + "]";
 	}
+
+	
+	
 }
