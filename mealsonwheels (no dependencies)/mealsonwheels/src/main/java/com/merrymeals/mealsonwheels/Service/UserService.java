@@ -51,13 +51,9 @@ public class UserService {
 //
 //	}
 
-	public Boolean loginUser(String email, String password) {
-		User logUser = ur.loginUser(email, password);
-		if (logUser != null) {
-			return true;
-		}
+	public User findLoginUser(String username) {
 		
-		return false;
+		return ur.findByUserName(username);
 	}
 
 	

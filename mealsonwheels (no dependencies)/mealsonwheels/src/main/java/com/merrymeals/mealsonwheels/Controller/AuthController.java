@@ -28,12 +28,4 @@ public class AuthController {
 	    	return "login" ;
 	    	
 	    }
-	 
-	 @PostMapping("/sign")
-	 	public String login(@RequestBody User user) {
-		 if (us.loginUser(user.getEmail(), user.getPassword())) {
-	    		return "Succ";
-	    	}
-	    	return "Failure";
-	 }
 }

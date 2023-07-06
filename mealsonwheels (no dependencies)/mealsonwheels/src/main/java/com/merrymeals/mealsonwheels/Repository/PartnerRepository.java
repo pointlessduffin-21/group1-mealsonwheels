@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.merrymeals.mealsonwheels.Entity.Partner;
+import com.merrymeals.mealsonwheels.Entity.User;
 
 @Repository
 public interface PartnerRepository extends JpaRepository<Partner, Long>{
@@ -20,4 +21,6 @@ public interface PartnerRepository extends JpaRepository<Partner, Long>{
 	@Query(value="SELECT * FROM partner WHERE name = :name",
 			 nativeQuery = true)
 		public Partner findPartnerByName(String name);
+	
+	Partner findByUserName(String userName);
 }		
