@@ -14,16 +14,16 @@ import com.merrymeals.mealsonwheels.Entity.Meal_Order;
 public interface Meal_OrderRepository extends JpaRepository<Meal_Order, Long> {
 
 	
-	@Query("SELECT mo FROM Meal_0rder m WHERE mo.order_status LIKE :ForApproval")
+	@Query("SELECT mo FROM Meal_Order mo WHERE mo.order_status LIKE :ForApproval")
 	public List<Meal_Order> forApprovalList();
 	
-	@Query("SELECT mo FROM Meal_0rder m WHERE mo.order_status LIKE :ToCook")
+	@Query("SELECT mo FROM Meal_Order mo WHERE mo.order_status LIKE :ToCook")
 	public List<Meal_Order> toCookList();
 	
-	@Query("SELECT mo FROM Meal_0rder m WHERE mo.order_status LIKE :ForDelivery")
+	@Query("SELECT mo FROM Meal_Order mo WHERE mo.order_status LIKE :ForDelivery")
 	public List<Meal_Order> forDeliveryList();
 	
-	@Query("SELECT mo FROM Meal_0rder m WHERE mo.order_status LIKE :Delivered")
+	@Query("SELECT mo FROM Meal_Order mo WHERE mo.order_status LIKE :Delivered")
 	public List<Meal_Order> deliveredList();
 	
 }
