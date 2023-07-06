@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-         pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="ISO-8859-1">
+<meta charset="ISO-8859-1">
 
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -14,6 +14,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script> 
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
     <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
     <!-- Favicon-->
@@ -59,6 +61,9 @@
             backdrop-filter: saturate(200%) blur(25px);
         }
     </style>
+
+
+
 </head>
 <body>
 
@@ -88,7 +93,7 @@
 
                 <div class="card bg-glass">
                     <div class="card-body px-4 py-5 px-md-5">
-                        <form>
+                        <form action="/login" method="POST">
                             <h1 class="mb-2 fw-bold ls-tight text-center" style="color: rgb(64, 59, 59)">
                                 Sign In <br />
                                 <!-- <span style="color: hsl(218, 81%, 75%)">for your business</span> -->
@@ -105,7 +110,9 @@
                                 <label class="form-label" for="form3Example4">Password</label>
                                 <input type="password" id="password" name="password" class="form-control" />
                             </div>
-
+                            
+                            <input type="hidden" id="error-message" value="${error}" />
+							
                             <div class="d-flex justify-content-center">
                                 <button type="submit" class="btn btn-secondary btn-block mb-4">
                                     Login
@@ -133,12 +140,18 @@
 <!-- Section: Design Block -->
 
 <%@ include file="footer.jsp"%>
+<script>
+  // Get the error message from the hidden input field
+  var errorMessage = document.getElementById('error-message').value;
+  
+  // Check if an error message is present
+  if (errorMessage) {
+    // Display the alert box
+    alert(errorMessage);
+  }
+</script>
 
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-        crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"
-        integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS"
-        crossorigin="anonymous"></script>
+   
+  
 </body>
 </html>
