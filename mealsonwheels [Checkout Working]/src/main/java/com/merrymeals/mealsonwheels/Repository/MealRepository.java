@@ -11,9 +11,7 @@ import com.merrymeals.mealsonwheels.Entity.Meal;
 
 @Repository
 public interface MealRepository extends JpaRepository<Meal, Long>{
-	@Query("SELECT m FROM Meal m WHERE m.meal_name LIKE %:key%"
-			+ " OR m.ingredients LIKE %:key%"
-			+ " OR m.nutrition LIKE %:key%")
+	@Query("SELECT m FROM Meal m WHERE m.meal_name LIKE %:key%")
 	public List<Meal> search(@Param("key") String key);
 
 	@Query("SELECT m FROM Meal m WHERE m.m_id = :mealId")

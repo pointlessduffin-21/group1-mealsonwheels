@@ -20,7 +20,7 @@ import com.merrymeals.mealsonwheels.Entity.Meal_Order;
 import com.merrymeals.mealsonwheels.Service.MealService;
 import com.merrymeals.mealsonwheels.Service.OrderService;
 
-import jakarta.servlet.http.HttpSession;
+import javax.servlet.http.HttpSession;
 
 
 @Controller
@@ -60,7 +60,7 @@ public class MainController {
         return "index";
     }
 
-    @RequestMapping("/login")
+    @RequestMapping("/loginPage")
     public String loginPage() {
         return "login";
     }
@@ -98,7 +98,13 @@ public class MainController {
 
         model.addAttribute("cartContent", mealDetails);
         
-        int orderNumber = Integer.parseInt(orderService.getLastOrderNumber()); 
+        String lastOrderNumber = orderService.getLastOrderNumber();
+        int orderNumber = 0; // Default value when the order number is null
+
+		if (lastOrderNumber != null && !lastOrderNumber.isEmpty()) {
+		    orderNumber = Integer.parseInt(lastOrderNumber);
+		}
+        
         int incrementedOrderNumber = orderNumber + 1;
         String incrementedOrderNumberString = String.valueOf(incrementedOrderNumber); // Convert back to a string
 
@@ -153,6 +159,11 @@ public class MainController {
         return "kitchen";
     }
     
+    @RequestMapping("/addmeal")
+    public String addMeal() {
+        return "addmeal";
+    }
+    
     
     
 //    DIMPLE NEW TOUCH UPS
@@ -163,29 +174,37 @@ public class MainController {
     
     @PostMapping("/addToCart")
     public String addToCart(@RequestParam("mealId") Long mealId, Model model) {
-    	 mealDetails.clear();
-    	
-    	List<Meal> mealResults = mealService.getAllMeals();
+        mealDetails.clear();
+
+        List<Meal> mealResults = mealService.getAllMeals();
         model.addAttribute("mealResults", mealResults);
-        
-        selectedItems.add(mealId);     
-        
+
+        selectedItems.add(mealId);
+
         for (Long itemId : selectedItems) {
             Meal meal = mealService.getCartOrders(itemId); // Retrieve meal details from service or repository
             if (meal != null) {
                 mealDetails.add(meal);
             }
         }
-        int orderNumber = Integer.parseInt(orderService.getLastOrderNumber()); 
+
+        String lastOrderNumber = orderService.getLastOrderNumber();
+        int orderNumber = 0; // Default value when the order number is null
+
+        if (lastOrderNumber != null && !lastOrderNumber.isEmpty()) {
+            orderNumber = Integer.parseInt(lastOrderNumber);
+        }
+
         int incrementedOrderNumber = orderNumber + 1;
         String incrementedOrderNumberString = String.valueOf(incrementedOrderNumber); // Convert back to a string
 
         model.addAttribute("orderNumber", incrementedOrderNumberString);
         model.addAttribute("selectedItems", selectedItems);
         model.addAttribute("cartContent", mealDetails);
-       
+
         return "member";
     }
+
     
     @PostMapping("/deleteFromCart")
     public String deleteFromCart(@RequestParam("mealId") Long mealId, Model model) {
@@ -224,16 +243,15 @@ public class MainController {
     @RequestMapping("/checkout")
     public String checkout(@RequestParam("mealId") String mealId, Model model) throws Exception {
         try {
-			
-        	int orderNumber = Integer.parseInt(orderService.getLastOrderNumber()); 
-        	int incrementedOrderNumber = orderNumber + 1;
-        	String incrementedOrderNumberString = String.valueOf(incrementedOrderNumber); // Convert back to a string
-			
+            String orderNumberString = orderService.getLastOrderNumber();
+            int orderNumber = orderNumberString != null ? Integer.parseInt(orderNumberString) : 0;
+            int incrementedOrderNumber = orderNumber + 1;
+            String incrementedOrderNumberString = String.valueOf(incrementedOrderNumber);
+
             for (Long item : selectedItems) {
-                Meal_Order order = new Meal_Order(); // Create a new Meal_Order object for each item
-				
-				order.setOrder_number(incrementedOrderNumberString); 
-				order.setOrder_date(java.time.LocalDate.now().toString());
+                Meal_Order order = new Meal_Order();
+                order.setOrder_number(incrementedOrderNumberString);
+                order.setOrder_date(java.time.LocalDate.now().toString());
                 order.setM_id(item);
                 order.setStatus("ORDERED");
                 orderService.save(order);
@@ -244,14 +262,14 @@ public class MainController {
 
             selectedItems.clear();
             return "member";
-
         } catch (Exception e) {
             System.out.println(e);
+            model.addAttribute("errMsg", "Failed to order");
         }
-        model.addAttribute("errMsg", "Failed to order");
 
         return "member";
     }
+
 
 
 

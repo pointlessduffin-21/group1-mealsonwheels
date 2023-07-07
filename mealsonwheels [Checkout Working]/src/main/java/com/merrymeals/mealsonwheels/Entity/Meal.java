@@ -1,5 +1,7 @@
 package com.merrymeals.mealsonwheels.Entity;
 
+import jakarta.persistence.Column;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -12,22 +14,32 @@ public class Meal {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long m_id;
 	private String meal_name;
-	private String ingredients;
-	private String nutrition;
-	private String p_id;
+	private String description;
+	private String duration;
+	
+	@Column(nullable = true, length = 64)
+	private String photo;
+	
+	@Column(nullable = true, length = 64)
+	private String photoPath;
 
 	public Meal() {
 
 	}
 
-	public Meal(Long m_id, String meal_name, String ingredients, String nutrition, String p_id) {
+	
+	
+	
+	public Meal(Long m_id, String meal_name, String description, String duration, String photo, String photoPath) {
 		super();
 		this.m_id = m_id;
 		this.meal_name = meal_name;
-		this.ingredients = ingredients;
-		this.nutrition = nutrition;
-		this.p_id = p_id;
+		this.description = description;
+		this.duration = duration;
+		this.photo = photo;
+		this.photoPath = photoPath;
 	}
+
 	public Long getM_id() {
 		return m_id;
 	}
@@ -40,23 +52,40 @@ public class Meal {
 	public void setMeal_name(String meal_name) {
 		this.meal_name = meal_name;
 	}
-	public String getIngredients() {
-		return ingredients;
+	public String getDescription() {
+		return description;
 	}
-	public void setIngredients(String ingredients) {
-		this.ingredients = ingredients;
+	public void setDescription(String description) {
+		this.description = description;
 	}
-	public String getNutrition() {
-		return nutrition;
+	public String getDuration() {
+		return duration;
 	}
-	public void setNutrition(String nutrition) {
-		this.nutrition = nutrition;
+	public void setDuration(String duration) {
+		this.duration = duration;
 	}
-	public String getP_id() {
-		return p_id;
+	public String getPhoto() {
+		return photo;
 	}
-	public void setP_id(String p_id) {
-		this.p_id = p_id;
+	public void setPhoto(String photo) {
+		this.photo = photo;
 	}
+	public String getPhotoPath() {
+		return photoPath;
+	}
+	public void setPhotoPath(String photoPath) {
+		this.photoPath = photoPath;
+	}
+
+
+
+
+	@Override
+	public String toString() {
+		return "Meal [m_id=" + m_id + ", meal_name=" + meal_name + ", description=" + description + ", duration="
+				+ duration + ", photo=" + photo + ", photoPath=" + photoPath + "]";
+	}
+	
+	
 
 }
