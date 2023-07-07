@@ -50,7 +50,7 @@
             onApprove: function(data, actions) {
                 return actions.order.capture().then(function(details) {
                     // Extract the necessary information from the details object
-                    let payerName = details.payer.name.given_name + ' ' + details.payer.name.surname;
+                    let name = document.getElementById("name").value;
                     let amount = details.purchase_units[0].amount.value;
                     let date = details.update_time;
 
@@ -64,7 +64,7 @@
                     xhr.setRequestHeader("Content-Type", "application/json");
 
                     // Send the request with the JSON data
-                    xhr.send(JSON.stringify({ name: payerName, amount: amount, dateTime: date }));
+                    xhr.send(JSON.stringify({ name: name, amount: amount, dateTime: date }));
 
                     // Handle the response
                     xhr.onload = function() {
