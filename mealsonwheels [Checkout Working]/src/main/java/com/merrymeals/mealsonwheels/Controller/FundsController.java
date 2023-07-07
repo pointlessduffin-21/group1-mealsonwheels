@@ -34,7 +34,7 @@ public class FundsController {
         response.put("message", "Donation added");
         response.put("name", createdFunds.getName());
         response.put("amount", createdFunds.getAmount());
-        response.put("date", createdFunds.getDateTime());
+        response.put("dateTime", createdFunds.getDateTime());
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 

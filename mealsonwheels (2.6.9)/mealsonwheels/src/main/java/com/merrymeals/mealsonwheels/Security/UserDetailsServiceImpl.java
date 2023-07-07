@@ -1,50 +1,43 @@
 package com.merrymeals.mealsonwheels.Security;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.merrymeals.mealsonwheels.Entity.Role;
 import com.merrymeals.mealsonwheels.Entity.User;
 import com.merrymeals.mealsonwheels.Repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
-
-@Transactional
+@Service
 public class UserDetailsServiceImpl implements UserDetailsService {
+
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
-    public UserDetailsServiceImpl() {
-    }
-
-    /*
-     * Default Authentication mechanism calls this method to get UserDetails by the name given at the time of login.
-     * This method returns UserDetails with password and roles he/she plays.
-     * Spring then verifies the password given by the user with this password and authenticates the user.
-     */
-    public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-
-        User user = userRepository.findUserByName(userName);
-        if(user == null) {
-            throw new UsernameNotFoundException("user " + userName + " is not valid. Please re-enter.");
+    @Override
+    @Transactional(readOnly = true)
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        User user = userRepository.findByEmail(email);
+        if (user == null) {
+            throw new UsernameNotFoundException("Invalid email or password.");
         }
-        org.springframework.security.core.userdetails.User.UserBuilder userBuilder = org.springframework.security.core.userdetails.User.builder();
 
-        String[] roleNames= user.getRoles().stream().map(Role::getName).toArray(String[]::new);
+        Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
+        for (Role role : user.getRoles()) {
+            grantedAuthorities.add(new SimpleGrantedAuthority(role.getName()));
+        }
 
-        System.out.println("Role Name is "+roleNames);
-
-        return userBuilder.username(user.getUserName())
-                .password(user.getPassword())
-                .roles(roleNames)
-                //.passwordEncoder(passwordEncoder::encode)
-                .build();
+        return new org.springframework.security.core.userdetails.User(
+                user.getEmail(),
+                user.getPassword(),
+                grantedAuthorities
+        );
     }
 }
-
