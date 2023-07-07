@@ -68,9 +68,57 @@
 									<div class="row align-items-center no-gutters ps-3">
 										<div class="col me-2 ps-3 d-flex justify-content-between" style="padding-top:13px; padding-bottom:13px;">
 											<span>Total Donations:</span>
-											<span class="text-uppercase text-secondary fw-bold text-xs mb-1 fs-5 pe-3">$100,209</span>
+											<span class="text-uppercase text-secondary fw-bold text-xs mb-1 fs-5 pe-3">$</span>
+											<span class="text-uppercase text-secondary fw-bold text-xs mb-1 fs-5 pe-3" id="totalAmount"></span>
 										</div>
 									</div>
+									<script type="text/javascript">
+    $(document).ready(function() {
+        $.ajax({
+            url: '/funds/all',
+            type: 'GET',
+            success: function(data) {
+                let tableBody = $('#fundsTable tbody');
+                let totalAmount = 0;
+                data.forEach(function(fund) {
+                    let row = $('<tr></tr>');
+                    row.append($('<td></td>').text(fund.f_id));
+                    row.append($('<td></td>').text(fund.name));
+                    row.append($('<td></td>').text(fund.amount));
+                    row.append($('<td></td>').text(fund.dateTime));
+                    tableBody.append(row);
+                    totalAmount += parseInt(fund.amount); // Parse amount as an integer
+                });
+                $('#totalAmount').text(totalAmount);
+            }
+        });
+        function updateDonations() {
+            $.ajax({
+                url: '/funds/all',
+                type: 'GET',
+                success: function(data) {
+                    let tableBody = $('#fundsTable tbody');
+                    let totalAmount = 0;
+                    tableBody.empty(); // Clear the table body
+
+                    data.forEach(function(donation) {
+                        let row = $('<tr></tr>');
+                        row.append($('<td></td>').text(donation.f_id));
+                        row.append($('<td></td>').text(donation.name));
+                        row.append($('<td></td>').text(donation.amount));
+                        row.append($('<td></td>').text(donation.dateTime));
+                        tableBody.append(row);
+                        totalAmount += parseInt(donation.amount);
+                    });
+
+                    $('#totalAmount').text(totalAmount);
+                }
+            });
+        }
+        updateDonations();
+        setInterval(updateDonations, 10000);
+    });
+</script>
 								</div>
 							</div>
 						</div>
@@ -253,69 +301,77 @@
 
 							</div>
 							<div class="col-lg-6 col-xxl-4 offset-xxl-0 mb-4">
-								<div class="card shadow mb-4"></div>
-								<div class="card shadow mb-4">
-									<div class="card-header py-3">
-										<h6 class="text-secondary fw-bold m-0">Donations</h6>
-									</div>
-									<ul class="list-group list-group-flush ps-3">
-										<!-- Order 1 -->
-										<li class="list-group-item">
-											<div class="row align-items-center no-gutters">
-												<div class="col-xxl-7 me-2">
-													<p>Donation #121</p>
-													<h6 class="mb-0">
-														<strong>Jane Doe</strong>
-													</h6>
-													<p>Cupertino, California</p>
-													<p>$200</p>
-												</div>
-												<div class="col-xxl-4 offset-xxl-0">
-													<button class="btn btn-success" type="button"
-														style="width: 126.037px; padding: 6px 12px; margin: 10px;">Accept
-														</button>
-												</div>
-											</div>
-										</li>
-										<!-- Order 2 -->
-										<li class="list-group-item">
-											<div class="row align-items-center no-gutters">
-												<div class="col-xxl-7 me-2">
-													<p>Order #122</p>
-													<h6 class="mb-0">
-														<strong>Jane Doe</strong>
-													</h6>
-													<p>Cupertino, California</p>
-													<p>$300</p>
-												</div>
-												<div class="col-xxl-4 offset-xxl-0">
-													<button class="btn btn-success" type="button"
-														style="width: 126.037px; padding: 6px 12px; margin: 10px;">Accept
-														</button>
-												</div>
-											</div>
-										</li>
-										<!-- Order 3 -->
-										<li class="list-group-item">
-											<div class="row align-items-center no-gutters">
-												<div class="col-xxl-7 me-2">
-													<p>Order #123</p>
-													<h6 class="mb-0">
-														<strong>Jane Doe</strong>
-													</h6>
-													<p>Cupertino, California</p>
-													<p>$100</p>
-												</div>
-												<div class="col-xxl-4 offset-xxl-0">
-													<button class="btn btn-success" type="button"
-														style="width: 126.037px; padding: 6px 12px; margin: 10px;">Accept
-														</button>
-												</div>
-											</div>
-										</li>
-									</ul>
-								</div>
-							</div>
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="text-secondary fw-bold m-0">Donations</h6>
+        </div>
+        <ul class="list-group list-group-flush ps-3" id="donationsList">
+            <!-- Donations will be dynamically added here -->
+        </ul>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $.ajax({
+            url: '/funds/all',
+            type: 'GET',
+            success: function(data) {
+                let donationsList = $('#donationsList');
+                let totalAmount = 0;
+
+                data.forEach(function(donation) {
+                    let donationItem = $('<li class="list-group-item"></li>');
+                    let donationRow = $('<div class="row align-items-center no-gutters"></div>');
+                    let donationDetails = $('<div class="col-xxl-7 me-2"></div>');
+
+                    donationDetails.append($('<p></p>').text('Donation #' + donation.d_id));
+                    donationDetails.append($('<h6 class="mb-0"></h6>').html('<strong>' + donation.name + '</strong>'));
+                    donationDetails.append($('<p></p>').text(donation.location));
+                    donationDetails.append($('<p></p>').text('$' + donation.amount));
+
+                    donationRow.append(donationDetails);
+
+                    let donationActions = $('<div class="col-xxl-4 offset-xxl-0"></div>');
+                    let acceptButton = $('<button class="btn btn-success" type="button" style="width: 126.037px; padding: 6px 12px; margin: 10px;">Accept</button>');
+
+                    donationActions.append(acceptButton);
+
+                    donationRow.append(donationActions);
+
+                    donationItem.append(donationRow);
+                    donationsList.append(donationItem);
+
+                    totalAmount += parseInt(donation.amount);
+                });
+
+                $('#totalAmount').text(totalAmount);
+
+                // Add boxes based on the amount of donations
+                let numDonations = data.length;
+                let numBoxes = Math.ceil(numDonations / 3); // Assuming 3 donations per box
+
+                for (let i = 0; i < numBoxes; i++) {
+                    let box = $('<div class="card shadow mb-4"></div>');
+                    let boxHeader = $('<div class="card-header py-3"></div>');
+                    let boxTitle = $('<h6 class="text-secondary fw-bold m-0">Donations Box ' + (i + 1) + '</h6>');
+
+                    boxHeader.append(boxTitle);
+                    box.append(boxHeader);
+
+                    let boxList = $('<ul class="list-group list-group-flush ps-3"></ul>');
+                    for (let j = i * 3; j < (i + 1) * 3 && j < numDonations; j++) {
+                        boxList.append(donationsList.children().eq(j).clone());
+                    }
+
+                    box.append(boxList);
+                    donationsList.after(box);
+                }
+            }
+        });
+    });
+</script>
+
 
 						</div>
 					</div>

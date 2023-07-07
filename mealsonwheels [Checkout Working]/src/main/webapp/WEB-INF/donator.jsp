@@ -73,8 +73,9 @@
 									<div class="row align-items-center no-gutters ps-3">
 										<div class="col me-2 ps-3 d-flex justify-content-between" style="padding-top:13px; padding-bottom:13px;">
 											<div>
-												<span>You've Donated:</span>
-												<span class="text-uppercase text-secondary fw-bold text-xs mb-1 fs-5 pe-3">$100,209</span>
+												<span>Total Donated:</span>
+												<span class="text-uppercase text-secondary fw-bold text-xs mb-1 fs-5 pe-3">$</span>
+												<span class="text-uppercase text-secondary fw-bold text-xs mb-1 fs-5 pe-3" id="totalAmount"></span>
 											</div>
 											<div>
 												<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#donateModal">
@@ -90,20 +91,102 @@
 												        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 												      </div>
 												      <div class="modal-body">
-															<form class='m-2' action="/register_user" method="post">
+    <form class="m-2" method="post" onsubmit="event.preventDefault(); createDonation();">
+        <div class="form-group mb-3 text-center">
+            <label for="name">Name:</label>
+            <input type="text" class="form-control" id="name" name="name">
+            <label for="amount">Amount:</label>
+            <input type="text" class="form-control" id="amount" name="amount" required>
+        </div>
+        <button type="submit" class="btn btn-primary col-12" data-bs-dismiss="modal" value="Submit">Save changes</button>
+        <div id="paypal-button-container"></div>
+    </form>
+</div>
+												      <script>
+        function createDonation() {
+            // Get the name and amount from the input fields
+            let name = document.getElementById("name").value;
+            let amount = document.getElementById("amount").value;
 
-													            <div class='form-group mb-3 text-center'>
-													                <label htmlFor='address'>Amount</label>
-													                <input
-													                        type='text'
-													                        class='form-control'
-													                        id='address'
-													                        name='address'
-													                />
-													            </div>
-																<button type="submit" class="btn btn-primary col-12">Save changes</button>
-													        </form>
-												      </div>
+            // Create a new XMLHttpRequest object
+            let xhr = new XMLHttpRequest();
+
+            // Open a new POST request to the /create endpoint
+            xhr.open("POST", "/funds/create");
+
+            // Set the request headers
+            xhr.setRequestHeader("Content-Type", "application/json");
+
+            // Send the request with the JSON data
+            xhr.send(JSON.stringify({name: name, amount: amount}));
+
+            // Handle the response
+            xhr.onload = function() {
+                if (xhr.status === 201) {
+                    // Parse the JSON response
+                    let response = JSON.parse(xhr.response);
+
+                    // Display the response on the page
+                    document.getElementById("response").innerHTML = JSON.stringify(response, null, 2);
+                    location.reload();
+                } else {
+                    alert("Error: " + xhr.statusText);
+                }
+                
+            };
+        }
+
+        paypal.Buttons({
+            createOrder: function(data, actions) {
+                let amount = document.getElementById("amount").value;
+
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: amount
+                        }
+                    }]
+                });
+            },
+            onApprove: function(data, actions) {
+                return actions.order.capture().then(function(details) {
+                    // Extract the necessary information from the details object
+                    let name = document.getElementById("name").value;
+                    let amount = details.purchase_units[0].amount.value;
+                    let date = details.update_time;
+
+                    // Create a new XMLHttpRequest object
+                    let xhr = new XMLHttpRequest();
+
+                    // Open a new POST request to the /funds/create endpoint
+                    xhr.open("POST", "/funds/create");
+
+                    // Set the request headers
+                    xhr.setRequestHeader("Content-Type", "application/json");
+
+                    // Send the request with the JSON data
+                    xhr.send(JSON.stringify({ name: name, amount: amount, dateTime: date }));
+
+                    // Handle the response
+                    xhr.onload = function() {
+                        if (xhr.status === 201) {
+                            // Parse the JSON response
+                            let response = JSON.parse(xhr.response);
+
+                            // Display the response on the page
+                            document.getElementById("response").innerHTML = JSON.stringify(response, null, 2);
+                        } else {
+                            alert("Error: " + xhr.statusText);
+                        }
+                    };
+
+                    // Handle the payment success
+                    alert('Payment completed successfully!');
+                    // Add your own code to handle further actions (e.g., redirecting to a success page)
+                });
+            }
+        }).render('#paypal-button-container');
+    </script>
 												      <div class="modal-footer">
 												        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 												        
@@ -117,6 +200,53 @@
 								</div>
 							</div>
 						</div>
+						<script type="text/javascript">
+    $(document).ready(function() {
+        $.ajax({
+            url: '/funds/all',
+            type: 'GET',
+            success: function(data) {
+                let tableBody = $('#fundsTable tbody');
+                let totalAmount = 0;
+                data.forEach(function(fund) {
+                    let row = $('<tr></tr>');
+                    row.append($('<td></td>').text(fund.f_id));
+                    row.append($('<td></td>').text(fund.name));
+                    row.append($('<td></td>').text(fund.amount));
+                    row.append($('<td></td>').text(fund.dateTime));
+                    tableBody.append(row);
+                    totalAmount += parseInt(fund.amount); // Parse amount as an integer
+                });
+                $('#totalAmount').text(totalAmount);
+            }
+        });
+        function updateDonations() {
+            $.ajax({
+                url: '/funds/all',
+                type: 'GET',
+                success: function(data) {
+                    let tableBody = $('#fundsTable tbody');
+                    let totalAmount = 0;
+                    tableBody.empty(); // Clear the table body
+
+                    data.forEach(function(donation) {
+                        let row = $('<tr></tr>');
+                        row.append($('<td></td>').text(donation.f_id));
+                        row.append($('<td></td>').text(donation.name));
+                        row.append($('<td></td>').text(donation.amount));
+                        row.append($('<td></td>').text(donation.dateTime));
+                        tableBody.append(row);
+                        totalAmount += parseInt(donation.amount);
+                    });
+
+                    $('#totalAmount').text(totalAmount);
+                }
+            });
+        }
+        updateDonations();
+        setInterval(updateDonations, 10000);
+    });
+</script>
 
 						<div class="row">
 							<div class="col-lg-4 col-xxl-4 mb-4">
@@ -141,30 +271,16 @@
 									</div>
 									<div class="card-body">
 								      <div class="table-responsive">
-								        <table class="table table-bordered" id="donationsTable">
+								        <table class="table table-bordered" id="fundsTable">
 								          <thead>
 								            <tr>
 								              <th>#</th>
-								              <th>Date</th>
+								              <th>Name</th>
 								              <th>Amount</th>
+								              <th>Date</th>
 								            </tr>
 								          </thead>
 								          <tbody>
-								            <tr>
-								              <td>1</td>
-								              <td>January 17, 2023</td>
-								              <td>$100</td>
-								            </tr>
-								            <tr>
-								              <td>2</td>
-								              <td>January 2, 2023</td>
-								              <td>$50</td>
-								            </tr>
-								         	<tr>
-								              <td>3</td>
-								              <td>December 12, 2022</td>
-								              <td>$500</td>
-								            </tr>
 								          </tbody>
 								        </table>
 								      </div>
