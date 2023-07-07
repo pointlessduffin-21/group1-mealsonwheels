@@ -2,6 +2,10 @@ package com.merrymeals.mealsonwheels.Controller;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.merrymeals.mealsonwheels.Entity.Meal_Order;
+import com.merrymeals.mealsonwheels.Entity.Partner;
+import com.merrymeals.mealsonwheels.Entity.User;
+import com.merrymeals.mealsonwheels.Repository.OrderRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
@@ -9,10 +13,18 @@ import org.springframework.web.client.RestTemplate;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.merrymeals.mealsonwheels.Repository.OrderRepository;
+
 @RestController
 @RequestMapping("/distance")
 public class DistanceMatrixController {
     private final String API_KEY = "AIzaSyBKwt4NuTqH__0QG_rq7MYeVFCNnvX4tVc";
+
+    private final OrderRepository orderRepository;
+
+    public DistanceMatrixController(OrderRepository orderRepository) {
+        this.orderRepository = orderRepository;
+    }
 
     @PostMapping("/{origin}/{destination}")
     public Object getDistance(@PathVariable String origin, @PathVariable String destination) {
@@ -31,6 +43,11 @@ public class DistanceMatrixController {
                 String destinationAddress = root.path("destination_addresses").path(0).asText();
                 String durationText = root.path("rows").path(0).path("elements").path(0).path("duration").path("text").asText();
                 int durationNum = root.path("rows").path(0).path("elements").path(0).path("duration").path("value").asInt();
+
+                Meal_Order order = new Meal_Order();            // Replace this to read the latest order status
+                order.setFrom_address(destinationAddress);
+                order.setTo_address(originAddress);
+                orderRepository.save(order);
 
                 if (distance < 10000) {     // Less than 10 KM
                     Map<String, Object> response = new HashMap<>();

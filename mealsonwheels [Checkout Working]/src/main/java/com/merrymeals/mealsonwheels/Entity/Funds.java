@@ -15,14 +15,14 @@ public class Funds {
 
     private Long f_id;
     private String name;
-    private String amount;
+    private double amount;
     private LocalDateTime dateTime;
 
     public Funds() {
 
     }
 
-    public Funds(Long f_id, String name, String amount, LocalDateTime dateTime) {
+    public Funds(Long f_id, String name, double amount, LocalDateTime dateTime) {
         super();
         this.f_id = f_id;
         this.name = name;
@@ -46,11 +46,11 @@ public class Funds {
         this.name = name;
     }
 
-    public String getAmount() {
+    public double getAmount() {
         return amount;
     }
 
-    public void setAmount(String amount) {
+    public void setAmount(double amount) {
         this.amount = amount;
     }
 
@@ -62,13 +62,13 @@ public class Funds {
         this.dateTime = dateTime;
     }
 
-    public Funds(String name, String amount, LocalDateTime dateTime) {
+    public Funds(String name, double amount, LocalDateTime dateTime) {
         this.name = name;
         this.amount = amount;
         this.dateTime = dateTime;
     }
 
-    public Funds(String name, String amount) {
+    public Funds(String name, double amount) {
         this.name = name;
         this.amount = amount;
     }
