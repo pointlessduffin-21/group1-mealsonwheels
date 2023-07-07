@@ -6,13 +6,14 @@ The "Meals On Wheels" project aims to develop an enterprise application for Merr
 The project is being developed by a team of full-stack web developers at Unity One Solutions. The team's responsibilities include creating a software design document, conducting a feasibility study, performing risk analysis, and developing a test plan. The tools and technologies used include Visual Studio Code, PHPMyAdmin, Laravel, Spring/Spring Boot, React, Angular, Apache Tomcat, and MySQL Server.
 
 ## Webpage List
-- [ ] Landing Page
+- [x] Landing Page
 - [ ] Login
 - [ ] Registration
-- [ ] Home
-- [ ] About Us
-- [ ] Contact Us
-- [ ] Donation Page
+- [x] Home
+- [x] About Us
+- [x] Contact Us
+- [x] Donation Page
+- [ ] Kitchen Page
 - [ ] Menu Page
 - [ ] Delivery Request Page
 - [ ] Admin Page
