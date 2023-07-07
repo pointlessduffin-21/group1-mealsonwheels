@@ -1,5 +1,5 @@
 server:
-  port: 8993
+  port: 8546
 
 spring:
   mvc:

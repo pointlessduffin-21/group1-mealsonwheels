@@ -101,8 +101,8 @@
 								</span>
 							</h4>
 							
-                            <p>Nutrition: <%= meal.getNutrition() %></p>
-                            <p class="card-time"><span class="fas fa-carrot"></span><%= meal.getIngredients() %></p>
+                            <%-- <p>Nutrition: <%= meal.getNutrition() %></p>
+                            <p class="card-time"><span class="fas fa-carrot"></span><%= meal.getIngredients() %></p> --%>
                         </div>
                     </div>
                 </div>
