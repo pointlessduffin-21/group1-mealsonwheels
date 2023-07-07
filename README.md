@@ -15,7 +15,9 @@ The project is being developed by a team of full-stack web developers at Unity O
 - [x] Donation Page
 - [ ] Kitchen Page
 - [ ] Menu Page
-- [ ] Delivery Request Page
 - [ ] Admin Page
+- [ ] Search
+- [ ] Member Page
+- [ ] Volunteer
 - [x] Wala nang dignity
 
