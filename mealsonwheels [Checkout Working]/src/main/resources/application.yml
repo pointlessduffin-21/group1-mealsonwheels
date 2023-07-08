@@ -2,10 +2,14 @@ server:
   port: 8546
 
 spring:
+  main:
+    allow-bean-definition-overriding: true
+    allow-circular-references: true
   mvc:
     view:
       prefix: /WEB-INF/
       suffix: .jsp
+   
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://100.110.13.2:3306/mow_db

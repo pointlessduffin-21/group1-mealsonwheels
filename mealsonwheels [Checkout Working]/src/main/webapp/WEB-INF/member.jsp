@@ -141,7 +141,7 @@
 	        	<form action="/deleteFromCart" method="post">
 	        		<div class="d-flex justify-content-between">
 							<div class="d-flex justify-content-start mb-3">
-					            <img class="order-image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLY5j-0GxBdLWv53oNAH6KKQszBRTDWstPXg&usqp=CAU">
+					            <img class="order-image" src="<%= meal.getPhotoPath() %>">
 					            <div class="order-detail ms-3">
 					            	<p class="fw-bold mb-0" style="font-size:1em;"><%= meal.getMeal_name() %></p>
 					                <span>x</span> <span>1</span>

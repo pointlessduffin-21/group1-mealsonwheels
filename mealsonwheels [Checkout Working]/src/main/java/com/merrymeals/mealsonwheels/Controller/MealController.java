@@ -41,7 +41,7 @@ public class MealController {
     public ResponseEntity<String> addNewMeal(@RequestParam("picture") MultipartFile image,
                                              @ModelAttribute Meal meal) {
       try {
-        String imageName = UUID.randomUUID().toString() + "_" + StringUtils.cleanPath(image.getOriginalFilename());
+        String imageName = StringUtils.cleanPath(image.getOriginalFilename());
 
         // Set meal details
         meal.setPhoto(imageName);
