@@ -89,7 +89,7 @@
                 <% } %>
                 <div class="col-sm-3 pe-1">
                     <div class="dashboard-card">
-                        <img class="card-image" src="https://hips.hearstapps.com/hmg-prod/images/classic-cheese-pizza-recipe-2-64429a0cb408b.jpg?crop=0.6666666666666667xw:1xh;center,top&resize=1200:*">
+                        <img class="card-image" src="<%= meal.getPhotoPath() %>">
                         <div class="card-detail">
                             <h4><%= meal.getMeal_name() %>
                             	<span>  
@@ -99,6 +99,7 @@
 									</form>
 
 								</span>
+								<%= meal.getPhotoPath() %>
 							</h4>
 							
                             <%-- <p>Nutrition: <%= meal.getNutrition() %></p>
