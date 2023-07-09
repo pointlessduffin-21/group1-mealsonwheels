@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1"%>
+         <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -88,7 +89,9 @@
 
                 <div class="card bg-glass">
                     <div class="card-body px-4 py-5 px-md-5">
-                        <form>
+                        <c:url var="post_url" value="/login" />
+						<form action="loginTa" method="post" class="">
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                             <h1 class="mb-2 fw-bold ls-tight text-center" style="color: rgb(64, 59, 59)">
                                 Sign In <br />
                                 <!-- <span style="color: hsl(218, 81%, 75%)">for your business</span> -->
@@ -123,6 +126,17 @@
                                     <i class="fab fa-google" style="color: #6C757D;"></i>
                                 </button>
                             </div>
+                            
+                             <c:choose>
+        <c:when test="${empty error_msg}">
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+            <button type="submit" formaction="/login_success">Login</button>
+        </c:when>
+        <c:otherwise>
+            <button type="submit" formaction="/login_error">Login</button>
+        </c:otherwise>
+    </c:choose>
+    
                         </form>
                     </div>
                 </div>
