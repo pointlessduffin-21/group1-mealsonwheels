@@ -135,7 +135,9 @@
 								}
 							}
 						</script>
+						
 						<div class="row">
+							<!--Notification  -->
 							<div class="col-lg-6 col-xxl-4 mb-4">
 								<div class="card shadow mb-4"></div>
 								<div class="card shadow mb-4">
@@ -150,156 +152,12 @@
 					                </div>
 								</div>
 							</div>
+							
+							<!-- Orders -->
 							<div class="col-lg-6 col-xxl-4 mb-4">
-								<div class="card shadow mb-4"></div>
-								<div class="card shadow mb-4">
-									<div class="card-header py-3">
-										<h6 class="text-secondary fw-bold m-0"
-											style="color: rgb(45, 237, 42);">Orders To Approve</h6>
-									</div>
-									<ul class="list-group list-group-flush ps-3">
-										<!-- Order 1 -->
-										<li class="list-group-item">
-											<div class="row align-items-center no-gutters">
-												<div class="col-xxl-7 me-2">
-													<p>Order #2142</p>
-													<h6 class="mb-0">
-														<strong>Jane Doe</strong>
-													</h6>
-													<p>Cupertino, California</p>
-													<span class="text-xs">Order</span>
-													<p>1pcs 12" Pizza</p>
-												</div>
-												<div class="col-xxl-4 offset-xxl-0">
-													<button class="btn btn-success" type="button"
-														style="width: 126.037px; padding: 6px 12px; margin: 10px;">Accept
-														</button>
-													<button class="btn btn-danger" type="button"
-														style="width: 127.438px; padding: 6px 12px; margin: 9px;"
-														data-bs-toggle="modal" data-bs-target="#declineModal1">Decline
-														</button>
-												</div>
-											</div>
-										</li>
-										<!-- Order 2 -->
-										<li class="list-group-item">
-											<div class="row align-items-center no-gutters">
-												<div class="col-xxl-7 me-2">
-													<p>Order #2142</p>
-													<h6 class="mb-0">
-														<strong>Jane Doe</strong>
-													</h6>
-													<p>Cupertino, California</p>
-													<span class="text-xs">Order</span>
-													<p>1pcs 12" Pizza</p>
-												</div>
-												<div class="col-xxl-4 offset-xxl-0">
-													<button class="btn btn-success" type="button"
-														style="width: 126.037px; padding: 6px 12px; margin: 10px;">Accept
-														</button>
-													<button class="btn btn-danger" type="button"
-														style="width: 127.438px; padding: 6px 12px; margin: 9px;"
-														data-bs-toggle="modal" data-bs-target="#declineModal1">Decline
-														</button>
-												</div>
-											</div>
-										</li>
-										<!-- Order 3 -->
-										<li class="list-group-item">
-											<div class="row align-items-center no-gutters">
-												<div class="col-xxl-7 me-2">
-													<p>Order #2142</p>
-													<h6 class="mb-0">
-														<strong>Jane Doe</strong>
-													</h6>
-													<p>Cupertino, California</p>
-													<span class="text-xs">Order</span>
-													<p>1pcs 12" Pizza</p>
-												</div>
-												<div class="col-xxl-4 offset-xxl-0">
-													<button class="btn btn-success" type="button"
-														style="width: 126.037px; padding: 6px 12px; margin: 10px;">Accept
-														</button>
-													<button class="btn btn-danger" type="button"
-														style="width: 127.438px; padding: 6px 12px; margin: 9px;"
-														data-bs-toggle="modal" data-bs-target="#declineModal1">Decline
-														</button>
-												</div>
-											</div>
-										</li>
-									</ul>
-								</div>
-
-								<!-- Decline Order Modal 1 -->
-								<div class="modal fade" id="declineModal1" tabindex="-1"
-									aria-labelledby="declineModal1Label" aria-hidden="true">
-									<div class="modal-dialog">
-										<div class="modal-content">
-											<div class="modal-header">
-												<h5 class="modal-title" id="declineModal1Label">Are you
-													sure you want to decline this order?</h5>
-												<button type="button" class="btn-close"
-													data-bs-dismiss="modal" aria-label="Close"></button>
-											</div>
-											<div class="modal-body">
-												<!-- Add additional information or warning message here if needed -->
-											</div>
-											<div class="modal-footer">
-												<button type="button" class="btn btn-secondary"
-													data-bs-dismiss="modal">Cancel</button>
-												<button type="button" class="btn btn-danger">Decline</button>
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<!-- Decline Order Modal 2 -->
-								<div class="modal fade" id="declineModal2" tabindex="-1"
-									aria-labelledby="declineModal2Label" aria-hidden="true">
-									<div class="modal-dialog">
-										<div class="modal-content">
-											<div class="modal-header">
-												<h5 class="modal-title" id="declineModal2Label">Are you
-													sure you want to decline this order?</h5>
-												<button type="button" class="btn-close"
-													data-bs-dismiss="modal" aria-label="Close"></button>
-											</div>
-											<div class="modal-body">
-												<!-- Add additional information or warning message here if needed -->
-											</div>
-											<div class="modal-footer">
-												<button type="button" class="btn btn-secondary"
-													data-bs-dismiss="modal">Cancel</button>
-												<button type="button" class="btn btn-danger">Decline</button>
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<!-- Decline Order Modal 3 -->
-								<div class="modal fade" id="declineModal3" tabindex="-1"
-									aria-labelledby="declineModal3Label" aria-hidden="true">
-									<div class="modal-dialog">
-										<div class="modal-content">
-											<div class="modal-header">
-												<h5 class="modal-title" id="declineModal3Label">Are you
-													sure you want to decline this order?</h5>
-												<button type="button" class="btn-close"
-													data-bs-dismiss="modal" aria-label="Close"></button>
-											</div>
-											<div class="modal-body">
-												<!-- Add additional information or warning message here if needed -->
-											</div>
-											<div class="modal-footer">
-												<button type="button" class="btn btn-secondary"
-													data-bs-dismiss="modal">Cancel</button>
-												<button type="button" class="btn btn-danger">Decline</button>
-											</div>
-										</div>
-									</div>
-								</div>
-
+								<div id="ordersContainer" class="no-gutters"></div>						
 							</div>
+							
 							<div class="col-lg-6 col-xxl-4 offset-xxl-0 mb-4">
     <div class="card shadow mb-4">
         <div class="card-header py-3">
@@ -371,6 +229,46 @@
         });
     });
 </script>
+
+<script>
+$(document).ready(function() {
+	  $.ajax({
+	    url: '/orders/pendingOrders',
+	    type: 'GET',
+	    dataType: 'json',
+	    success: function(data) {
+	      let container = $('#ordersContainer');
+	      let totalAmount = 0;
+
+	      data.forEach(function(order) {
+	        let orderContainer = $('<div class="card mb-3"></div>');
+	        let cardBody = $('<div class="card-body"></div>');
+
+	        cardBody.append($('<p class="card-text"></p>').text('Meal Id: ' + order.mo_id));
+	        cardBody.append($('<p class="card-text"></p>').text('Order Number: ' + order.order_number));
+	        cardBody.append($('<p class="card-text"></p>').text('Member Id: ' + order.m_id));
+	        cardBody.append($('<p class="card-text"></p>').text('Date: ' + order.order_date));
+	        cardBody.append($('<p class="card-text"></p>').html('Status: <strong>' + order.status + '</strong>'));
+
+
+
+	        // Create the button
+	        let acceptButton = $('<button class="btn btn-success float-end" type="button">Accept</button>');
+
+	        cardBody.append(acceptButton);
+
+	        orderContainer.append(cardBody);
+	        container.append(orderContainer);
+	      });
+	    },
+	    error: function(xhr, status, error) {
+	      console.error('Error:', error);
+	    }
+	  });
+	});
+
+</script>
+								
 
 
 						</div>
