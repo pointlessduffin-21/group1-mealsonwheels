@@ -50,6 +50,10 @@ public class UserService {
 //		return false;
 //
 //	}
+	
+	public User getUser(String email, String password) {
+		return ur.loginUser(email, password);
+	}
 
 	public Boolean loginUser(String email, String password) {
 		User logUser = ur.loginUser(email, password);

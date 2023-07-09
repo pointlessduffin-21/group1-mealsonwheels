@@ -15,13 +15,13 @@ import com.merrymeals.mealsonwheels.Repository.OrderRepository;
 @RestController
 @RequestMapping("/orders")
 public class OrderController {
-	
-	@Autowired
-	OrderRepository orderRepository;
-	
-	@GetMapping("/pendingOrders")
-	public ResponseEntity<List<Meal_Order>> getAllOrders() {
-		List <Meal_Order> allOrders = orderRepository.findByStatus("ORDERED");
-		return new ResponseEntity<>(allOrders, HttpStatus.OK);
-	}
+
+    @Autowired
+    OrderRepository orderRepository;
+
+    @GetMapping("/pendingOrders")
+    public ResponseEntity<List<Meal_Order>> getAllOrders() {
+        List <Meal_Order> allOrders = orderRepository.findByStatus("ORDERED");
+        return new ResponseEntity<>(allOrders, HttpStatus.OK);
+    }
 }

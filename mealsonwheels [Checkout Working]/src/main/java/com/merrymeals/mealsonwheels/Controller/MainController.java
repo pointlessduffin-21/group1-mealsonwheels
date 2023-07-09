@@ -17,70 +17,154 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.merrymeals.mealsonwheels.Entity.Meal;
 import com.merrymeals.mealsonwheels.Entity.Meal_Order;
+import com.merrymeals.mealsonwheels.Entity.User;
 import com.merrymeals.mealsonwheels.Service.MealService;
 import com.merrymeals.mealsonwheels.Service.OrderService;
+import com.merrymeals.mealsonwheels.Service.UserService;
 
 import javax.servlet.http.HttpSession;
 
 
 @Controller
 public class MainController {
-	
+
 	@Autowired
 	MealService mealService;
 
 	@Autowired
 	OrderService orderService;
 
+	@Autowired
+	UserService userService;
+
+	// AUTH CONTROLLER
+
+	@GetMapping("/login")
+    public String onLogin() {
+        return "login";
+    }
+
+	  @GetMapping("/login_error")
+	    public String onLoginError(Model model) {
+	        String error_msg = "That ain't right. Try Again.";
+	        model.addAttribute("error_string", error_msg);
+	        return "login";
+	    }
+
+	    @GetMapping("/login_success")
+	    public String onLoginSuccess(HttpSession session, Model model) {
+	    	mealDetails.clear();
+
+	    	User loggedUser = (User) session.getAttribute("user");
+	        model.addAttribute("loggedUser", loggedUser);
+
+	    	String success_login = "Welcome to the world of ABC Used Cars.";
+	        model.addAttribute("success_login", success_login);
+
+	        model.addAttribute("selectedItems", selectedItems);
+
+	        List<Meal> mealResults = mealService.getAllMeals();
+	        model.addAttribute("mealResults", mealResults);
+
+	        List<Meal_Order> myOrders = orderService.getMealsByUId(loggedUser.getU_id());
+	        model.addAttribute("myOrders", myOrders);
+
+	        model.addAttribute("cartContent", mealDetails);
+
+	        String lastOrderNumber = orderService.getLastOrderNumber();
+	        int orderNumber = 0; // Default value when the order number is null
+
+			if (lastOrderNumber != null && !lastOrderNumber.isEmpty()) {
+			    orderNumber = Integer.parseInt(lastOrderNumber);
+			}
+
+	        int incrementedOrderNumber = orderNumber + 1;
+	        String incrementedOrderNumberString = String.valueOf(incrementedOrderNumber); // Convert back to a string
+
+	        model.addAttribute("orderNumber", incrementedOrderNumberString);
+
+	        return "member";
+	    }
+
+	    @GetMapping("/logout")
+	    public String onLogoutSuccess(Model model) {
+
+	    	String success_logout = "See you next time";
+	        model.addAttribute("success_logout", success_logout);
+
+	    	return "login";
+	    }
+
+	@PostMapping("/register_user")
+	public String registration(User user, @RequestParam("userRole") String role) {
+		userService.saveUser(user,role);
+		return "login" ;
+
+	}
+
+	@PostMapping("/loginTa")
+    public String login(@RequestParam String email, @RequestParam String password, Model model, HttpSession session) {
+
+        if (userService.loginUser(email, password)) {
+
+        	User user = userService.getUser(email, password);
+        	session.setAttribute("user", user);
+        	System.out.print("HUY");
+
+            return "redirect:/login_success";
+        } else {
+            model.addAttribute("error", "Invalid email or password");
+            return "redirect:/login_error";
+        }
+    }
+
+
+
+
     @RequestMapping("/")
-    public String landing() {
+    public String indexPage() {
         return "index";
     }
 
     // For Testing purposes (palihug ko remove ani once naa na sa main pages) - Roel
-    @RequestMapping("/distancematrixniroel")
+    @GetMapping("/distancematrixniroel")
     public String distance() {
         return "distancematrixniroel";
     }
 
-    @RequestMapping("/addfundsniroel")
+    @GetMapping("/addfundsniroel")
     public String funds() {
         return "addfundsniroel";
     }
 
-    @RequestMapping("/tablefundsniroel")
+    @GetMapping("/tablefundsniroel")
     public String tablefunds() {
         return "tablefundsniroel";
     }
 
     // Diri rni kutob - Roel
 
-    @RequestMapping("/dashboard")
+    @GetMapping("/dashboard")
     public String homePage() {
         return "index";
     }
 
-    @RequestMapping("/loginPage")
-    public String loginPage() {
-        return "login";
-    }
-
-    @RequestMapping("/register")
+    @GetMapping("/register")
     public String registerPage() {
         return "register";
     }
 
-    @RequestMapping("/contact")
+    @GetMapping("/contact")
     public String contactUsPage() {
         return "contact";
     }
 
-    @RequestMapping("/about")
+    @GetMapping("/about")
     public String aboutUsPage() {
         return "about";
     }
 
-    @RequestMapping("/memberTwo")
+    @GetMapping("/memberTwo")
     public String memberTwo(Model model) {
 
         List<Meal> mealResults = mealService.getAllMeals();
@@ -89,22 +173,29 @@ public class MainController {
         return "search";
     }
 
-    @RequestMapping("/member")
-    public String memberDashboard(Model model) {
-        model.addAttribute("selectedItems", selectedItems);
+    @GetMapping("/member")
+    public String memberDashboard(Model model, HttpSession session) {
+    	User loggedUser = (User) session.getAttribute("user");
+        model.addAttribute("loggedUser", loggedUser);
 
         List<Meal> mealResults = mealService.getAllMeals();
         model.addAttribute("mealResults", mealResults);
 
-        model.addAttribute("cartContent", mealDetails);
-        
-        String lastOrderNumber = orderService.getLastOrderNumber();
-        int orderNumber = 0; // Default value when the order number is null
+        mealDetails.clear();
 
-		if (lastOrderNumber != null && !lastOrderNumber.isEmpty()) {
-		    orderNumber = Integer.parseInt(lastOrderNumber);
-		}
-        
+        model.addAttribute("selectedItems", selectedItems);
+        model.addAttribute("cartContent", mealDetails);
+
+        List<Meal_Order> myOrders = orderService.getMealsByUId(loggedUser.getU_id());
+        model.addAttribute("myOrders", myOrders);
+
+        int orderNumber = 0; // Default value when the order number is null
+        String lastOrderNumber = orderService.getLastOrderNumber();
+
+        if (lastOrderNumber != null && !lastOrderNumber.isEmpty()) {
+            orderNumber = Integer.parseInt(lastOrderNumber);
+        }
+
         int incrementedOrderNumber = orderNumber + 1;
         String incrementedOrderNumberString = String.valueOf(incrementedOrderNumber); // Convert back to a string
 
@@ -114,17 +205,23 @@ public class MainController {
     }
 
 
-    @RequestMapping(value="/search")
-    public String search(@RequestParam String searchKey, Model model) throws Exception {
+    @GetMapping(value="/search")
+    public String search(@RequestParam String searchKey,HttpSession session, Model model) throws Exception {
+    	User loggedUser = (User) session.getAttribute("user");
+        model.addAttribute("loggedUser", loggedUser);
+
     	model.addAttribute("cartContent", mealDetails);
+
+    	 List<Meal_Order> myOrders = orderService.getMealsByUId(loggedUser.getU_id());
+	        model.addAttribute("myOrders", myOrders);
 
         if(searchKey != null && !searchKey.equals("")) {
             searchKey = searchKey.split(" ")[0];
 
             List<Meal> mealResults = mealService.search(searchKey);
             model.addAttribute("mealResults", mealResults);
-            
-            int orderNumber = Integer.parseInt(orderService.getLastOrderNumber()); 
+
+            int orderNumber = Integer.parseInt(orderService.getLastOrderNumber());
             int incrementedOrderNumber = orderNumber + 1;
             String incrementedOrderNumberString = String.valueOf(incrementedOrderNumber); // Convert back to a string
 
@@ -144,36 +241,42 @@ public class MainController {
 
     }
 
-    @RequestMapping("/admin")
+    @GetMapping("/admin")
     public String adminPage() {
         return "admin";
     }
 
-    @RequestMapping("/donator")
+    @GetMapping("/donator")
     public String donatePage() {
         return "donator";
     }
 
-    @RequestMapping("/kitchen")
+    @GetMapping("/kitchen")
     public String kitPage() {
         return "kitchen";
     }
-    
-    @RequestMapping("/addmeal")
+
+    @GetMapping("/addmeal")
     public String addMeal() {
         return "addmeal";
     }
-    
-    
-    
+
+
+
 //    DIMPLE NEW TOUCH UPS
-    
+
 
     List<Long> selectedItems = new ArrayList<>();
     List<Meal> mealDetails = new ArrayList<>();
-    
+
     @PostMapping("/addToCart")
-    public String addToCart(@RequestParam("mealId") Long mealId, Model model) {
+    public String addToCart(@RequestParam("mealId") Long mealId,HttpSession session, Model model) {
+    	User loggedUser = (User) session.getAttribute("user");
+        model.addAttribute("loggedUser", loggedUser);
+
+        List<Meal_Order> myOrders = orderService.getMealsByUId(loggedUser.getU_id());
+        model.addAttribute("myOrders", myOrders);
+
         mealDetails.clear();
 
         List<Meal> mealResults = mealService.getAllMeals();
@@ -205,9 +308,15 @@ public class MainController {
         return "member";
     }
 
-    
+
     @PostMapping("/deleteFromCart")
-    public String deleteFromCart(@RequestParam("mealId") Long mealId, Model model) {
+    public String deleteFromCart(@RequestParam("mealId") Long mealId, Model model, HttpSession session) {
+
+    	User loggedUser = (User) session.getAttribute("user");
+        model.addAttribute("loggedUser", loggedUser);
+
+        List<Meal_Order> myOrders = orderService.getMealsByUId(loggedUser.getU_id());
+        model.addAttribute("myOrders", myOrders);
 
         List<Meal> mealResults = mealService.getAllMeals();
         model.addAttribute("mealResults", mealResults);
@@ -229,7 +338,7 @@ public class MainController {
             // Handle the case when the meal was not found in the cart
             model.addAttribute("errMsg", "Meal not found in the cart");
         }
-        int orderNumber = Integer.parseInt(orderService.getLastOrderNumber()); 
+        int orderNumber = Integer.parseInt(orderService.getLastOrderNumber());
         int incrementedOrderNumber = orderNumber + 1;
         String incrementedOrderNumberString = String.valueOf(incrementedOrderNumber); // Convert back to a string
 
@@ -239,10 +348,22 @@ public class MainController {
         return "member";
     }
 
-    
-    @RequestMapping("/checkout")
-    public String checkout(@RequestParam("mealId") String mealId, Model model) throws Exception {
+
+    @PostMapping("/checkout")
+    public String checkout(@RequestParam("mealId") String mealId, Model model, HttpSession session) throws Exception {
         try {
+        	User loggedUser = (User) session.getAttribute("user");
+	        model.addAttribute("loggedUser", loggedUser);
+	        Long userId = loggedUser.getU_id();
+
+	        List<Meal> mealResults = mealService.getAllMeals();
+	        model.addAttribute("mealResults", mealResults);
+
+
+	        List<Meal_Order> myOrders = orderService.getMealsByUId(loggedUser.getU_id());
+	        model.addAttribute("myOrders", myOrders);
+
+	        System.out.print("hi");
             String orderNumberString = orderService.getLastOrderNumber();
             int orderNumber = orderNumberString != null ? Integer.parseInt(orderNumberString) : 0;
             int incrementedOrderNumber = orderNumber + 1;
@@ -250,6 +371,7 @@ public class MainController {
 
             for (Long item : selectedItems) {
                 Meal_Order order = new Meal_Order();
+                order.setU_id(userId);
                 order.setOrder_number(incrementedOrderNumberString);
                 order.setOrder_date(java.time.LocalDate.now().toString());
                 order.setM_id(item);
@@ -273,8 +395,8 @@ public class MainController {
 
 
 
-    
-    
 
-    
+
+
+
 }

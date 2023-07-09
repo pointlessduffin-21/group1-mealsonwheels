@@ -1,9 +1,9 @@
 package com.merrymeals.mealsonwheels.Entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
 public class Meal_Order {
@@ -13,7 +13,7 @@ public class Meal_Order {
 	private Long mo_id;
 	private String order_number;
 	private Long m_id;
-	private String u_id;
+	private Long u_id;
 	private String p_id;
 	private String v_id;
 	private String a_id;
@@ -26,7 +26,7 @@ public class Meal_Order {
 		
 	}
 	
-	public Meal_Order(Long mo_id, String order_number, Long m_id, String u_id, String p_id, String v_id, String a_id,
+	public Meal_Order(Long mo_id, String order_number, Long m_id, Long u_id, String p_id, String v_id, String a_id,
 			String order_date, String to_address, String from_address, String status) {
 		super();
 		this.mo_id = mo_id;
@@ -59,10 +59,10 @@ public class Meal_Order {
 	public void setM_id(Long m_id) {
 		this.m_id = m_id;
 	}
-	public String getU_id() {
+	public Long getU_id() {
 		return u_id;
 	}
-	public void setU_id(String u_id) {
+	public void setU_id(Long u_id) {
 		this.u_id = u_id;
 	}
 	public String getP_id() {

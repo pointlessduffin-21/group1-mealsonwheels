@@ -11427,8 +11427,8 @@ p{
 .banner-promo{
   position: absolute;
   color: var(--lightGrey);
-  top: 25%;
-  right: 10%;
+  top: 0%;
+  right: 20%;
   font-weight: 800;
 }
 

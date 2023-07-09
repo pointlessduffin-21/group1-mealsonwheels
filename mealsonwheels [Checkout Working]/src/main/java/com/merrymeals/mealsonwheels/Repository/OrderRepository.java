@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import com.merrymeals.mealsonwheels.Entity.Meal;
 import com.merrymeals.mealsonwheels.Entity.Meal_Order;
 
 @Repository
@@ -19,6 +20,9 @@ public interface OrderRepository extends JpaRepository<Meal_Order, Long>{
 //			+ " JOIN meal ON meal_order.m_id = meal.m_id"
 //			+ " WHERE meal.m_id = :mealId", nativeQuery = true)
 //	public String getDetailsById(@Param("mealId") String userId);
+
+	@Query("SELECT o, m.meal_name FROM Meal_Order o JOIN Meal m ON o.m_id = m.m_id WHERE o.u_id = :userId")
+	public List<Meal_Order> getMealsByUId(@Param("userId") Long userId);
 
 	@Query(value = "SELECT order_number FROM Meal_Order ORDER BY mo_id DESC LIMIT 1",
 			nativeQuery = true)
@@ -36,6 +40,7 @@ public interface OrderRepository extends JpaRepository<Meal_Order, Long>{
 	@Query("SELECT mo FROM Meal_Order mo WHERE mo.status LIKE :DELIVERED")
 	public List<Meal_Order> getDelivered();
 
-	 @Query("SELECT mo FROM Meal_Order mo WHERE mo.status = :status")
-	    List<Meal_Order> findByStatus(@Param("status") String status);
+	@Query("SELECT mo FROM Meal_Order mo WHERE mo.status = :status")
+	List<Meal_Order> findByStatus(@Param("status") String status);
+
 }
