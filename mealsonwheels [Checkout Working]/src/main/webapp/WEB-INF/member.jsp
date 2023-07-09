@@ -89,7 +89,7 @@
                 <% } %>
                 <div class="col-sm-3 pe-1">
                     <div class="dashboard-card">
-                        <img class="card-image" src="https://hips.hearstapps.com/hmg-prod/images/classic-cheese-pizza-recipe-2-64429a0cb408b.jpg?crop=0.6666666666666667xw:1xh;center,top&resize=1200:*">
+                        <img class="card-image" src="<%= meal.getPhotoPath() %>">
                         <div class="card-detail">
                             <h4><%= meal.getMeal_name() %>
                             	<span>  
@@ -99,6 +99,7 @@
 									</form>
 
 								</span>
+								<%= meal.getPhotoPath() %>
 							</h4>
 							
                             <%-- <p>Nutrition: <%= meal.getNutrition() %></p>
@@ -140,7 +141,7 @@
 	        	<form action="/deleteFromCart" method="post">
 	        		<div class="d-flex justify-content-between">
 							<div class="d-flex justify-content-start mb-3">
-					            <img class="order-image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLY5j-0GxBdLWv53oNAH6KKQszBRTDWstPXg&usqp=CAU">
+					            <img class="order-image" src="<%= meal.getPhotoPath() %>">
 					            <div class="order-detail ms-3">
 					            	<p class="fw-bold mb-0" style="font-size:1em;"><%= meal.getMeal_name() %></p>
 					                <span>x</span> <span>1</span>
