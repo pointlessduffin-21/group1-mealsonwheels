@@ -36,4 +36,6 @@ public interface OrderRepository extends JpaRepository<Meal_Order, Long>{
 	@Query("SELECT mo FROM Meal_Order mo WHERE mo.status LIKE :DELIVERED")
 	public List<Meal_Order> getDelivered();
 
+	 @Query("SELECT mo FROM Meal_Order mo WHERE mo.status = :status")
+	    List<Meal_Order> findByStatus(@Param("status") String status);
 }
