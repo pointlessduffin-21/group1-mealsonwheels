@@ -260,6 +260,11 @@ public class MainController {
     public String addMeal() {
         return "addmeal";
     }
+    
+    @GetMapping("/volunteer")
+    public String volunteer() {
+        return "volunteer";
+    }
 
 
 
