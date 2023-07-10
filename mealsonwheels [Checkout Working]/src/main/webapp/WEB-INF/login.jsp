@@ -90,7 +90,7 @@
                 <div class="card bg-glass">
                     <div class="card-body px-4 py-5 px-md-5">
                         <c:url var="post_url" value="/login" />
-						<form action="loginTa" method="post" class="">
+						<form action="/login" method="post" class="">
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                             <h1 class="mb-2 fw-bold ls-tight text-center" style="color: rgb(64, 59, 59)">
                                 Sign In <br />
@@ -100,7 +100,7 @@
                             <!-- Email input -->
                             <div class="form-outline mb-4">
                                 <label class="form-label" for="form3Example3">Email</label>
-                                <input type="email" id="email" name="email" class="form-control" />
+                                <input type="text" id="userName" name="userName" class="form-control" />
                             </div>
 
                             <!-- Password input -->
