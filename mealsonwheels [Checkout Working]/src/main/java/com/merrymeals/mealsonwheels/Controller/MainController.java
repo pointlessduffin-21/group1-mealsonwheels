@@ -60,10 +60,7 @@ public class MainController {
         return "login";
     }
 	
-	@GetMapping("/volunteer")
-    public String volunteerDashboard() {
-        return "volunteer";
-    }
+
 	
 	@GetMapping("/login_success")
     public String onLoginSuccess(HttpSession session, Model model) {
@@ -331,8 +328,6 @@ public class MainController {
         return "volunteer";
     }
 
-
-
 //    DIMPLE NEW TOUCH UPS
 
 
@@ -489,25 +484,24 @@ public class MainController {
 
 	    @GetMapping("/logout")
 	    public String onLogoutSuccess(Model model) {
-
-    @PostMapping("/assignRider")
-    public String assignRiderr(@RequestParam("orderId") Long orderId,@RequestParam("riderId") Long riderId, HttpSession session, Model model) {
-		
-    	Meal_Order riderAssigned = orderService.getOrder(orderId);
-    	
-    	
-    	riderAssigned.setStatus("COOKED");
-    	riderAssigned.setV_id(riderId);
-    	
-    	orderService.save(riderAssigned);
-        return "redirect:/kitchen";
-    }
-
 	    	String success_logout = "See you next time";
 	        model.addAttribute("success_logout", success_logout);
 
 	    	return "login";
 	    }
+
+        @PostMapping("/assignRider")
+        public String assignRiderr(@RequestParam("orderId") Long orderId,@RequestParam("riderId") Long riderId, HttpSession session, Model model) {
+
+            Meal_Order riderAssigned = orderService.getOrder(orderId);
+
+
+            riderAssigned.setStatus("COOKED");
+            riderAssigned.setV_id(riderId);
+
+            orderService.save(riderAssigned);
+            return "redirect:/kitchen";
+        }
 	    
 		@PostMapping("/register_user")
 		public String registration(User user, @RequestParam("userRole") String role) {
