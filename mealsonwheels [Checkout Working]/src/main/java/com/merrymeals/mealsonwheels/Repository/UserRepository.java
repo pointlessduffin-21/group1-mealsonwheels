@@ -38,6 +38,10 @@ public interface UserRepository extends JpaRepository<User, Long>{
 			nativeQuery = true)
 	public String findRoleByUid(Long uid);
 	
+	@Query(value="SELECT user_role.r_id FROM user JOIN user_role ON user.u_id = user_role.u_id WHERE user.u_id = :uid",
+			nativeQuery = true)
+	public String findRoleIdByUid(Long uid);
+	
 	@Query(value="SELECT * FROM user JOIN user_role ON user.u_id = user_role.u_id JOIN role ON user_role.r_id = role.id WHERE role.name = :role",
 			nativeQuery = true)
 	public List<User> findUsersByRole(String role);

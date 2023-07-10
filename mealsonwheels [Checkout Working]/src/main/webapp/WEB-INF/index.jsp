@@ -83,13 +83,13 @@
 					<!-- Portfolio item 1-->
 					<div class="portfolio-item">
 						<a class="portfolio-link" data-bs-toggle="modal"
-							href="#portfolioModal1">
+							href="#portfolioModal2">
 							<div class="portfolio-hover">
 								<div class="portfolio-hover-content">
 									<i class="fas fa-plus fa-3x"></i>
 								</div>
 							</div> <img class="img-fluid"
-							src="https://imageio.forbes.com/specials-images/imageserve/904288674/Manila-Makati-at-Twilight/960x0.jpg?format=jpg&width=960"
+							src="https://welcomeasia.jp/assets/img/city/metromanila/metromanila_pic02.jpg"
 							alt="..." />
 						</a>
 						<div class="portfolio-caption">

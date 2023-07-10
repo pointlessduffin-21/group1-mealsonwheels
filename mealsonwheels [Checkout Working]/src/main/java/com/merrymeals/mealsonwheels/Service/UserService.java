@@ -100,6 +100,10 @@ public class UserService {
 	public String findRoleByUid(Long Uid) {
 		return ur.findRoleByUid(Uid);
 	}
+	
+	public String findRoleIdByUid(Long Uid) {
+		return ur.findRoleIdByUid(Uid);
+	}
 
 	public List<User> getAllUsers() {
 		return ur.findAll();

@@ -91,7 +91,7 @@
                     <div class="card-body px-4 py-5 px-md-5">
                     
                      <c:url var="post_url" value="/login" />
-                    <form action="/loginTa" method="post" class="was-validated">
+                    <form action="/login" method="post" class="was-validated">
 				        <input type="hidden" name="${_csrf.parameterName}"
 				               value="${_csrf.token}" />
 				

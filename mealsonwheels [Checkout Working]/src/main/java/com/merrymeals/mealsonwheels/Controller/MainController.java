@@ -1,5 +1,8 @@
 package com.merrymeals.mealsonwheels.Controller;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -91,40 +94,86 @@ public class MainController {
         return "volunteer";
     }
 	
+	/*
+	 * @GetMapping("/login_success") public String onLoginSuccess(HttpSession
+	 * session, Model model) { mealDetails.clear();
+	 * 
+	 * User loggedUser = (User) session.getAttribute("user");
+	 * model.addAttribute("loggedUser", loggedUser);
+	 * 
+	 * String success_login = "Welcome to the world of ABC Used Cars.";
+	 * model.addAttribute("success_login", success_login);
+	 * 
+	 * model.addAttribute("selectedItems", selectedItems);
+	 * 
+	 * List<Meal> mealResults = mealService.getAllMeals();
+	 * model.addAttribute("mealResults", mealResults);
+	 * 
+	 * List<Meal_Order> myOrders = orderService.getMealsByUId(loggedUser.getU_id());
+	 * model.addAttribute("myOrders", myOrders);
+	 * 
+	 * model.addAttribute("cartContent", mealDetails);
+	 * 
+	 * String lastOrderNumber = orderService.getLastOrderNumber(); int orderNumber =
+	 * 0; // Default value when the order number is null
+	 * 
+	 * if (lastOrderNumber != null && !lastOrderNumber.isEmpty()) { orderNumber =
+	 * Integer.parseInt(lastOrderNumber); }
+	 * 
+	 * int incrementedOrderNumber = orderNumber + 1; String
+	 * incrementedOrderNumberString = String.valueOf(incrementedOrderNumber); //
+	 * Convert back to a string
+	 * 
+	 * model.addAttribute("orderNumber", incrementedOrderNumberString);
+	 * 
+	 * return "member"; }
+	 */
+	
 	@GetMapping("/login_success")
-    public String onLoginSuccess(HttpSession session, Model model) {
-    	mealDetails.clear();
+	public String onLoginSuccess(HttpSession session, Model model) {
+	    mealDetails.clear();
 
-    	User loggedUser = (User) session.getAttribute("user");
-        model.addAttribute("loggedUser", loggedUser);
+	    User loggedUser = (User) session.getAttribute("user");
+	    model.addAttribute("loggedUser", loggedUser);
 
-    	String success_login = "Welcome to the world of ABC Used Cars.";
-        model.addAttribute("success_login", success_login);
+	    String success_login = "Welcome to the world of ABC Used Cars.";
+	    model.addAttribute("success_login", success_login);
 
-        model.addAttribute("selectedItems", selectedItems);
+	    model.addAttribute("selectedItems", selectedItems);
 
-        List<Meal> mealResults = mealService.getAllMeals();
-        model.addAttribute("mealResults", mealResults);
+	    List<Meal> mealResults = mealService.getAllMeals();
+	    model.addAttribute("mealResults", mealResults);
 
-        List<Meal_Order> myOrders = orderService.getMealsByUId(loggedUser.getU_id());
-        model.addAttribute("myOrders", myOrders);
+	    List<Meal_Order> myOrders = orderService.getMealsByUId(loggedUser.getU_id());
+	    model.addAttribute("myOrders", myOrders);
 
-        model.addAttribute("cartContent", mealDetails);
+	    model.addAttribute("cartContent", mealDetails);
 
-        String lastOrderNumber = orderService.getLastOrderNumber();
-        int orderNumber = 0; // Default value when the order number is null
+	    String lastOrderNumber = orderService.getLastOrderNumber();
+	    int orderNumber = 0; // Default value when the order number is null
 
-		if (lastOrderNumber != null && !lastOrderNumber.isEmpty()) {
-		    orderNumber = Integer.parseInt(lastOrderNumber);
-		}
+	    if (lastOrderNumber != null && !lastOrderNumber.isEmpty()) {
+	        orderNumber = Integer.parseInt(lastOrderNumber);
+	    }
 
-        int incrementedOrderNumber = orderNumber + 1;
-        String incrementedOrderNumberString = String.valueOf(incrementedOrderNumber); // Convert back to a string
+	    int incrementedOrderNumber = orderNumber + 1;
+	    String incrementedOrderNumberString = String.valueOf(incrementedOrderNumber); // Convert back to a string
 
-        model.addAttribute("orderNumber", incrementedOrderNumberString);
+	    model.addAttribute("orderNumber", incrementedOrderNumberString);
 
-        return "member";
-    }
+	    Long userId = loggedUser.getU_id();
+	    String roleId = userService.findRoleIdByUid(userId);
+		/*
+		 * if (roleId == "1") { return "admin"; } else if (roleId == "2") { return
+		 * "member"; } else if (roleId == "3") { return "kitchen"; } else if (roleId ==
+		 * "4") { return "volunteer"; } else if (roleId == "5") { return "donator"; }
+		 * else { return "login"; }
+		 */
+	    
+	    return "member";
+	}
+
+
 
 
 
@@ -450,7 +499,7 @@ public class MainController {
 		@PostMapping("/register_user")
 		public String registration(User user, @RequestParam("userRole") String role) {
 			userService.saveUser(user,role);
-			return "Regsitration Success" ;
+			return "login" ;
 
 		}
 }
