@@ -1,3 +1,7 @@
+<%@ page import="com.merrymeals.mealsonwheels.Entity.Meal_Order" %>
+<%@ page import="com.merrymeals.mealsonwheels.Entity.Meal" %>
+<%@ page import="com.merrymeals.mealsonwheels.Entity.User" %>
+<%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
 
@@ -117,75 +121,43 @@
 											style="color: rgb(45, 237, 42);">Incoming</h6>
 									</div>
 									<ul class="list-group list-group-flush ps-3">
+									
+									<% List<Meal_Order> ookOrders = (List<Meal_Order>) request.getAttribute("ookOrders"); %>
 										<!-- Order 1 -->
 										<li class="list-group-item">
-											<div class="row align-items-center no-gutters">
+										<% if (ookOrders != null && !ookOrders.isEmpty()) { %>
+							           
+							            <% for (Meal_Order order : ookOrders) { %>
+											<div class="row align-items-center no-gutters border-bottom">
 												<div class="col-xxl-7 me-2">
-													<p>Order #2142</p>
+													<p class="mb-0 fw-bold">Order Number # <%= order.getOrder_number() %></p>
+													<% List<Meal> meals = (List<Meal>) request.getAttribute("meals"); %>
+														<% for (Meal meal : meals) { %>
+	        											<% if (order.getM_id() == meal.getM_id()) { %>
+													<p class=""><%= meal.getMeal_name() %></p>
+													<% } %>
+										            <% } %>
+													<% List<User> users = (List<User>) request.getAttribute("users"); %>
+														<% for (User user : users) { %>
+	        											<% if (order.getU_id() == user.getU_id()) { %>
+													
 													<h6 class="mb-0">
-														<strong>Jane Doe</strong>
+														<strong><%= user.getName() %></strong>
 													</h6>
-													<p>Cupertino, California</p>
-													<span class="text-xs">Order</span>
-													<p>1pcs 12" Pizza</p>
+													<p><%= user.getAddress() %></p>
+													<% } %>
+										            <% } %>
 												</div>
 												<div class="col-xxl-4 offset-xxl-0">
 													<button class="btn btn-success" type="button"
-														style="width: 126.037px; padding: 6px 12px; margin: 10px;">Accept
-														</button>
-													<button class="btn btn-danger" type="button"
-														style="width: 127.438px; padding: 6px 12px; margin: 9px;"
-														data-bs-toggle="modal" data-bs-target="#declineModal1">Decline
+														style="width: 126.037px; padding: 6px 12px; margin: 10px;">Received
 														</button>
 												</div>
 											</div>
+											<% } %>
+            								<% } %>
 										</li>
-										<!-- Order 2 -->
-										<li class="list-group-item">
-											<div class="row align-items-center no-gutters">
-												<div class="col-xxl-7 me-2">
-													<p>Order #2142</p>
-													<h6 class="mb-0">
-														<strong>Jane Doe</strong>
-													</h6>
-													<p>Cupertino, California</p>
-													<span class="text-xs">Order</span>
-													<p>1pcs 12" Pizza</p>
-												</div>
-												<div class="col-xxl-4 offset-xxl-0">
-													<button class="btn btn-success" type="button"
-														style="width: 126.037px; padding: 6px 12px; margin: 10px;">Accept
-														</button>
-													<button class="btn btn-danger" type="button"
-														style="width: 127.438px; padding: 6px 12px; margin: 9px;"
-														data-bs-toggle="modal" data-bs-target="#declineModal1">Decline
-														</button>
-												</div>
-											</div>
-										</li>
-										<!-- Order 3 -->
-										<li class="list-group-item">
-											<div class="row align-items-center no-gutters">
-												<div class="col-xxl-7 me-2">
-													<p>Order #2142</p>
-													<h6 class="mb-0">
-														<strong>Jane Doe</strong>
-													</h6>
-													<p>Cupertino, California</p>
-													<span class="text-xs">Order</span>
-													<p>1pcs 12" Pizza</p>
-												</div>
-												<div class="col-xxl-4 offset-xxl-0">
-													<button class="btn btn-success" type="button"
-														style="width: 126.037px; padding: 6px 12px; margin: 10px;">Accept
-														</button>
-													<button class="btn btn-danger" type="button"
-														style="width: 127.438px; padding: 6px 12px; margin: 9px;"
-														data-bs-toggle="modal" data-bs-target="#declineModal1">Decline
-														</button>
-												</div>
-											</div>
-										</li>
+									
 									</ul>
 								</div>
 
@@ -211,53 +183,6 @@
 										</div>
 									</div>
 								</div>
-
-								<!-- Decline Order Modal 2 -->
-								<div class="modal fade" id="declineModal2" tabindex="-1"
-									aria-labelledby="declineModal2Label" aria-hidden="true">
-									<div class="modal-dialog">
-										<div class="modal-content">
-											<div class="modal-header">
-												<h5 class="modal-title" id="declineModal2Label">Are you
-													sure you want to decline this order?</h5>
-												<button type="button" class="btn-close"
-													data-bs-dismiss="modal" aria-label="Close"></button>
-											</div>
-											<div class="modal-body">
-												<!-- Add additional information or warning message here if needed -->
-											</div>
-											<div class="modal-footer">
-												<button type="button" class="btn btn-secondary"
-													data-bs-dismiss="modal">Cancel</button>
-												<button type="button" class="btn btn-danger">Decline</button>
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<!-- Decline Order Modal 3 -->
-								<div class="modal fade" id="declineModal3" tabindex="-1"
-									aria-labelledby="declineModal3Label" aria-hidden="true">
-									<div class="modal-dialog">
-										<div class="modal-content">
-											<div class="modal-header">
-												<h5 class="modal-title" id="declineModal3Label">Are you
-													sure you want to decline this order?</h5>
-												<button type="button" class="btn-close"
-													data-bs-dismiss="modal" aria-label="Close"></button>
-											</div>
-											<div class="modal-body">
-												<!-- Add additional information or warning message here if needed -->
-											</div>
-											<div class="modal-footer">
-												<button type="button" class="btn btn-secondary"
-													data-bs-dismiss="modal">Cancel</button>
-												<button type="button" class="btn btn-danger">Decline</button>
-											</div>
-										</div>
-									</div>
-								</div>
-
 							</div>
 							<div class="col-lg-6 col-xxl-4 mb-4">
 								<div class="card shadow mb-4"></div>
@@ -266,65 +191,44 @@
 										<h6 class="text-secondary fw-bold m-0">Ongoing</h6>
 									</div>
 									<ul class="list-group list-group-flush ps-3">
+										<% List<Meal_Order> vrOrders = (List<Meal_Order>) request.getAttribute("vrOrders"); %>
 										<!-- Order 1 -->
 										<li class="list-group-item">
-											<div class="row align-items-center no-gutters">
+										<% if (vrOrders != null && !vrOrders.isEmpty()) { %>
+							           
+							            <% for (Meal_Order order : vrOrders) { %>
+											<div class="row align-items-center no-gutters border-bottom">
 												<div class="col-xxl-7 me-2">
-													<p>Order #2142</p>
+													<p class="mb-0 fw-bold">Order Number # <%= order.getOrder_number() %></p>
+													<% List<Meal> meals = (List<Meal>) request.getAttribute("meals"); %>
+														<% for (Meal meal : meals) { %>
+	        											<% if (order.getM_id() == meal.getM_id()) { %>
+													<p class=""><%= meal.getMeal_name() %></p>
+													<% } %>
+										            <% } %>
+													<% List<User> users = (List<User>) request.getAttribute("users"); %>
+														<% for (User user : users) { %>
+	        											<% if (order.getU_id() == user.getU_id()) { %>
+													
 													<h6 class="mb-0">
-														<strong>Jane Doe</strong>
+														<strong><%= user.getName() %></strong>
 													</h6>
-													<p>Cupertino, California</p>
-													<span class="text-xs">Order</span>
-													<p>1pcs 12" Pizza</p>
+													<p><%= user.getAddress() %></p>
+													<% } %>
+										            <% } %>
+										            
+										            
 												</div>
 												<div class="col-xxl-4 offset-xxl-0">
 													<button class="btn btn-danger" type="button"
 														style="width: 127.438px; padding: 6px 12px; margin: 9px;"
-														data-bs-toggle="modal" data-bs-target="#declineModal1">Cancel
-														Order</button>
+														data-bs-toggle="modal" data-bs-target="#declineModal1">Deliver
+														</button>
 												</div>
 											</div>
-										</li>
-										<!-- Order 2 -->
-										<li class="list-group-item">
-											<div class="row align-items-center no-gutters">
-												<div class="col-xxl-7 me-2">
-													<p>Order #2142</p>
-													<h6 class="mb-0">
-														<strong>Jane Doe</strong>
-													</h6>
-													<p>Cupertino, California</p>
-													<span class="text-xs">Order</span>
-													<p>1pcs 12" Pizza</p>
-												</div>
-												<div class="col-xxl-4 offset-xxl-0">
-													<button class="btn btn-danger" type="button"
-														style="width: 127.438px; padding: 6px 12px; margin: 9px;"
-														data-bs-toggle="modal" data-bs-target="#declineModal1">Cancel
-														Order</button>
-												</div>
-											</div>
-										</li>
-										<!-- Order 3 -->
-										<li class="list-group-item">
-											<div class="row align-items-center no-gutters">
-												<div class="col-xxl-7 me-2">
-													<p>Order #2142</p>
-													<h6 class="mb-0">
-														<strong>Jane Doe</strong>
-													</h6>
-													<p>Cupertino, California</p>
-													<span class="text-xs">Order</span>
-													<p>1pcs 12" Pizza</p>
-												</div>
-												<div class="col-xxl-4 offset-xxl-0">
-													<button class="btn btn-danger" type="button"
-														style="width: 127.438px; padding: 6px 12px; margin: 9px;"
-														data-bs-toggle="modal" data-bs-target="#declineModal1">Cancel
-														Order</button>
-												</div>
-											</div>
+										
+											<% } %>
+            								<% } %>
 										</li>
 									</ul>
 								</div>
@@ -351,53 +255,6 @@
 										</div>
 									</div>
 								</div>
-
-								<!-- Decline Order Modal 2 -->
-								<div class="modal fade" id="declineModal2" tabindex="-1"
-									aria-labelledby="declineModal2Label" aria-hidden="true">
-									<div class="modal-dialog">
-										<div class="modal-content">
-											<div class="modal-header">
-												<h5 class="modal-title" id="declineModal2Label">Are you
-													sure you want to cancel this order?</h5>
-												<button type="button" class="btn-close"
-													data-bs-dismiss="modal" aria-label="Close"></button>
-											</div>
-											<div class="modal-body">
-												<!-- Add additional information or warning message here if needed -->
-											</div>
-											<div class="modal-footer">
-												<button type="button" class="btn btn-secondary"
-													data-bs-dismiss="modal">Cancel</button>
-												<button type="button" class="btn btn-danger">Decline</button>
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<!-- Decline Order Modal 3 -->
-								<div class="modal fade" id="declineModal3" tabindex="-1"
-									aria-labelledby="declineModal3Label" aria-hidden="true">
-									<div class="modal-dialog">
-										<div class="modal-content">
-											<div class="modal-header">
-												<h5 class="modal-title" id="declineModal3Label">Are you
-													sure you want to cancel this order?</h5>
-												<button type="button" class="btn-close"
-													data-bs-dismiss="modal" aria-label="Close"></button>
-											</div>
-											<div class="modal-body">
-												<!-- Add additional information or warning message here if needed -->
-											</div>
-											<div class="modal-footer">
-												<button type="button" class="btn btn-secondary"
-													data-bs-dismiss="modal">Cancel</button>
-												<button type="button" class="btn btn-danger">Decline</button>
-											</div>
-										</div>
-									</div>
-								</div>
-
 							</div>
 							<div class="col-lg-6 col-xxl-4 offset-xxl-0 mb-4">
 								<div class="card shadow mb-4"></div>
@@ -405,68 +262,34 @@
 									<div class="card-header py-3">
 										<h6 class="text-secondary fw-bold m-0">History</h6>
 									</div>
-									<ul class="list-group list-group-flush ps-3">
+									<div>
+									<% List<Meal_Order> dOrders = (List<Meal_Order>) request.getAttribute("dOrders"); %>
 										<!-- Order 1 -->
 										<li class="list-group-item">
-											<div class="row align-items-center no-gutters">
-												<div class="col-xxl-7 me-2">
-													<p>Order #2142</p>
-													<h6 class="mb-0">
-														<strong>Jane Doe</strong>
-													</h6>
-													<p>Cupertino, California</p>
-													<span class="text-xs">Order</span>
-													<p>1pcs 12" Pizza</p>
-												</div>
-												<div class="col-xxl-4 offset-xxl-0">
-													<button class="btn text-white" type="button"
-														style="background: rgb(86, 114, 216); width: 126.037px; padding: 6px 12px; margin: 10px;"
-														data-bs-toggle="modal" data-bs-target="#orderModal1">
-														View Order</button>
-												</div>
-											</div>
-										</li>
-										<!-- Order 2 -->
-										<li class="list-group-item">
-											<div class="row align-items-center no-gutters">
-												<div class="col-xxl-7 me-2">
-													<p>Order #2142</p>
-													<h6 class="mb-0">
-														<strong>Jane Doe</strong>
-													</h6>
-													<p>Cupertino, California</p>
-													<span class="text-xs">Order</span>
-													<p>1pcs 12" Pizza</p>
-												</div>
-												<div class="col-xxl-4 offset-xxl-0">
-													<button class="btn text-white" type="button"
-														style="background: rgb(86, 114, 216); width: 126.037px; padding: 6px 12px; margin: 10px;"
-														data-bs-toggle="modal" data-bs-target="#orderModal1">
-														View Order</button>
-												</div>
-											</div>
-										</li>
-										<!-- Order 3 -->
-										<li class="list-group-item">
-											<div class="row align-items-center no-gutters">
-												<div class="col-xxl-7 me-2">
-													<p>Order #2142</p>
-													<h6 class="mb-0">
-														<strong>Jane Doe</strong>
-													</h6>
-													<p>Cupertino, California</p>
-													<span class="text-xs">Order</span>
-													<p>1pcs 12" Pizza</p>
-												</div>
-												<div class="col-xxl-4 offset-xxl-0">
-													<button class="btn text-white" type="button"
-														style="background: rgb(86, 114, 216); width: 126.037px; padding: 6px 12px; margin: 10px;"
-														data-bs-toggle="modal" data-bs-target="#orderModal1">
-														View Order</button>
-												</div>
-											</div>
-										</li>
-									</ul>
+										<% if (dOrders != null && !dOrders.isEmpty()) { %>
+							           
+							            <% for (Meal_Order order : dOrders) { %>
+									<div class="alert alert-info">
+										<% List<User> users = (List<User>) request.getAttribute("users"); %>
+														<% for (User user : users) { %>
+	        											<% if (order.getU_id() == user.getU_id()) { %>
+	        							<span class="fw-bold"><%= user.getName() %>'s</span>
+													<% } %>
+										            <% } %> 
+										            order of
+										<% List<Meal> meals = (List<Meal>) request.getAttribute("meals"); %>
+														<% for (Meal meal : meals) { %>
+	        											<% if (order.getM_id() == meal.getM_id()) { %>
+										<span class="fw-bold"><%= meal.getMeal_name() %></span>
+													<% } %>
+										            <% } %> 
+										            is delivered successfully.
+										
+													
+									</div>
+									<% } %>
+            						<% } %>
+								</div>
 								</div>
 							</div>
 
@@ -477,72 +300,6 @@
 									<div class="modal-content">
 										<div class="modal-header">
 											<h5 class="modal-title" id="orderModal1Label">Order
-												Details</h5>
-											<button type="button" class="btn-close"
-												data-bs-dismiss="modal" aria-label="Close"></button>
-										</div>
-										<div class="modal-body">
-											<h6>Order</h6>
-											<h3>#2142</h3>
-											<h6>Name</h6>
-											<h3>
-												<strong>Jane Doe</strong>
-											</h3>
-											<h6>Address</h6>
-											<h3>Cupertino, California</h3>
-											<h6>Order</h6>
-											<h3>1pc. 12" Pizza</h3>
-											<h6>Date of Order</h6>
-											<h3>October 5, 2022</h3>
-										</div>
-										<div class="modal-footer">
-											<button type="button" class="btn btn-secondary"
-												data-bs-dismiss="modal">Close</button>
-										</div>
-									</div>
-								</div>
-							</div>
-
-							<!-- Order Modal 2 -->
-							<div class="modal fade" id="orderModal2" tabindex="-1"
-								aria-labelledby="orderModal2Label" aria-hidden="true">
-								<div class="modal-dialog">
-									<div class="modal-content">
-										<div class="modal-header">
-											<h5 class="modal-title" id="orderModal2Label">Order
-												Details</h5>
-											<button type="button" class="btn-close"
-												data-bs-dismiss="modal" aria-label="Close"></button>
-										</div>
-										<div class="modal-body">
-											<h6>Order</h6>
-											<h3>#2142</h3>
-											<h6>Name</h6>
-											<h3>
-												<strong>Jane Doe</strong>
-											</h3>
-											<h6>Address</h6>
-											<h3>Cupertino, California</h3>
-											<h6>Order</h6>
-											<h3>1pc. 12" Pizza</h3>
-											<h6>Date of Order</h6>
-											<h3>October 5, 2022</h3>
-										</div>
-										<div class="modal-footer">
-											<button type="button" class="btn btn-secondary"
-												data-bs-dismiss="modal">Close</button>
-										</div>
-									</div>
-								</div>
-							</div>
-
-							<!-- Order Modal 3 -->
-							<div class="modal fade" id="orderModal3" tabindex="-1"
-								aria-labelledby="orderModal3Label" aria-hidden="true">
-								<div class="modal-dialog">
-									<div class="modal-content">
-										<div class="modal-header">
-											<h5 class="modal-title" id="orderModal3Label">Order
 												Details</h5>
 											<button type="button" class="btn-close"
 												data-bs-dismiss="modal" aria-label="Close"></button>

@@ -24,6 +24,9 @@ public interface OrderRepository extends JpaRepository<Meal_Order, Long>{
 	@Query("SELECT o, m.meal_name FROM Meal_Order o JOIN Meal m ON o.m_id = m.m_id WHERE o.u_id = :userId")
 	public List<Meal_Order> getMealsByUId(@Param("userId") Long userId);
 
+	@Query("SELECT o FROM Meal_Order o WHERE o.v_id = :volunteerId and o.status = :status")
+	public List<Meal_Order> getOrdersByVIdAndStatus(@Param("volunteerId") String volunteerId, @Param("status") String status);
+
 	@Query(value = "SELECT order_number FROM Meal_Order ORDER BY mo_id DESC LIMIT 1",
 			nativeQuery = true)
 	public String getLastOrderNumber();
@@ -42,5 +45,8 @@ public interface OrderRepository extends JpaRepository<Meal_Order, Long>{
 
 	@Query("SELECT mo FROM Meal_Order mo WHERE mo.status = :status")
 	List<Meal_Order> findByStatus(@Param("status") String status);
+	
+	@Query("SELECT o FROM Meal_Order o WHERE o.mo_id = :mealOrderId")
+	public Meal_Order findOrderById(@Param("mealOrderId") Long mealOrderId);
 
 }

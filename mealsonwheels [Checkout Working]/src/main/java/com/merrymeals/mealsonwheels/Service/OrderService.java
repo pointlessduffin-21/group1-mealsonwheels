@@ -27,4 +27,11 @@ public class OrderService {
 		// TODO Auto-generated method stub
 		return orderRepo.getMealsByUId(u_id);
 	}
+	public List<Meal_Order> getOrdersByVIdAndStatus(String v_id, String status){
+		return orderRepo.getOrdersByVIdAndStatus(v_id, status);
+	}
+	
+	public Meal_Order findOrderById(Long mealOrderId ){
+		return orderRepo.findOrderById(mealOrderId);
+	}
 }
