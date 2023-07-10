@@ -55,7 +55,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers(HttpMethod.GET, "/contact").permitAll()
 				.antMatchers(HttpMethod.GET, "/login").permitAll()
 				.antMatchers(HttpMethod.GET, "/home").permitAll()
-				.antMatchers(HttpMethod.GET, "/member").hasAnyRole("Member")
+				/* .antMatchers(HttpMethod.GET, "/member").hasAnyRole("Member") */
 				.antMatchers(HttpMethod.GET, "/donator").hasAnyRole("Donator")
 				.antMatchers("/WEB-INF/**").permitAll() // Allow access to resources in the WEB-INF folder
 				.and()

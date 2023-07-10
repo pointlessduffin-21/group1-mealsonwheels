@@ -201,8 +201,10 @@ public class MainController {
 
     @GetMapping("/member")
     public String memberDashboard(Model model, HttpSession session) {
-    	User loggedUser = (User) session.getAttribute("user");
-        model.addAttribute("loggedUser", loggedUser);
+		/*
+		 * User loggedUser = (User) session.getAttribute("user");
+		 * model.addAttribute("loggedUser", loggedUser);
+		 */
 
         List<Meal> mealResults = mealService.getAllMeals();
         model.addAttribute("mealResults", mealResults);
@@ -212,8 +214,10 @@ public class MainController {
         model.addAttribute("selectedItems", selectedItems);
         model.addAttribute("cartContent", mealDetails);
 
-        List<Meal_Order> myOrders = orderService.getMealsByUId(loggedUser.getU_id());
-        model.addAttribute("myOrders", myOrders);
+		/*
+		 * List<Meal_Order> myOrders = orderService.getMealsByUId(loggedUser.getU_id());
+		 * model.addAttribute("myOrders", myOrders);
+		 */
 
         int orderNumber = 0; // Default value when the order number is null
         String lastOrderNumber = orderService.getLastOrderNumber();
@@ -278,13 +282,53 @@ public class MainController {
     }
 
     @GetMapping("/kitchen")
-    public String kitPage() {
+    public String kitPage(Model model, HttpSession session) {
+    	   List<Meal> mealResults = mealService.getAllMeals();
+           model.addAttribute("mealResults", mealResults);
+
+           mealDetails.clear();
+
+           model.addAttribute("selectedItems", selectedItems);
+           model.addAttribute("cartContent", mealDetails);
+           
+           
+           List<Meal_Order> approvedMeals = orderService.getApproved();
+           model.addAttribute("approvedMeals", approvedMeals);
+           
+           List<Meal_Order> acceptedMeals = orderService.getAccepted();
+           model.addAttribute("acceptedMeals", acceptedMeals);
+           
+           List<User> volunteers = userService.listAllRider();
+           model.addAttribute("riders", volunteers);
+           
+   		/*
+   		 * List<Meal_Order> myOrders = orderService.getMealsByUId(loggedUser.getU_id());
+   		 * model.addAttribute("myOrders", myOrders);
+   		 */
+
+           int orderNumber = 0; // Default value when the order number is null
+           String lastOrderNumber = orderService.getLastOrderNumber();
+
+           if (lastOrderNumber != null && !lastOrderNumber.isEmpty()) {
+               orderNumber = Integer.parseInt(lastOrderNumber);
+           }
+
+           int incrementedOrderNumber = orderNumber + 1;
+           String incrementedOrderNumberString = String.valueOf(incrementedOrderNumber); // Convert back to a string
+
+           model.addAttribute("orderNumber", incrementedOrderNumberString);
+
         return "kitchen";
     }
 
     @GetMapping("/addmeal")
     public String addMeal() {
         return "addmeal";
+    }
+    
+    @GetMapping("/volunteer")
+    public String volunteer() {
+        return "volunteer";
     }
 
 
@@ -297,11 +341,13 @@ public class MainController {
 
     @PostMapping("/addToCart")
     public String addToCart(@RequestParam("mealId") Long mealId,HttpSession session, Model model) {
-    	User loggedUser = (User) session.getAttribute("user");
-        model.addAttribute("loggedUser", loggedUser);
-
-        List<Meal_Order> myOrders = orderService.getMealsByUId(loggedUser.getU_id());
-        model.addAttribute("myOrders", myOrders);
+		/*
+		 * User loggedUser = (User) session.getAttribute("user");
+		 * model.addAttribute("loggedUser", loggedUser);
+		 * 
+		 * List<Meal_Order> myOrders = orderService.getMealsByUId(loggedUser.getU_id());
+		 * model.addAttribute("myOrders", myOrders);
+		 */
 
         mealDetails.clear();
 
@@ -418,6 +464,20 @@ public class MainController {
         return "member";
     }
 
+// Kitchen Stuff
+    
+    
+    @PostMapping("/acceptOrder")
+    public String acceptOrder(@RequestParam("orderId") Long orderId, HttpSession session, Model model) {
+		
+    	Meal_Order acceptedOrder = orderService.getOrder(orderId);
+    	
+    	acceptedOrder.setStatus("ACCEPTED");
+    	
+    	orderService.save(acceptedOrder);
+        return "redirect:/kitchen";
+    }
+
 
 	  @GetMapping("/login_error")
 	    public String onLoginError(Model model) {
@@ -429,6 +489,19 @@ public class MainController {
 
 	    @GetMapping("/logout")
 	    public String onLogoutSuccess(Model model) {
+
+    @PostMapping("/assignRider")
+    public String assignRiderr(@RequestParam("orderId") Long orderId,@RequestParam("riderId") Long riderId, HttpSession session, Model model) {
+		
+    	Meal_Order riderAssigned = orderService.getOrder(orderId);
+    	
+    	
+    	riderAssigned.setStatus("COOKED");
+    	riderAssigned.setV_id(riderId);
+    	
+    	orderService.save(riderAssigned);
+        return "redirect:/kitchen";
+    }
 
 	    	String success_logout = "See you next time";
 	        model.addAttribute("success_logout", success_logout);

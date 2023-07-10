@@ -25,7 +25,7 @@ public class OrderController {
 
     @GetMapping("/pendingOrders")
     public ResponseEntity<List<Meal_Order>> getAllOrders() {
-        List <Meal_Order> allOrders = orderRepository.findByStatus("ORDERED");
+        List <Meal_Order> allOrders = orderRepository.getOrdered();
         return new ResponseEntity<>(allOrders, HttpStatus.OK);
     }
 
