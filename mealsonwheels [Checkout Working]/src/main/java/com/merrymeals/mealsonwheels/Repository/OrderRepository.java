@@ -27,17 +27,24 @@ public interface OrderRepository extends JpaRepository<Meal_Order, Long>{
 	@Query(value = "SELECT order_number FROM Meal_Order ORDER BY mo_id DESC LIMIT 1",
 			nativeQuery = true)
 	public String getLastOrderNumber();
+	
+	@Query(value = "SELECT o FROM Meal_Order m WHERE o.mo_id = :orderId",
+			nativeQuery = true)
+	public Meal_Order getAcceptedOrders(@Param("orderId") Long orderId);
 
-	@Query("SELECT mo FROM Meal_Order mo WHERE mo.status LIKE :ORDERED")
+	@Query("SELECT mo FROM Meal_Order mo WHERE mo.status = 'ORDERED'")
 	public List<Meal_Order> getOrdered();
 
-	@Query("SELECT mo FROM Meal_Order mo WHERE mo.status LIKE :APPROVED")
+	@Query("SELECT mo FROM Meal_Order mo WHERE mo.status  = 'APPROVED'")
 	public List<Meal_Order> getApproved();
+	
+	@Query("SELECT mo FROM Meal_Order mo WHERE mo.status  = 'ACCEPTED'")
+	public List<Meal_Order> getAccepted();
 
-	@Query("SELECT mo FROM Meal_Order mo WHERE mo.status LIKE :COOKED")
+	@Query("SELECT mo FROM Meal_Order mo WHERE mo.status  = 'COOKED'")
 	public List<Meal_Order> getCooked();
 
-	@Query("SELECT mo FROM Meal_Order mo WHERE mo.status LIKE :DELIVERED")
+	@Query("SELECT mo FROM Meal_Order mo WHERE mo.status  = 'DELIVERED'")
 	public List<Meal_Order> getDelivered();
 
 	@Query("SELECT mo FROM Meal_Order mo WHERE mo.status = :status")
