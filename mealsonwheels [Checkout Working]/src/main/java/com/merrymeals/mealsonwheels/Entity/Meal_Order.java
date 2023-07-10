@@ -107,4 +107,7 @@ public class Meal_Order {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
+    public void setPartner_id(Long partnerId) {
+    }
 }
