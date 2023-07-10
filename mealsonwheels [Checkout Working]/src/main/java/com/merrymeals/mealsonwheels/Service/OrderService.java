@@ -27,4 +27,18 @@ public class OrderService {
 		// TODO Auto-generated method stub
 		return orderRepo.getMealsByUId(u_id);
 	}
+	
+	public List<Meal_Order> getOrdered() {
+
+		return orderRepo.getOrdered();
+	}
+	
+	public List<Meal_Order> getApproved() {
+
+		return orderRepo.getApproved();
+	}
+	public List<Meal_Order> getCooked() {
+
+		return orderRepo.getCooked();
+	}
 }

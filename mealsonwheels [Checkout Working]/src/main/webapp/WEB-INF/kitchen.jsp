@@ -1,3 +1,9 @@
+<%@ page import="com.merrymeals.mealsonwheels.Entity.Meal_Order" %>
+<%@ page import="com.merrymeals.mealsonwheels.Entity.Meal" %>
+<%@ page import="com.merrymeals.mealsonwheels.Entity.User" %>
+<%@ page import="java.util.List" %>
+
+
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
 <head>
@@ -35,7 +41,55 @@
         </div>
 
         <div class="dashboard-content">
-            <div class="dashboard-card">
+        
+         <% String noMealResult = (String) request.getAttribute("noMealResult"); %>
+	    <% if (noMealResult != null) { %>
+	    <div class="border rounded text-center py-3 mx-5">
+	        <h6 class="fw-bold mb-0"><%= noMealResult %></h6>
+	    </div>
+	    <% } %>
+        
+        <div class=" mx-5">
+
+        <% List<Meal> mealResult = (List<Meal>) request.getAttribute("mealResults"); %>
+        <div style="margin: 16px;">
+            <% if (mealResult != null && !mealResult.isEmpty()) { %>
+            <% int count = 0; %>
+            <% for (Meal meal : mealResult) { %>
+            <% if (count % 4 == 0) { %>
+            <div class="row mb-3">
+                <% } %>
+                <div class="col-sm-3 pe-1">
+                    <div class="dashboard-card">
+                        <img class="card-image" src="<%= meal.getPhotoPath() %>">
+                        <div class="card-detail">
+                            <h4><%= meal.getMeal_name() %>
+                            	<span>  
+      
+
+
+								</span>
+								<p>Meal no.  <%= meal.getM_id() %></p>
+								<p><%= meal.getDescription() %></p>
+                            	<p class="card-time"><span class="fas fa-clock"></span> <%= meal.getDuration() %></p>
+							</h4>
+							
+                            <%-- <p>Nutrition: <%= meal.getNutrition() %></p>
+                            <p class="card-time"><span class="fas fa-carrot"></span><%= meal.getIngredients() %></p> --%>
+                        </div>
+                    </div>
+                </div>
+                <% if (count % 4 == 3 || count == mealResult.size() - 1) { %>
+            </div>
+            <% } %>
+            <% count++; %>
+            <% } %>
+            <% } %>
+        </div>
+
+    </div>
+        
+          <!--   <div class="dashboard-card">
                 <img class="card-image" src="https://hips.hearstapps.com/hmg-prod/images/classic-cheese-pizza-recipe-2-64429a0cb408b.jpg?crop=0.6666666666666667xw:1xh;center,top&resize=1200:*">
                 <div class="card-detail">
                     <h4>Amazing Pizza<span><label for="cart" class="label-cart"><span class="fas fa-shopping-cart"></span></label></span></h4>
@@ -80,7 +134,7 @@
         </div>
         <div class="text-center p-5">
         	<button class="btn btn-success p-4" type="button" data-bs-toggle="modal" data-bs-target="#addMenuModal">Add Menu</button>
-        </div>
+        </div> -->
     </div>
 
     <!-- Order Dashboard -->
@@ -90,7 +144,32 @@
 				style="color: rgb(45, 237, 42);">Incoming</h6>
 		</div>
         <div class="order-wrapper">
-            <div class="order-card">
+        <% List<Meal_Order> approvedMeals = (List<Meal_Order>) request.getAttribute("approvedMeals"); %>
+       		<% if (approvedMeals != null && !approvedMeals.isEmpty()) { %>
+       		<% for (Meal_Order order : approvedMeals) { %>
+        <div class="order-card">
+                <% mealResult = (List<Meal>) request.getAttribute("mealResults"); %>
+		       	<% for (Meal approvedMeal : mealResult) { %>
+		       	<% if (order.getM_id() == approvedMeal.getM_id()) { %>
+                <img class="order-image" src="<%= approvedMeal.getPhotoPath() %>">
+                <div class="order-detail">
+                    <p><%= approvedMeal.getMeal_name() %></p>
+                    <p><%= order.getU_id() %></p>
+                    <p><%= order.getP_id() %></p>
+					<div style="display: flex;">
+					  <span style="margin-right: 10px;">
+					    <button class="btn btn-success" type="button" style="width: 80px; padding: 6px 12px;">Accept</button>
+					  </span>
+					</div>
+                </div>
+	            <% } %>
+				<% } %>
+            </div>
+            <% } %>
+			<% } %>
+       
+        
+           <!--  <div class="order-card">
                 <img class="order-image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLY5j-0GxBdLWv53oNAH6KKQszBRTDWstPXg&usqp=CAU">
                 <div class="order-detail">
                     <p>Fried Chicken | ON: #121</p>
@@ -131,7 +210,7 @@
 					  </span>
 					</div>
                 </div>
-            </div>
+            </div> -->
         </div><br><br><br>
         <hr class="divider">
         

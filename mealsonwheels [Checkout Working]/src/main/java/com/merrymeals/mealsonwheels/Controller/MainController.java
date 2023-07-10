@@ -175,8 +175,10 @@ public class MainController {
 
     @GetMapping("/member")
     public String memberDashboard(Model model, HttpSession session) {
-    	User loggedUser = (User) session.getAttribute("user");
-        model.addAttribute("loggedUser", loggedUser);
+		/*
+		 * User loggedUser = (User) session.getAttribute("user");
+		 * model.addAttribute("loggedUser", loggedUser);
+		 */
 
         List<Meal> mealResults = mealService.getAllMeals();
         model.addAttribute("mealResults", mealResults);
@@ -186,8 +188,10 @@ public class MainController {
         model.addAttribute("selectedItems", selectedItems);
         model.addAttribute("cartContent", mealDetails);
 
-        List<Meal_Order> myOrders = orderService.getMealsByUId(loggedUser.getU_id());
-        model.addAttribute("myOrders", myOrders);
+		/*
+		 * List<Meal_Order> myOrders = orderService.getMealsByUId(loggedUser.getU_id());
+		 * model.addAttribute("myOrders", myOrders);
+		 */
 
         int orderNumber = 0; // Default value when the order number is null
         String lastOrderNumber = orderService.getLastOrderNumber();
@@ -252,7 +256,35 @@ public class MainController {
     }
 
     @GetMapping("/kitchen")
-    public String kitPage() {
+    public String kitPage(Model model, HttpSession session) {
+    	   List<Meal> mealResults = mealService.getAllMeals();
+           model.addAttribute("mealResults", mealResults);
+
+           mealDetails.clear();
+
+           model.addAttribute("selectedItems", selectedItems);
+           model.addAttribute("cartContent", mealDetails);
+           
+           
+           List<Meal_Order> approvedMeals = orderService.getApproved();
+           model.addAttribute("approvedMeals", approvedMeals);
+   		/*
+   		 * List<Meal_Order> myOrders = orderService.getMealsByUId(loggedUser.getU_id());
+   		 * model.addAttribute("myOrders", myOrders);
+   		 */
+
+           int orderNumber = 0; // Default value when the order number is null
+           String lastOrderNumber = orderService.getLastOrderNumber();
+
+           if (lastOrderNumber != null && !lastOrderNumber.isEmpty()) {
+               orderNumber = Integer.parseInt(lastOrderNumber);
+           }
+
+           int incrementedOrderNumber = orderNumber + 1;
+           String incrementedOrderNumberString = String.valueOf(incrementedOrderNumber); // Convert back to a string
+
+           model.addAttribute("orderNumber", incrementedOrderNumberString);
+
         return "kitchen";
     }
 
@@ -276,11 +308,13 @@ public class MainController {
 
     @PostMapping("/addToCart")
     public String addToCart(@RequestParam("mealId") Long mealId,HttpSession session, Model model) {
-    	User loggedUser = (User) session.getAttribute("user");
-        model.addAttribute("loggedUser", loggedUser);
-
-        List<Meal_Order> myOrders = orderService.getMealsByUId(loggedUser.getU_id());
-        model.addAttribute("myOrders", myOrders);
+		/*
+		 * User loggedUser = (User) session.getAttribute("user");
+		 * model.addAttribute("loggedUser", loggedUser);
+		 * 
+		 * List<Meal_Order> myOrders = orderService.getMealsByUId(loggedUser.getU_id());
+		 * model.addAttribute("myOrders", myOrders);
+		 */
 
         mealDetails.clear();
 
