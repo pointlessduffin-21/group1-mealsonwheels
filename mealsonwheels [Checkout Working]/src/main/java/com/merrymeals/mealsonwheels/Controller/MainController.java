@@ -268,6 +268,13 @@ public class MainController {
            
            List<Meal_Order> approvedMeals = orderService.getApproved();
            model.addAttribute("approvedMeals", approvedMeals);
+           
+           List<Meal_Order> acceptedMeals = orderService.getAccepted();
+           model.addAttribute("acceptedMeals", acceptedMeals);
+           
+           List<User> volunteers = userService.listAllRider();
+           model.addAttribute("riders", volunteers);
+           
    		/*
    		 * List<Meal_Order> myOrders = orderService.getMealsByUId(loggedUser.getU_id());
    		 * model.addAttribute("myOrders", myOrders);
@@ -431,8 +438,32 @@ public class MainController {
         return "member";
     }
 
+// Kitchen Stuff
+    
+    
+    @PostMapping("/acceptOrder")
+    public String acceptOrder(@RequestParam("orderId") Long orderId, HttpSession session, Model model) {
+		
+    	Meal_Order acceptedOrder = orderService.getOrder(orderId);
+    	
+    	acceptedOrder.setStatus("ACCEPTED");
+    	
+    	orderService.save(acceptedOrder);
+        return "redirect:/kitchen";
+    }
 
-
+    @PostMapping("/assignRider")
+    public String assignRiderr(@RequestParam("orderId") Long orderId,@RequestParam("riderId") Long riderId, HttpSession session, Model model) {
+		
+    	Meal_Order riderAssigned = orderService.getOrder(orderId);
+    	
+    	
+    	riderAssigned.setStatus("COOKED");
+    	riderAssigned.setV_id(riderId);
+    	
+    	orderService.save(riderAssigned);
+        return "redirect:/kitchen";
+    }
 
 
 

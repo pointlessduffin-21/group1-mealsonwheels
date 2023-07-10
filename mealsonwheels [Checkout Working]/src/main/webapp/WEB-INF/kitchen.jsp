@@ -81,60 +81,13 @@
                 </div>
                 <% if (count % 4 == 3 || count == mealResult.size() - 1) { %>
             </div>
-            <% } %>
-            <% count++; %>
-            <% } %>
-            <% } %>
-        </div>
+	            <% } %>
+	            <% count++; %>
+	            <% } %>
+	            <% } %>
+        	</div>
 
-    </div>
-        
-          <!--   <div class="dashboard-card">
-                <img class="card-image" src="https://hips.hearstapps.com/hmg-prod/images/classic-cheese-pizza-recipe-2-64429a0cb408b.jpg?crop=0.6666666666666667xw:1xh;center,top&resize=1200:*">
-                <div class="card-detail">
-                    <h4>Amazing Pizza<span><label for="cart" class="label-cart"><span class="fas fa-shopping-cart"></span></label></span></h4>
-                    <p>Lorem ipsum dolor sit.</p>
-                </div>
-            </div>
-            <div class="dashboard-card">
-                <img class="card-image" src="https://images.immediate.co.uk/production/volatile/sites/30/2014/05/Epic-summer-salad-hub-2646e6e.jpg">
-                <div class="card-detail">
-                    <h4>Fresh Salad<span><label for="cart" class="label-cart"><span class="fas fa-shopping-cart"></span></label></span></h4>
-                    <p>Lorem ipsum dolor sit.</p>
-                </div>
-            </div>
-            <div class="dashboard-card">
-                <img class="card-image" src="https://static.onecms.io/wp-content/uploads/sites/43/2022/02/16/21014-Good-old-Fashioned-Pancakes-mfs_001.jpg">
-                <div class="card-detail">
-                    <h4>Sweet Pancake<span><label for="cart" class="label-cart"><span class="fas fa-shopping-cart"></span></label></span></h4>
-                    <p>Lorem ipsum dolor sit.</p>
-                </div>
-            </div>
-            <div class="dashboard-card">
-                <img class="card-image" src="https://www.seriouseats.com/thmb/WzQz05gt5witRGeOYKTcTqfe1gs=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/butter-basted-pan-seared-steaks-recipe-hero-06-03b1131c58524be2bd6c9851a2fbdbc3.jpg">
-                <div class="card-detail">
-                    <h4>Steak<span><label for="cart" class="label-cart"><span class="fas fa-shopping-cart"></span></label></span></h4>
-                    <p>Lorem ipsum dolor sit.</p>
-                </div>
-            </div>
-            <div class="dashboard-card">
-                <img class="card-image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLY5j-0GxBdLWv53oNAH6KKQszBRTDWstPXg&usqp=CAU">
-                <div class="card-detail">
-                    <h4>Healthy Breakfast<span><label for="cart" class="label-cart"><span class="fas fa-shopping-cart"></span></label></span></h4>
-                    <p>Lorem ipsum dolor sit.</p>
-                </div>
-            </div>
-            <div class="dashboard-card">
-                <img class="card-image" src="https://assets.epicurious.com/photos/5c745a108918ee7ab68daf79/1:1/w_2560%2Cc_limit/Smashburger-recipe-120219.jpg">
-                <div class="card-detail">
-                    <h4>Fantastic Burger<span><label for="cart" class="label-cart"><span class="fas fa-shopping-cart"></span></label></span></h4>
-                    <p>Lorem ipsum dolor sit.</p>
-                </div>
-            </div>
-        </div>
-        <div class="text-center p-5">
-        	<button class="btn btn-success p-4" type="button" data-bs-toggle="modal" data-bs-target="#addMenuModal">Add Menu</button>
-        </div> -->
+    	</div>
     </div>
 
     <!-- Order Dashboard -->
@@ -154,11 +107,19 @@
                 <img class="order-image" src="<%= approvedMeal.getPhotoPath() %>">
                 <div class="order-detail">
                     <p><%= approvedMeal.getMeal_name() %></p>
-                    <p><%= order.getU_id() %></p>
+                    <p>Order Number: <%= order.getOrder_number() %></p>
+                    <p>Member ID: <%= order.getU_id() %></p>
                     <p><%= order.getP_id() %></p>
 					<div style="display: flex;">
 					  <span style="margin-right: 10px;">
-					    <button class="btn btn-success" type="button" style="width: 80px; padding: 6px 12px;">Accept</button>
+						  <form action="/acceptOrder" method="post" class="ms-0 col-2" style="position:relative;left:0%;">	
+					    	<input type="hidden" name="orderId" value="<%= order.getMo_id() %>">
+					    	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+					    	<button class="btn btn-success" type="submit" style="width: 80px; padding: 6px 12px;">Accept</button>
+					    </form>
+					    
+					    
+					    
 					  </span>
 					</div>
                 </div>
@@ -167,50 +128,6 @@
             </div>
             <% } %>
 			<% } %>
-       
-        
-           <!--  <div class="order-card">
-                <img class="order-image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLY5j-0GxBdLWv53oNAH6KKQszBRTDWstPXg&usqp=CAU">
-                <div class="order-detail">
-                    <p>Fried Chicken | ON: #121</p>
-					<div style="display: flex;">
-					  <span style="margin-right: 10px;">
-					    <button class="btn btn-success" type="button" style="width: 80px; padding: 6px 12px;">Accept</button>
-					  </span>
-					  <span>
-					    <button class="btn btn-danger" type="button" style="width: 80px; padding: 6px 12px;" data-bs-toggle="modal" data-bs-target="#declineModal1">Decline</button>
-					  </span>
-					</div>
-                </div>
-            </div>
-            <div class="order-card">
-                <img class="order-image" src="https://images.immediate.co.uk/production/volatile/sites/30/2014/05/Epic-summer-salad-hub-2646e6e.jpg">
-                <div class="order-detail">
-                    <p>Chicken Adobo | ON: #122</p>
-                    <div style="display: flex;">
-					  <span style="margin-right: 10px;">
-					    <button class="btn btn-success" type="button" style="width: 80px; padding: 6px 12px;">Accept</button>
-					  </span>
-					  <span>
-					    <button class="btn btn-danger" type="button" style="width: 80px; padding: 6px 12px;" data-bs-toggle="modal" data-bs-target="#declineModal1">Decline</button>
-					  </span>
-					</div>
-                </div>
-            </div>
-            <div class="order-card">
-                <img class="order-image" src="https://assets.epicurious.com/photos/5c745a108918ee7ab68daf79/1:1/w_2560%2Cc_limit/Smashburger-recipe-120219.jpg">
-                <div class="order-detail">
-                    <p>Pork Menudo | ON: #123</p>
-                    <div style="display: flex;">
-					  <span style="margin-right: 10px;">
-					    <button class="btn btn-success" type="button" style="width: 80px; padding: 6px 12px;">Accept</button>
-					  </span>
-					  <span>
-					    <button class="btn btn-danger" type="button" style="width: 80px; padding: 6px 12px;" data-bs-toggle="modal" data-bs-target="#declineModal1">Decline</button>
-					  </span>
-					</div>
-                </div>
-            </div> -->
         </div><br><br><br>
         <hr class="divider">
         
@@ -221,23 +138,45 @@
 				style="color: rgb(45, 237, 42);">Delivery</h6>
 		</div>
 		<div class="order-wrapper">
+		  <% List<Meal_Order> acceptedMeals = (List<Meal_Order>) request.getAttribute("acceptedMeals"); %>
+       		<% if (acceptedMeals != null && !acceptedMeals.isEmpty()) { %>
+       		<% for (Meal_Order cooking : acceptedMeals) { %>
+		
             <div class="order-card">
                 <div class="order-detail">
-                    <p>Order Number: #121</p>
-                    <select class="form-select rider-dropdown">
-			          <option selected disabled>Select a rider</option>
-			          <option>Rider 1</option>
-			          <option>Rider 2</option>
-			          <option>Rider 3</option>
-			        </select>
+                <% mealResult = (List<Meal>) request.getAttribute("mealResults"); %>
+		       	<% for (Meal approvedMeal : mealResult) { %>
+		       	<% if (cooking.getM_id() == approvedMeal.getM_id()) { %>
+                    <p>Order Number: <%= cooking.getOrder_number() %></p>
+                    <p>Name: <%= approvedMeal.getMeal_name() %></p>
+                    <% } %>
+					<% } %>
+                    
 					<div style="display: flex;" class="pt-2">
 					  <span style="margin-right: 10px;">
-					    <button class="btn text-white" type="button" style="width: 220px; padding: 6px 12px; background: rgb(86, 114, 216);">Deliver</button>
+					    <form action="/assignRider" method="post" class="ms-0 col-2" style="position:relative;left:0%;">	
+					    	<input type="hidden" name="orderId" value="<%= cooking.getMo_id() %>">
+					    	 <select class="form-select rider-dropdown" name="riderId" id="riderId">
+			          		<option selected disabled>Select a rider</option>
+			            	<% List<User> rider = (List<User>) request.getAttribute("riders"); %>
+		       				<% if (rider != null && !rider.isEmpty()) { %>
+		       				<% for (User volunteers : rider) { %>
+		       			
+			          <option value="<%= volunteers.getU_id() %>"><%= volunteers.getName() %></option>
+			           <% } %>
+						<% } %>
+			        </select>
+					    	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+					    	<button class="btn btn-success" type="submit" style="width: 80px; padding: 6px 12px;">Accept</button>
+					    </form>
 					  </span>
 					</div>
                 </div>
             </div>
             <hr class="divider">
+            <% } %>
+			<% } %>
+           <!--  <hr class="divider">
             <div class="order-card">
                 <div class="order-detail">
                     <p>Order Number: #122</p>
@@ -270,7 +209,7 @@
 					  </span>
 					</div>
                 </div>
-            </div>
+            </div> -->
 
         </div>
     </div>
