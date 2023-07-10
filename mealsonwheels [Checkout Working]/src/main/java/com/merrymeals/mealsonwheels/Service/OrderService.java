@@ -20,11 +20,38 @@ public class OrderService {
 	public void save(Meal_Order order) {
 		orderRepo.save(order);
 	}
+	public Meal_Order getOrder(Long id) {
+		return orderRepo.findById(id).get();
+	}
+	
 	public String getLastOrderNumber() {
 		return orderRepo.getLastOrderNumber();
 	}
 	public List<Meal_Order> getMealsByUId(Long u_id) {
 		// TODO Auto-generated method stub
 		return orderRepo.getMealsByUId(u_id);
+	}
+	
+	public Meal_Order getAcceptedOrders(Long orderId) {
+		return orderRepo.getAcceptedOrders(orderId);
+	}
+	
+	public List<Meal_Order> getOrdered() {
+
+		return orderRepo.getOrdered();
+	}
+	
+	public List<Meal_Order> getApproved() {
+
+		return orderRepo.getApproved();
+	}
+	
+	public List<Meal_Order> getAccepted() {
+
+		return orderRepo.getAccepted();
+	}
+	public List<Meal_Order> getCooked() {
+
+		return orderRepo.getCooked();
 	}
 }

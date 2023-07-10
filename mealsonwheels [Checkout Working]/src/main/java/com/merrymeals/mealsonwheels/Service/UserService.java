@@ -1,6 +1,7 @@
 package com.merrymeals.mealsonwheels.Service;
 
 import java.util.HashSet;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -54,6 +55,11 @@ public class UserService {
 	public User getUser(String email, String password) {
 		return ur.loginUser(email, password);
 	}
+	
+	public List<User> listAllRider(){
+		return ur.findUsersByRole("Volunteer");
+	}
+	
 
 	public Boolean loginUser(String email, String password) {
 		User logUser = ur.loginUser(email, password);
@@ -89,6 +95,19 @@ public class UserService {
 
 		return false;
 
+	}
+	
+	public User findByUserName(String userName) {
+		return ur.findByUserName(userName);
+	}
+	
+	public String findRoleByUid(Long Uid) {
+		return ur.findRoleByUid(Uid);
+	}
+
+	public User findByEmail(String email) {
+		// TODO Auto-generated method stub
+		return ur.findByEmail(email);
 	}
 
 }

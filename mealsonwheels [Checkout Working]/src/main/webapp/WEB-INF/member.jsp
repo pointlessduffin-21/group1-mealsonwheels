@@ -29,7 +29,7 @@
     <div class="dashboard-banner">
         <img src="https://i.pinimg.com/564x/25/e6/a1/25e6a1365e9a35071db3c7d2d8ea6eab.jpg">
         <div class="row">
-
+<%-- 
             <div class="row" style="position:absolute;top:25%;left:10%">
                 <% User user = (User) request.getAttribute("loggedUser"); %>
                 <div class="col-1">
@@ -44,7 +44,7 @@
                     <h1 style="color: var(--yellow);font-weight: 800;">WELCOME!</h1>
                     <h1 class="text-white"><%= user.getName() %> </h1>
                     <h4 class="text-white"><%= user.getU_id() %></h4>
-            </div>
+            </div> --%>
 
             <div class="banner-promo text-end">
                 <h1><span>FREE</span><br>
