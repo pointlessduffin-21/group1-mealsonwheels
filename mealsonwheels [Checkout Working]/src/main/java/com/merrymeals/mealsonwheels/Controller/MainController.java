@@ -51,40 +51,45 @@ public class MainController {
 	        return "login";
 	    }
 
-	    @GetMapping("/login_success")
-	    public String onLoginSuccess(HttpSession session, Model model) {
-	    	mealDetails.clear();
+//	    @GetMapping("/login_success")
+//	    public String onLoginSuccess(HttpSession session, Model model) {
+//	    	mealDetails.clear();
+//
+//	    	User loggedUser = (User) session.getAttribute("user");
+//	        model.addAttribute("loggedUser", loggedUser);
+//
+//	    	String success_login = "Welcome to the world of ABC Used Cars.";
+//	        model.addAttribute("success_login", success_login);
+//
+//	        model.addAttribute("selectedItems", selectedItems);
+//
+//	        List<Meal> mealResults = mealService.getAllMeals();
+//	        model.addAttribute("mealResults", mealResults);
+//
+//	        List<Meal_Order> myOrders = orderService.getMealsByUId(loggedUser.getU_id());
+//	        model.addAttribute("myOrders", myOrders);
+//
+//	        model.addAttribute("cartContent", mealDetails);
+//
+//	        String lastOrderNumber = orderService.getLastOrderNumber();
+//	        int orderNumber = 0; // Default value when the order number is null
+//
+//			if (lastOrderNumber != null && !lastOrderNumber.isEmpty()) {
+//			    orderNumber = Integer.parseInt(lastOrderNumber);
+//			}
+//
+//	        int incrementedOrderNumber = orderNumber + 1;
+//	        String incrementedOrderNumberString = String.valueOf(incrementedOrderNumber); // Convert back to a string
+//
+//	        model.addAttribute("orderNumber", incrementedOrderNumberString);
+//
+//	        return "member";
+//	    }
 
-	    	User loggedUser = (User) session.getAttribute("user");
-	        model.addAttribute("loggedUser", loggedUser);
-
-	    	String success_login = "Welcome to the world of ABC Used Cars.";
-	        model.addAttribute("success_login", success_login);
-
-	        model.addAttribute("selectedItems", selectedItems);
-
-	        List<Meal> mealResults = mealService.getAllMeals();
-	        model.addAttribute("mealResults", mealResults);
-
-	        List<Meal_Order> myOrders = orderService.getMealsByUId(loggedUser.getU_id());
-	        model.addAttribute("myOrders", myOrders);
-
-	        model.addAttribute("cartContent", mealDetails);
-
-	        String lastOrderNumber = orderService.getLastOrderNumber();
-	        int orderNumber = 0; // Default value when the order number is null
-
-			if (lastOrderNumber != null && !lastOrderNumber.isEmpty()) {
-			    orderNumber = Integer.parseInt(lastOrderNumber);
-			}
-
-	        int incrementedOrderNumber = orderNumber + 1;
-	        String incrementedOrderNumberString = String.valueOf(incrementedOrderNumber); // Convert back to a string
-
-	        model.addAttribute("orderNumber", incrementedOrderNumberString);
-
-	        return "member";
-	    }
+    @GetMapping("login_success")
+    public String onLogginSuccess () {
+        return "member";
+    }
 
 	    @GetMapping("/logout")
 	    public String onLogoutSuccess(Model model) {
