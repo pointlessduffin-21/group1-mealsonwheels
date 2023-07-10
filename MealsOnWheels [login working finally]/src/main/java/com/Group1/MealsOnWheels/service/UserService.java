@@ -37,9 +37,7 @@ public class UserService {
     }
 
     public User findLoginUser(String username) {
-
         return userRepository.findByUserName(username);
-
     }
 
     public List<User> showAllUser(){
@@ -73,6 +71,18 @@ public class UserService {
         user.getRoles().clear();
         user.setRoles(new HashSet<>(roleRepository.findBySpecificRoles(role)));
         userRepository.save(user);
+    }
+
+    public User getUser(String email, String password) {
+        return userRepository.loginUser(email, password);
+    }
+
+    public Boolean loginUser(String email, String password) {
+        User logUser = userRepository.loginUser(email, password);
+        if (logUser != null) {
+            return true;
+        }
+        return false;
     }
 
 

@@ -3,6 +3,9 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="sec"
            uri="http://www.springframework.org/security/tags"%>
+<%@ page import="com.Group1.MealsOnWheels.service.UserService"%>
+<%@ page import="com.Group1.MealsOnWheels.Entity.User"%>
+<%@ page import="com.Group1.MealsOnWheels.Entity.Role"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -92,7 +95,7 @@
                     </div>
 
                     <input type="submit" name="Login" value="Sign In"
-                           class="btn btn-primary"></input>
+                           class="btn btn-primary" onSubmit="setSession()"></input>
                     <a href="register_user" class="btn btn-primary">Register</a>
                 </form>
 

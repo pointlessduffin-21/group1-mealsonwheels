@@ -55,7 +55,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/login").permitAll()
                 .antMatchers(HttpMethod.POST, "/home").permitAll()
                 .antMatchers(HttpMethod.GET, "/login_success").hasAnyRole("Users","Administrator")
-                .antMatchers(HttpMethod.GET, "/profile").hasAnyRole("Users","Administrator", )
+                .antMatchers(HttpMethod.GET, "/profile").hasAnyRole("Users","Administrator")
                 .antMatchers(HttpMethod.GET, "/car_detail").hasAnyRole("Users","Administrator")
                 .antMatchers(HttpMethod.GET, "/users").hasRole("Administrator")
                 .antMatchers(HttpMethod.GET, "/view").hasRole("Administrator")
