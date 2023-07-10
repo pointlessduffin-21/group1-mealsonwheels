@@ -11,6 +11,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import com.merrymeals.mealsonwheels.Repository.UserRepository;
+
 
 @Configuration
 @EnableWebSecurity
@@ -44,7 +46,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.csrf().ignoringAntMatchers("/api/**", "addToCart", "/login_success", "/login_error", "/logout", "/login", "/register", "/about", "/contact", "/dashboard", "/home", "/member", "/donator")
 				.and()
 				.authorizeRequests()
-				.antMatchers("/").permitAll()
+				.antMatchers("/","/donator").permitAll()
 				.antMatchers("/assets/**").permitAll()
 				.antMatchers("/style/**").permitAll()
 				.antMatchers(HttpMethod.GET, "/dashboard").permitAll()

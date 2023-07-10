@@ -89,9 +89,34 @@
 
                 <div class="card bg-glass">
                     <div class="card-body px-4 py-5 px-md-5">
-                        <c:url var="post_url" value="/login" />
-						<form action="/login" method="post" class="">
-						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                    
+                     <c:url var="post_url" value="/login" />
+                    <form action="/loginTa" method="post" class="was-validated">
+				        <input type="hidden" name="${_csrf.parameterName}"
+				               value="${_csrf.token}" />
+				
+				        <div class="mb-3 mt-3">
+				            <label for="userName" class="form-label">Username:</label> <input
+				                type="text" class="form-control" id="userName"
+				                placeholder="Enter username" name="userName" value="" required>
+				            <div class="valid-feedback">Valid.</div>
+				            <div class="invalid-feedback">Please fill out this field.</div>
+				        </div>
+				        <div class="mb-3">
+				            <label for="password" class="form-label">Password:</label> <input
+				                type="password" class="form-control" id="password"
+				                placeholder="Enter password" name="password" value="" required>
+				            <div class="valid-feedback">Valid.</div>
+				            <div class="invalid-feedback">Please fill out this field.</div>
+				        </div>
+				
+				        <input type="submit" name="Login" value="Sign In"
+				               class="btn btn-primary"></input>
+				    </form>
+                    <%-- 
+                        <c:url var="post_url" value="/login" /> --%>
+						<%-- <form action="/login" method="post" class=""> 
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
                             <h1 class="mb-2 fw-bold ls-tight text-center" style="color: rgb(64, 59, 59)">
                                 Sign In <br />
                                 <!-- <span style="color: hsl(218, 81%, 75%)">for your business</span> -->
@@ -99,13 +124,14 @@
 
                             <!-- Email input -->
                             <div class="form-outline mb-4">
-                                <label class="form-label" for="form3Example3">Email</label>
-                                <input type="text" id="userName" name="userName" class="form-control" />
-                            </div>
+							    <label class="form-label" for="userName">Username</label>
+							    <input type="text" id="userName" name="userName" class="form-control" />
+							</div>
+
 
                             <!-- Password input -->
                             <div class="form-outline mb-4">
-                                <label class="form-label" for="form3Example4">Password</label>
+                                <label class="form-label" for="password">Password</label>
                                 <input type="password" id="password" name="password" class="form-control" />
                             </div>
 
@@ -137,7 +163,7 @@
         </c:otherwise>
     </c:choose>
     
-                        </form>
+                        </form> --%>
                     </div>
                 </div>
             </div>

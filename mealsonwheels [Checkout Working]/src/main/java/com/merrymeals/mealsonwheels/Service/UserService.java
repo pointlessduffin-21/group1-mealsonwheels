@@ -96,5 +96,18 @@ public class UserService {
 		return false;
 
 	}
+	
+	public User findByUserName(String userName) {
+		return ur.findByUserName(userName);
+	}
+	
+	public String findRoleByUid(Long Uid) {
+		return ur.findRoleByUid(Uid);
+	}
+
+	public User findByEmail(String email) {
+		// TODO Auto-generated method stub
+		return ur.findByEmail(email);
+	}
 
 }
