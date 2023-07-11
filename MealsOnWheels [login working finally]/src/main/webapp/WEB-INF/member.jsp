@@ -1,6 +1,6 @@
-<%@ page import="com.merrymeals.mealsonwheels.Entity.Meal_Order" %>
-<%@ page import="com.merrymeals.mealsonwheels.Entity.Meal" %>
-<%@ page import="com.merrymeals.mealsonwheels.Entity.User" %>
+<%@ page import="com.Group1.MealsOnWheels.Entity.Meal_Order" %>
+<%@ page import="com.Group1.MealsOnWheels.Entity.Meal" %>
+<%@ page import="com.Group1.MealsOnWheels.Entity.User" %>
 <%@ page import="java.util.List" %>
 
 
@@ -21,8 +21,6 @@
 <%@ include file="header.jsp"%>
 
 <!-- header -->
-<input type="checkbox" id="cart">
-<label for="cart" class="label-cart"><span class="fas fa-shopping-cart"></span></label>
 
 <!-- Main Dashboard -->
 <div class="dashboard">
@@ -31,7 +29,7 @@
         <div class="row">
 
             <div class="row" style="position:absolute;top:25%;left:10%">
-                <% User user = (User) request.getAttribute("loggedUser"); %>
+                <<% User user = (User) request.getAttribute("loggedUser"); %>>
                 <div class="col-1">
                     <div style="height: 150px; width: 150px;" class="rounded-circle bg-primary">
                         <div class="h-100 fs-1 text-white d-flex justify-content-center" style="width: 150px;">
@@ -43,7 +41,7 @@
                 <div class="col-8 ms-5 ps-5">
                     <h1 style="color: var(--yellow);font-weight: 800;">WELCOME!</h1>
                     <h1 class="text-white"><%= user.getName() %> </h1>
-                    <h4 class="text-white"><%= user.getU_id() %></h4>
+                    <h4 class="text-white">Member</h4>
             </div>
 
             <div class="banner-promo text-end">

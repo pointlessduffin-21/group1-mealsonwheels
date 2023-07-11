@@ -14,7 +14,8 @@ import com.Group1.MealsOnWheels.Entity.Meal_Order;
 public interface OrderRepository extends JpaRepository<Meal_Order, Long>{
 
 	@Query("SELECT o FROM Meal_Order o WHERE o.m_id = :mealId")
-	public Long getMealIdById(@Param("mealId") Long mealId);
+	public Meal_Order getMealById(@Param("mealId") Long mealId);
+
 
 //	@Query(value = "SELECT user_details_id, first_name, last_name, title, about, phone_number, address, city, country FROM meal_order"
 //			+ " JOIN meal ON meal_order.m_id = meal.m_id"
@@ -31,16 +32,19 @@ public interface OrderRepository extends JpaRepository<Meal_Order, Long>{
 			nativeQuery = true)
 	public String getLastOrderNumber();
 
-	@Query("SELECT mo FROM Meal_Order mo WHERE mo.status LIKE :ORDERED")
+	@Query("SELECT mo FROM Meal_Order mo WHERE mo.status = 'ORDERED'")
 	public List<Meal_Order> getOrdered();
 
-	@Query("SELECT mo FROM Meal_Order mo WHERE mo.status LIKE :APPROVED")
+	@Query("SELECT mo FROM Meal_Order mo WHERE mo.status  = 'APPROVED'")
 	public List<Meal_Order> getApproved();
 
-	@Query("SELECT mo FROM Meal_Order mo WHERE mo.status LIKE :COOKED")
+	@Query("SELECT mo FROM Meal_Order mo WHERE mo.status  = 'ACCEPTED'")
+	public List<Meal_Order> getAccepted();
+
+	@Query("SELECT mo FROM Meal_Order mo WHERE mo.status  = 'COOKED'")
 	public List<Meal_Order> getCooked();
 
-	@Query("SELECT mo FROM Meal_Order mo WHERE mo.status LIKE :DELIVERED")
+	@Query("SELECT mo FROM Meal_Order mo WHERE mo.status  = 'DELIVERED'")
 	public List<Meal_Order> getDelivered();
 
 	@Query("SELECT mo FROM Meal_Order mo WHERE mo.status = :status")
@@ -48,5 +52,7 @@ public interface OrderRepository extends JpaRepository<Meal_Order, Long>{
 	
 	@Query("SELECT o FROM Meal_Order o WHERE o.mo_id = :mealOrderId")
 	public Meal_Order findOrderById(@Param("mealOrderId") Long mealOrderId);
+
+
 
 }

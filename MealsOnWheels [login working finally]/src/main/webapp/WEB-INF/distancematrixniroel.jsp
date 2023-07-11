@@ -69,7 +69,7 @@
         var destination = encodeURIComponent(document.getElementById("destination").value);
 
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", "/distance/" + origin + "/" + destination, true);
+        xhr.open("POST", "/api/" + origin + "/" + destination, true);
         xhr.onreadystatechange = function() {
             if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
                 // Hide the loading icon

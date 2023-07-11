@@ -21,7 +21,29 @@ public class OrderController {
 
     @GetMapping("/pendingOrders")
     public ResponseEntity<List<Meal_Order>> getAllOrders() {
-        List <Meal_Order> allOrders = orderRepository.findByStatus("ORDERED");
+        List <Meal_Order> allOrders = orderRepository.getOrdered();
         return new ResponseEntity<>(allOrders, HttpStatus.OK);
     }
+
+    @GetMapping("/readyOrders")
+    public ResponseEntity<List<Meal_Order>> getAllReadyOrders() {
+        List<Meal_Order> allOrders = orderRepository.findByStatus("ORDERED");
+
+        // Update the status of each order from "ORDERED" to "APPROVED"
+        for (Meal_Order order : allOrders) {
+            order.setStatus("APPROVED");
+        }
+
+        // Save the updated orders to the database
+        orderRepository.saveAll(allOrders);
+
+        return new ResponseEntity<>(allOrders, HttpStatus.OK);
+    }
+
+    @GetMapping("/deliveredOrders")
+    public ResponseEntity<List<Meal_Order>> getReadyOrders() {
+        List <Meal_Order> allOrders = orderRepository.getApproved();
+        return new ResponseEntity<>(allOrders, HttpStatus.OK);
+    }
+
 }

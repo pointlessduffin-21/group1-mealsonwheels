@@ -30,6 +30,7 @@ public interface UserRepository extends JpaRepository<User, Long>{
      * @Query(value="SELECT * FROM user WHERE user.user_name = :userName",
      * nativeQuery = true)
      */
+    
 
     @Query(value="SELECT role.name FROM user JOIN user_role ON user.id = user_role.user_id JOIN role ON user_role.role_id = role.id WHERE user.id = :uid",
             nativeQuery = true)

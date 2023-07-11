@@ -57,7 +57,7 @@ public class LoginController {
     }
 
     @GetMapping("login_success")
-    public String logginSuccess(HttpSession session) {
+    public String loginSuccess(HttpSession session) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if (authentication != null && authentication.isAuthenticated()) {

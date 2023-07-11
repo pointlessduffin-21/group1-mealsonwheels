@@ -55,6 +55,10 @@ public class UserService {
     	return userRepository.findRoleByUid(uid);
     }
 
+    public List<User> listAllRider(){
+		return userRepository.findUsersByRole("Volunteer");
+	}
+
     public Optional<User> getUserInfo(long uid){
 
         return userRepository.findById(uid);
@@ -74,9 +78,13 @@ public class UserService {
     }
 
     public void saveUser(User u, String r) {
-
         u.setRoles(new HashSet<>(roleRepository.findBySpecificRoles(r)));
+
+        String encodedPassword = passwordEncoder.encode(u.getPassword());
+        u.setPassword(encodedPassword);
+
         userRepository.save(u);
+
     }
 
     public User getUser(Long id) {

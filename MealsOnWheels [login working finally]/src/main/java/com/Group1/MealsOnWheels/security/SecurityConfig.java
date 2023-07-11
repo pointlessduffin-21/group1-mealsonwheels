@@ -34,7 +34,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-
         System.out.println("At Security configure");
         http
                 .formLogin()
@@ -44,28 +43,30 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .defaultSuccessUrl("/login_success", true)
                 .and()
-                .csrf()
-                .and()
+                .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/").permitAll()
-                .antMatchers("/css/**").permitAll()
-                .antMatchers("/images/**").permitAll()
-                .antMatchers("/js/**").permitAll()
-                .antMatchers(HttpMethod.GET, "/favicon.*").permitAll()
-                .antMatchers(HttpMethod.GET, "/login").permitAll()
+                .antMatchers("/", "/distancematrixniroel", "/addfundsniroel", "/tablefundsniroel").permitAll()
+                .antMatchers("/css/**", "/images/**", "/js/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/favicon.*", "/login", "/login_success").permitAll()
                 .antMatchers(HttpMethod.POST, "/home").permitAll()
-                .antMatchers(HttpMethod.GET, "/login_success").hasAnyRole("Users","Administrator")
-                .antMatchers(HttpMethod.GET, "/profile").hasAnyRole("Users","Administrator")
-                .antMatchers(HttpMethod.GET, "/car_detail").hasAnyRole("Users","Administrator")
+                .antMatchers(HttpMethod.GET, "/prfiole", "/car_detail").hasAnyRole("Users", "Administrator")
                 .antMatchers(HttpMethod.GET, "/member").hasRole("Member")
                 .antMatchers(HttpMethod.GET, "/donator").hasRole("Donator")
-                .antMatchers(HttpMethod.POST, "/kitchen").hasRole("Partner")
+                .antMatchers(HttpMethod.GET, "/kitchen", "/addmeal", "/createMeal").hasRole("Partner")
                 .antMatchers(HttpMethod.GET, "/volunteer").hasRole("Volunteer")
                 .antMatchers(HttpMethod.GET, "/admin").hasRole("Administrator")
+                .antMatchers(HttpMethod.GET, "/funds/all").permitAll() // Allow access to "/funds/all" for all roles
+                .antMatchers(HttpMethod.POST, "/funds/create").hasAnyRole("Users", "Administrator") // Allow access to "/funds/create" for "Users" and "Administrator" roles
+                .antMatchers(HttpMethod.PUT, "/funds/update/{id}").hasAnyRole("Users", "Administrator") // Allow access to "/funds/update/{id}" for "Users" and "Administrator" roles
+                .antMatchers(HttpMethod.DELETE, "/funds/delete/{id}").hasAnyRole("Users", "Administrator") // Allow access to "/funds/delete/{id}" for "Users" and "Administrator" roles
+                .antMatchers(HttpMethod.POST, "/api/createfunds").permitAll() // Allow access to "/distance/{origin}/{destination}" for all roles
+                .antMatchers(HttpMethod.GET, "/api/greeting").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/allfunds", "/orders/pendingOrders", "/orders/readyOrders", "/orders/deliveredOrders").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/{origin}/{destination}").permitAll()// Allow access to "/api/greeting" for all roles
                 .and()
                 .logout()
                 .logoutSuccessUrl("/login")
                 .invalidateHttpSession(true);
-
     }
+
 }

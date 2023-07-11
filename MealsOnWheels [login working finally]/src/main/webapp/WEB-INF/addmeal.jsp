@@ -31,6 +31,7 @@
 		
 		<form action="createMeal" method="post" class="was-validated" modelAttribute="meal"
           enctype="multipart/form-data">
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 	        <div class="mb-3">
 	            <label for="meal_name" class="form-label">Name:</label>
 	            <input type="text" class="form-control" placeholder="Enter name" name="meal_name" id="meal_name"

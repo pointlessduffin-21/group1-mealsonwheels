@@ -19,6 +19,9 @@ public class OrderService {
     public void save(Meal_Order order) {
         orderRepo.save(order);
     }
+    public Meal_Order getOrder(Long id) {
+		return orderRepo.findById(id).get();
+	}
     public String getLastOrderNumber() {
         return orderRepo.getLastOrderNumber();
     }
@@ -26,8 +29,36 @@ public class OrderService {
         // TODO Auto-generated method stub
         return orderRepo.getMealsByUId(u_id);
     }
-    public List<Meal_Order> getOrdersByVIdAndStatus(String v_id, String status){
+
+    public List<Meal_Order> getOrdersByVIdAndStatus(String v_id, String status) {
         return orderRepo.getOrdersByVIdAndStatus(v_id, status);
+    }
+
+    public List<Meal_Order> getAcceptedOrders() {
+		return orderRepo.getAccepted();
+	}
+
+	public List<Meal_Order> getOrdered() {
+
+		return orderRepo.getOrdered();
+	}
+
+	public List<Meal_Order> getApproved() {
+
+		return orderRepo.getApproved();
+	}
+
+	public List<Meal_Order> getAccepted() {
+
+		return orderRepo.getAccepted();
+	}
+	public List<Meal_Order> getCooked() {
+
+		return orderRepo.getCooked();
+	}
+
+    public Meal_Order getMealById(Long mealId) {
+    	return orderRepo.getMealById(mealId);
     }
 
     public Meal_Order findOrderById(Long mealOrderId ){

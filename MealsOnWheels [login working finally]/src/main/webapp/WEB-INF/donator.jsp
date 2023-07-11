@@ -1,3 +1,5 @@
+<%@ page import="com.Group1.MealsOnWheels.Entity.User" %>
+
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
 
@@ -51,8 +53,8 @@
 										<div class="col-auto">
 											<div style="height: 65px; width: 65px;" class="rounded bg-primary">
 						                        <div class="h-100 fs-1 text-white d-flex justify-content-center" style="width: 65px;">
-						                            <span style="font-size: 0.8em;" class="my-auto">H</span>
-						                            <span style="font-size: 0.8em;" class="my-auto">G</span>
+													<span style="font-size: 0.8em;" class="my-auto">H</span>
+													<span style="font-size: 0.8em;" class="my-auto">G</span>
 						                        </div>
 						                    </div>
 										</div>
@@ -98,95 +100,95 @@
             <label for="amount">Amount:</label>
             <input type="text" class="form-control" id="amount" name="amount" required>
         </div>
-        <button type="submit" class="btn btn-primary col-12" data-bs-dismiss="modal" value="Submit">Save changes</button>
-        <div id="paypal-button-container"></div>
+		<div id="paypal-button-container"></div>
+        <!-- <button type="submit" class="btn btn-primary col-12" data-bs-dismiss="modal" value="Submit">Save changes</button> -->
+        
     </form>
 </div>
-												      <script>
-        function createDonation() {
-            // Get the name and amount from the input fields
-            let name = document.getElementById("name").value;
-            let amount = document.getElementById("amount").value;
+<script src="https://www.paypal.com/sdk/js?client-id=AbPgKt26jKqlmXNV_LZkwyKbtdml0LR3e2YIVoOnoHbY0seQ4tZTMdP1L4wy4Tf4PM3kbX1i_B-MYRVy"></script>
+<script>
+	function createDonation() {
+		// Get the name and amount from the input fields
+		let name = document.getElementById("name").value;
+		let amount = document.getElementById("amount").value;
 
-            // Create a new XMLHttpRequest object
-            let xhr = new XMLHttpRequest();
+		// Create a new XMLHttpRequest object
+		let xhr = new XMLHttpRequest();
 
-            // Open a new POST request to the /create endpoint
-            xhr.open("POST", "/funds/create");
+		// Open a new POST request to the /create endpoint
+		xhr.open("POST", "/api/createfunds/");
 
-            // Set the request headers
-            xhr.setRequestHeader("Content-Type", "application/json");
+		// Set the request headers
+		xhr.setRequestHeader("Content-Type", "application/json");
 
-            // Send the request with the JSON data
-            xhr.send(JSON.stringify({name: name, amount: amount}));
+		// Send the request with the JSON data
+		xhr.send(JSON.stringify({name: name, amount: amount}));
 
-            // Handle the response
-            xhr.onload = function() {
-                if (xhr.status === 201) {
-                    // Parse the JSON response
-                    let response = JSON.parse(xhr.response);
+		// Handle the response
+		xhr.onload = function() {
+			if (xhr.status === 201) {
+				// Parse the JSON response
+				let response = JSON.parse(xhr.response);
 
-                    // Display the response on the page
-                    document.getElementById("response").innerHTML = JSON.stringify(response, null, 2);
-                    location.reload();
-                } else {
-                    alert("Error: " + xhr.statusText);
-                }
-                
-            };
-        }
+				// Display the response on the page
+				document.getElementById("response").innerHTML = JSON.stringify(response, null, 2);
+			} else {
+				alert("Error: " + xhr.statusText);
+			}
+		};
+	}
 
-        paypal.Buttons({
-            createOrder: function(data, actions) {
-                let amount = document.getElementById("amount").value;
+	paypal.Buttons({
+		createOrder: function(data, actions) {
+			let amount = document.getElementById("amount").value;
 
-                return actions.order.create({
-                    purchase_units: [{
-                        amount: {
-                            value: amount
-                        }
-                    }]
-                });
-            },
-            onApprove: function(data, actions) {
-                return actions.order.capture().then(function(details) {
-                    // Extract the necessary information from the details object
-                    let name = document.getElementById("name").value;
-                    let amount = details.purchase_units[0].amount.value;
-                    let date = details.update_time;
+			return actions.order.create({
+				purchase_units: [{
+					amount: {
+						value: amount
+					}
+				}]
+			});
+		},
+		onApprove: function(data, actions) {
+			return actions.order.capture().then(function(details) {
+				// Extract the necessary information from the details object
+				let name = document.getElementById("name").value;
+				let amount = details.purchase_units[0].amount.value;
+				let date = details.update_time;
 
-                    // Create a new XMLHttpRequest object
-                    let xhr = new XMLHttpRequest();
+				// Create a new XMLHttpRequest object
+				let xhr = new XMLHttpRequest();
 
-                    // Open a new POST request to the /funds/create endpoint
-                    xhr.open("POST", "/funds/create");
+				// Open a new POST request to the /funds/create endpoint
+				xhr.open("POST", "/api/createfunds/");
 
-                    // Set the request headers
-                    xhr.setRequestHeader("Content-Type", "application/json");
+				// Set the request headers
+				xhr.setRequestHeader("Content-Type", "application/json");
 
-                    // Send the request with the JSON data
-                    xhr.send(JSON.stringify({ name: name, amount: amount, dateTime: date }));
+				// Send the request with the JSON data
+				xhr.send(JSON.stringify({ name: name, amount: amount, dateTime: date }));
 
-                    // Handle the response
-                    xhr.onload = function() {
-                        if (xhr.status === 201) {
-                            // Parse the JSON response
-                            let response = JSON.parse(xhr.response);
+				// Handle the response
+				xhr.onload = function() {
+					if (xhr.status === 201) {
+						// Parse the JSON response
+						let response = JSON.parse(xhr.response);
 
-                            // Display the response on the page
-                            document.getElementById("response").innerHTML = JSON.stringify(response, null, 2);
-                        } else {
-                            alert("Error: " + xhr.statusText);
-                        }
-                    };
+						// Display the response on the page
+						document.getElementById("response").innerHTML = JSON.stringify(response, null, 2);
+					} else {
+						alert("Error: " + xhr.statusText);
+					}
+				};
 
-                    // Handle the payment success
-                    alert('Payment completed successfully!');
-                    // Add your own code to handle further actions (e.g., redirecting to a success page)
-                });
-            }
-        }).render('#paypal-button-container');
-    </script>
+				// Handle the payment success
+				alert('Payment completed successfully!');
+				// Add your own code to handle further actions (e.g., redirecting to a success page)
+			});
+		}
+	}).render('#paypal-button-container');
+</script>
 												      <div class="modal-footer">
 												        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 												        
@@ -201,52 +203,62 @@
 							</div>
 						</div>
 						<script type="text/javascript">
-    $(document).ready(function() {
-        $.ajax({
-            url: '/funds/all',
-            type: 'GET',
-            success: function(data) {
-                let tableBody = $('#fundsTable tbody');
-                let totalAmount = 0;
-                data.forEach(function(fund) {
-                    let row = $('<tr></tr>');
-                    row.append($('<td></td>').text(fund.f_id));
-                    row.append($('<td></td>').text(fund.name));
-                    row.append($('<td></td>').text(fund.amount));
-                    row.append($('<td></td>').text(fund.dateTime));
-                    tableBody.append(row);
-                    totalAmount += parseInt(fund.amount); // Parse amount as an integer
-                });
-                $('#totalAmount').text(totalAmount);
-            }
-        });
-        function updateDonations() {
-            $.ajax({
-                url: '/funds/all',
-                type: 'GET',
-                success: function(data) {
-                    let tableBody = $('#fundsTable tbody');
-                    let totalAmount = 0;
-                    tableBody.empty(); // Clear the table body
+							$(document).ready(function() {
+								$.ajax({
+									url: '/api/allfunds/',
+									type: 'GET',
+									success: function(data) {
+										let tableBody = $('#fundsTable tbody');
+										let totalAmount = 0;
+										data.sort(function(b, a) {
+											return new Date(a.dateTime) - new Date(b.dateTime);
+										});
+										data.forEach(function(fund) {
+											let row = $('<tr></tr>');
+											row.append($('<td></td>').text(fund.f_id));
+											row.append($('<td></td>').text(fund.name));
+											row.append($('<td></td>').text(fund.amount));
+											row.append($('<td></td>').text(fund.dateTime)); // Display dateTime as is
+											tableBody.append(row);
+											totalAmount += parseInt(fund.amount); // Parse amount as an integer
+										});
+										$('#totalAmount').text(totalAmount);
+									}
+								});
 
-                    data.forEach(function(donation) {
-                        let row = $('<tr></tr>');
-                        row.append($('<td></td>').text(donation.f_id));
-                        row.append($('<td></td>').text(donation.name));
-                        row.append($('<td></td>').text(donation.amount));
-                        row.append($('<td></td>').text(donation.dateTime));
-                        tableBody.append(row);
-                        totalAmount += parseInt(donation.amount);
-                    });
+								function updateDonations() {
+									$.ajax({
+										url: '/api/allfunds/',
+										type: 'GET',
+										success: function(data) {
+											let tableBody = $('#fundsTable tbody');
+											let totalAmount = 0;
+											tableBody.empty(); // Clear the table body
 
-                    $('#totalAmount').text(totalAmount);
-                }
-            });
-        }
-        updateDonations();
-        setInterval(updateDonations, 10000);
-    });
-</script>
+											data.sort(function(b, a) {
+												return new Date(a.dateTime) - new Date(b.dateTime);
+											});
+
+											data.forEach(function(donation) {
+												let row = $('<tr></tr>');
+												row.append($('<td></td>').text(donation.f_id));
+												row.append($('<td></td>').text(donation.name));
+												row.append($('<td></td>').text(donation.amount));
+												row.append($('<td></td>').text(donation.dateTime)); // Display dateTime as is
+												tableBody.append(row);
+												totalAmount += parseInt(donation.amount);
+											});
+
+											$('#totalAmount').text(totalAmount);
+										}
+									});
+								}
+
+								updateDonations();
+								setInterval(updateDonations, 10000);
+							});
+
+						</script>
 
 						<div class="row">
 							<div class="col-lg-4 col-xxl-4 mb-4">

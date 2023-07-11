@@ -57,7 +57,9 @@
 										</div>
 										<div class="col me-2 ps-3">
 											<div class="text-uppercase text-secondary fw-bold text-xs mb-1 fs-5">
-												<span>Allan Doe</span>
+												<% String uName = (String) request.getAttribute("uName"); %>
+
+												<span><%= uName %></span>
 											</div>
 											<span>Volunteer</span>
 											<div class="text-dark fw-bold h5 mb-0"></div>
@@ -148,11 +150,15 @@
 													<% } %>
 										            <% } %>
 												</div>
-												<div class="col-xxl-4 offset-xxl-0">
-													<button class="btn btn-success" type="button"
-														style="width: 126.037px; padding: 6px 12px; margin: 10px;">Received
-														</button>
-												</div>
+												<form action="/volunteerReceives" method="post">
+													<div class="col-xxl-4 offset-xxl-0">
+														<input type="hidden" name="mo_id" id="mo_id" value="<%= order.getMo_id() %>">
+														<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+														<button class="btn btn-success" type="submit"
+															style="width: 126.037px; padding: 6px 12px; margin: 10px;">Receive
+															</button>
+													</div>
+												</form>
 											</div>
 											<% } %>
             								<% } %>
@@ -162,12 +168,12 @@
 								</div>
 
 								<!-- Decline Order Modal 1 -->
-								<div class="modal fade" id="declineModal1" tabindex="-1"
-									aria-labelledby="declineModal1Label" aria-hidden="true">
+								<div class="modal fade" id="colOneModal" tabindex="-1"
+									aria-labelledby="colOneModalLabel" aria-hidden="true">
 									<div class="modal-dialog">
 										<div class="modal-content">
 											<div class="modal-header">
-												<h5 class="modal-title" id="declineModal1Label">Are you
+												<h5 class="modal-title" id="colOneModalLabel">Are you
 													sure you want to decline this order?</h5>
 												<button type="button" class="btn-close"
 													data-bs-dismiss="modal" aria-label="Close"></button>
@@ -219,12 +225,15 @@
 										            
 										            
 												</div>
-												<div class="col-xxl-4 offset-xxl-0">
-													<button class="btn btn-danger" type="button"
-														style="width: 127.438px; padding: 6px 12px; margin: 9px;"
-														data-bs-toggle="modal" data-bs-target="#declineModal1">Deliver
+												<form action="/deliverOrder" method="post">
+													<div class="col-xxl-4 offset-xxl-0">
+														<input type="hidden" name="mlo_id" id="mlo_id" value="<%= order.getMo_id() %>">
+														<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+														<button class="btn btn-success" type="submit"
+																style="width: 126.037px; padding: 6px 12px; margin: 10px;">Deliver
 														</button>
-												</div>
+													</div>
+												</form>
 											</div>
 										
 											<% } %>

@@ -4,13 +4,12 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Meals On Wheels</title>
 <meta charset="utf-8" />
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <meta name="description" content="" />
 <meta name="author" content="" />
-<title>Meals On Wheels</title>
+<title>About Us</title>
 <!-- Favicon-->
 <link href="https://cdn-icons-png.flaticon.com/512/7541/7541900.png"
 	rel="icon">

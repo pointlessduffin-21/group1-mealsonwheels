@@ -28,7 +28,7 @@
 <script type="text/javascript">
     $(document).ready(function() {
         $.ajax({
-            url: '/funds/all',
+            url: '/api/allfunds/',
             type: 'GET',
             success: function(data) {
                 let tableBody = $('#fundsTable tbody');

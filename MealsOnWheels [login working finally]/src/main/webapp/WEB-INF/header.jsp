@@ -40,11 +40,23 @@
 	        </button>
 	        <div class="collapse navbar-collapse" id="navbarResponsive">
 	            <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-	                <li class="nav-item"><a class="nav-link" href="/dashboard">Home</a></li>
-	                <li class="nav-item"><a class="nav-link" href="/about">About Us</a></li>
-	                <li class="nav-item"><a class="nav-link" href="/contact">Contact Us</a></li>
-	                <li class="nav-item"><a class="nav-link" href="/register">Register</a></li>
-	                <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
+					<sec:authorize access="isAuthenticated()">
+						<form action="logout" method="post" style="padding: 7px;">
+							<input type="hidden" name="${_csrf.parameterName}"
+								   value="${_csrf.token}" /> <input type="submit" name="Logout"
+																	value="Logout" class="btn btn-primary"></input>
+						</form>
+					</sec:authorize>
+
+					<sec:authorize access="!isAuthenticated()">
+						<li class="nav-item"><a class="nav-link" href="/dashboard">Home</a></li>
+						<li class="nav-item"><a class="nav-link" href="/about">About Us</a></li>
+						<li class="nav-item"><a class="nav-link" href="/contact">Contact Us</a></li>
+						<!-- Hide Register and Login links for authenticated users -->
+						<li class="nav-item"><a class="nav-link" href="/register">Register</a></li>
+						<li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
+					</sec:authorize>
+
 	            </ul>
 	        </div>
 	    </div>

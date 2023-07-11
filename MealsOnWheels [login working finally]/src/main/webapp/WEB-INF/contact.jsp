@@ -4,7 +4,9 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Contact Us</title>
+    <link href="https://cdn-icons-png.flaticon.com/512/7541/7541900.png"
+          rel="icon">
 </head>
 <body>
 	<%@ include file="header.jsp"%>

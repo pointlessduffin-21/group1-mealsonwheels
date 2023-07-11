@@ -13,7 +13,7 @@
             let xhr = new XMLHttpRequest();
 
             // Open a new POST request to the /create endpoint
-            xhr.open("POST", "/funds/create");
+            xhr.open("POST", "/api/createfunds/");
 
             // Set the request headers
             xhr.setRequestHeader("Content-Type", "application/json");
@@ -58,7 +58,7 @@
                     let xhr = new XMLHttpRequest();
 
                     // Open a new POST request to the /funds/create endpoint
-                    xhr.open("POST", "/funds/create");
+                    xhr.open("POST", "/api/createfunds/");
 
                     // Set the request headers
                     xhr.setRequestHeader("Content-Type", "application/json");
