@@ -304,6 +304,7 @@
 											$('body').append(modal);
 											modal.modal('show');
 
+
 											// Retrieve the list of partners from the server
 											$.ajax({
 												url: '/orders/partners',
