@@ -73,6 +73,30 @@ public class UserService {
         userRepository.save(user);
     }
 
+    public void saveUser(User u, String r) {
+
+        u.setRoles(new HashSet<>(roleRepository.findBySpecificRoles(r)));
+        userRepository.save(u);
+    }
+
+    public User getUser(Long id) {
+        return userRepository.findById(id).get();
+    }
+
+    public void deleteUser(Long id) {
+        userRepository.deleteById(id);
+    }
+
+//	public Boolean loginUser(String email, String password) {
+//		User logUser = ur.login(email, password);
+//		if (logUser != null) {
+//			return true;
+//		}
+//
+//		return false;
+//
+//	}
+
     public User getUser(String email, String password) {
         return userRepository.loginUser(email, password);
     }
@@ -82,9 +106,32 @@ public class UserService {
         if (logUser != null) {
             return true;
         }
+
         return false;
     }
 
 
+// Partner
+
+    public User findByUserName(String userName) {
+        return userRepository.findByUserName(userName);
+    }
+
+    public String findRoleByUid(Long Uid) {
+        return userRepository.findRoleByUid(Uid);
+    }
+
+    public String findRoleIdByUid(Long Uid) {
+        return userRepository.findRoleIdByUid(Uid);
+    }
+
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
+
+    public User findByEmail(String email) {
+        // TODO Auto-generated method stub
+        return userRepository.findByEmail(email);
+    }
 
 }

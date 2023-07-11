@@ -1,155 +1,54 @@
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="sec"
+		   uri="http://www.springframework.org/security/tags"%>
+<!DOCTYPE html>
+<html>
 <head>
-    <link rel="icon" href="https://gpupv.yeems214.xyz/R%20e%20p%20o%20s%20i%20t%20o%20r%20y/abc-cars.png">
-    <meta charset="UTF-8">
-    <title>ABC Cars</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <link rel="stylesheet" href="https://gpupv.yeems214.xyz/R%20e%20p%20o%20s%20i%20t%20o%20r%20y/assets2/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i&amp;display=swap">
-    <link rel="stylesheet" href="https://gpupv.yeems214.xyz/R%20e%20p%20o%20s%20i%20t%20o%20r%20y/assets2/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://gpupv.yeems214.xyz/R%20e%20p%20o%20s%20i%20t%20o%20r%20y/assets2/css/baguetteBox.min.css">
-    <link rel="stylesheet" href="https://gpupv.yeems214.xyz/R%20e%20p%20o%20s%20i%20t%20o%20r%20y/assets2/css/vanilla-zoom.min.css">
-    <link rel="stylesheet" href="https://gpupv.yeems214.xyz/R%20e%20p%20o%20s%20i%20t%20o%20r%20y/assets2/fonts/simple-line-icons.min.css">
-
-    <head>
-        <!-- Add your existing meta tags, link tags, etc. -->
-        <style>
-            .navbar {
-                z-index: 1030;
-            }
-
-            .navbar-collapse {
-                background-color: #ffffff;
-            }
-
-            @media (max-width: 991px) {
-                .navbar-nav {
-                    margin-left: 0;
-                }
-                .navbar-nav .nav-item {
-                    float: none;
-                }
-                .navbar-nav .nav-link {
-                    padding-left: 15px;
-                    padding-right: 15px;
-                }
-            }
-        </style>
-    </head>
-
+<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="style/styles.css" rel="stylesheet" />
 </head>
 
-
-
-<!-- Navbar -->
-<nav class="navbar navbar-light navbar-expand-lg fixed-top bg-white clean-navbar">
-    <div class="container">
-        <a class="navbar-brand logo" href="/">
-            <img src="/images/abc-cars.png" alt="ABC Cars" style="width: 60px; height: auto;">
-        </a>
-        <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1">
-            <span class="visually-hidden">Toggle navigation</span>
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navcol-1">
-            <ul class="navbar-nav ms-auto">
-
-
-                <sec:authorize access="!isAuthenticated()">
-                <div class="navbar-nav ms-auto">
-                    <a href="/" class="nav-item nav-link">Home</a>
-                  <a href="about_us" class="nav-item nav-link">About Us</a> <a
-                        href="contact_us" class="nav-item nav-link">Contact Us</a>
-                </div>
-                <div class="navbar-nav ms-auto">
-                    <a href="login" class="btn btn-primary">Login</a>
-                </div>
-                </sec:authorize>
-
-                    <sec:authorize access="hasAnyRole('Administrator')">
-
-                    <div class="navbar-nav px-5 ms-auto" style="width: 40%;">
-                        <sf:form action="search" method="get" style="width: 100%;">
-                            <div class="input-group">
-                                <input type="search" class="form-control rounded p-3"
-                                       placeholder="Search" aria-label="Search" name="keyword"
-                                       aria-describedby="search-addon" />
-                                <button type="submit" class="btn btn-outline-primary p-3">search</button>
-                            </div>
-                        </sf:form>
-                    </div>
-
-                    </sec:authorize>
-
-                    <sec:authorize access="hasAnyRole('Users')">
-
-                    <div class="navbar-nav px-5 ms-auto" style="width: 70%;">
-                        <sf:form action="search" method="get" style="width: 100%;">
-                            <div class="input-group">
-                                <input type="search" class="form-control rounded p-3"
-                                       placeholder="Search" aria-label="Search" name="keyword"
-                                       aria-describedby="search-addon" />
-                                <button type="submit" class="btn btn-outline-primary p-3">search</button>
-                            </div>
-                        </sf:form>
-                    </div>
-
-                    </sec:authorize>
-
-
-
-
-                <sec:authorize access="isAuthenticated()">
-
-                <sec:authorize access="hasRole('Users')">
-                <div class="navbar-nav ms-auto">
-                    <a class="nav-item nav-link p-3" href="cars">Home</a>
-                </div>
-
-                </sec:authorize>
-
-                <sec:authorize access="hasRole('Administrator')">
-                <div class="navbar-nav ms-auto">
-                    <a class="nav-item nav-link p-3" href="cars">Home</a> <a
-                        class="nav-item nav-link p-3" href="all_cars">Car Manager</a>
-                    <a class="nav-item nav-link p-3" href="users">User Manager</a>
-                </div>
-
-                </sec:authorize>
-
-                    <sec:authorize access="hasAnyRole('Administrator','Users')">
-
-                    <!-- /logout must be a POST request, as csrf is enabled.
-                    This ensures that log out requires a CSRF token and that a malicious user cannot forcibly log out your users.-->
-                    <div class="navbar-nav ms-auto">
-
-                        <a class="nav-item nav-link p-3" href="profile">Profile</a>
-
-                        <form action="logout" method="post" style="padding: 7px;">
-                            <input type="hidden" name="${_csrf.parameterName}"
-                                   value="${_csrf.token}" /> <input type="submit" name="Logout"
-                                                                    value="Logout" class="btn btn-primary"></input>
-                        </form>
-                    </div>
-
-
-                    </sec:authorize>
-
-
-
-
-                </sec:authorize>
-
-
-
-
-        </div>
-    </div>
-</nav>
-</div>
-</nav>
-
-<br />
-<br />
-<br />
-<br />
+<body>
+	<nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+	    <div class="container">
+	        <h1 class="text-white fs-2"><a type="button" href="/" class="text-decoration-none">MOW</a></h1>
+	        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
+	            aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+	            Menu
+	            <i class="fas fa-bars ms-1"></i>
+	        </button>
+	        <div class="collapse navbar-collapse" id="navbarResponsive">
+	            <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+	                <li class="nav-item"><a class="nav-link" href="/dashboard">Home</a></li>
+	                <li class="nav-item"><a class="nav-link" href="/about">About Us</a></li>
+	                <li class="nav-item"><a class="nav-link" href="/contact">Contact Us</a></li>
+	                <li class="nav-item"><a class="nav-link" href="/register">Register</a></li>
+	                <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
+	            </ul>
+	        </div>
+	    </div>
+	</nav>
+	
+</body>
+</html>

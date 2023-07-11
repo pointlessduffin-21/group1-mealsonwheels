@@ -1,127 +1,130 @@
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="sec"
+		   uri="http://www.springframework.org/security/tags"%>
+<!DOCTYPE html>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Know Your Neighborhood</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="ISO-8859-1">
+<title>Meals On Wheels</title>
+<meta charset="utf-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+<title>Meals On Wheels</title>
+<!-- Favicon-->
+<link href="https://cdn-icons-png.flaticon.com/512/7541/7541900.png"
+	rel="icon">
+<!-- Font Awesome icons (free version)-->
+<script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
+	crossorigin="anonymous"></script>
+<!-- Google fonts-->
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700"
+	rel="stylesheet" type="text/css" />
+<link
+	href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700"
+	rel="stylesheet" type="text/css" />
+<!-- Core theme CSS (includes Bootstrap)-->
+<link href="style/styles.css" rel="stylesheet" />
+<body id="page-top">
 
-    <link rel="icon" href="https://gpupv.yeems214.xyz/R%20e%20p%20o%20s%20i%20t%20o%20r%20y/assets/img/kynlogo.png">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://gpupv.yeems214.xyz/R%20e%20p%20o%20s%20i%20t%20o%20r%20y/assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i&amp;display=swap">
-    <link rel="stylesheet" href="https://gpupv.yeems214.xyz/R%20e%20p%20o%20s%20i%20t%20o%20r%20y/assets/css/baguetteBox.min.css">
-    <link rel="stylesheet" href="https://gpupv.yeems214.xyz/R%20e%20p%20o%20s%20i%20t%20o%20r%20y/assets/css/vanilla-zoom.min.css">
+	<footer class="text-center text-lg-start text-muted"
+		style="background-color: black;">
 
-</head>
+		<section
+			class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+			<div class="me-5 d-none d-lg-block">
+				<span class="text-white">Contact us through our social
+					networking sites:</span>
+			</div>
+			<div>
+				<a href="" class="me-4 text-reset"> <i
+					class="fab fa-facebook-f text-white"></i>
+				</a> <a href="" class="me-4 text-reset"> <i
+					class="fab fa-twitter text-white"></i>
+				</a> <a href="" class="me-4 text-reset"> <i
+					class="fab fa-google text-white"></i>
+				</a> <a href="" class="me-4 text-reset"> <i
+					class="fab fa-instagram text-white"></i>
+				</a> <a href="" class="me-4 text-reset"> <i
+					class="fab fa-linkedin text-white"></i>
+				</a> <a href="" class="me-4 text-reset"> <i
+					class="fab fa-github text-white"></i>
+				</a>
+			</div>
 
-<!-- Footer -->
-<footer class="text-center text-lg-start bg-light text-muted mt-5">
-    <!-- Section: Social media -->
-    <section
-            class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
-    </section>
-    <!-- Section: Social media -->
+		</section>
 
-    <!-- Section: Links  -->
-    <section class="">
-        <div class="container text-center text-md-start mt-5">
-            <!-- Grid row -->
-            <div class="row mt-3">
-                <!-- Grid column -->
-                <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-                    <!-- Content -->
-                    <h6 class="text-uppercase fw-bold mb-4">
-                        <i class="fas fa-gem me-3"></i>ABC Cars
-                    </h6>
-                    <p>Always Beyond Comfort, Driven to Exceed Expectations
-                    </p>
-                </div>
-                <!-- Grid column -->
+		<section class="">
+			<div class="container text-center text-md-start mt-5">
 
-                <!-- Grid column -->
-                <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-                    <!-- Links -->
-                    <h6 class="text-uppercase fw-bold mb-4">Cars</h6>
-                    <p>
-                        <a href="cars" class="text-reset">Post Car</a>
-                    </p>
-                    <p>
-                        <a href="cars" class="text-reset">View all Car</a>
-                    </p>
-                    <!-- <p>
-                        <a href="#!" class="text-reset">Vue</a>
-                    </p>
-                    <p>
-                        <a href="#!" class="text-reset">Laravel</a>
-                    </p> -->
-                </div>
-                <!-- Grid column -->
+				<div class="row mt-3">
 
-                <!-- Grid column -->
-                <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-                    <!-- Links -->
-                    <h6 class="text-uppercase fw-bold mb-4">ABC Car</h6>
-                    <p>
-                        <a href="about_us" class="text-reset">About Us</a>
-                    </p>
-                    <p>
-                        <a href="contact_us" class="text-reset">Contact Us</a>
-                    </p>
-                    <!-- <p>
-                        <a href="#!" class="text-reset">Orders</a>
-                    </p>
-                    <p>
-                        <a href="#!" class="text-reset">Help</a>
-                    </p> -->
-                </div>
-                <!-- Grid column -->
+					<div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+						<h6 class="text-uppercase fw-bold mb-4 text-white">
+							<i class="fas fa-gem me-3 text-white"></i>Meals On Wheels
+						</h6>
+						<p class="text-white">Nourishing Lives: Meals on Wheels
+							Delivers Care and Support</p>
+					</div>
 
-                <!-- Grid column -->
-                <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-                    <!-- Links -->
-                    <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
-                    <p>
-                        <i class="fas fa-home me-3"></i> Springfield, IL
-                    </p>
-                    <p>
-                        <i class="fas fa-envelope me-3"></i> support@abccars.com
-                    </p>
-                    <p>
-                        <i class="fas fa-phone me-3"></i> +1 (555) 321-6789
-                    </p>
-                </div>
-                <!-- Grid column -->
-            </div>
-            <!-- Grid row -->
-        </div>
-    </section>
-    <!-- Section: Links  -->
+					<div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4" id="links">
+						<h6 class="text-uppercase fw-bold mb-4 text-white">Meals</h6>
+						<p>
+							<a href="cars" class="text-white text-decoration-none">Menu</a>
+						</p>
+						<p>
+							<a href="cars" class="text-white text-decoration-none">Partners</a>
+						</p>
+					</div>
 
-    <!-- Copyright -->
-    <div class="text-center p-4"
-         style="background-color: rgba(0, 0, 0, 0.05);">
-        &copy; 2023 Copyright: <a class="text-reset fw-bold"
-                                  href="https://home.yeems214.xyz/">yeems214</a>
-    </div>
+					<div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4" id="links">
+						<h6 class="text-uppercase fw-bold mb-4 text-white">Meals On
+							Wheels</h6>
+						<p>
+							<a href="about_us" class="text-white text-decoration-none">About
+								Us</a>
+						</p>
+						<p>
+							<a href="contact_us" class="text-white text-decoration-none">Contact
+								Us</a>
+						</p>
 
-    <script>
-        function adjustFooter() {
-            const main = document.querySelector("main");
-            const windowHeight = window.innerHeight;
-            const headerHeight = document.querySelector("header").offsetHeight;
-            const footerHeight = document.querySelector("footer").offsetHeight;
-            const contentHeight = headerHeight + footerHeight;
+					</div>
 
-            if (contentHeight < windowHeight) {
-                main.style.minHeight = `${windowHeight - contentHeight}px`;
-            } else {
-                main.style.minHeight = "0";
-            }
-        }
+					<div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+						<h6 class="text-uppercase fw-bold mb-4 text-white">Contact</h6>
+						<p class="text-white">
+							<i class="fas fa-home me-3 text-white"></i> Philippines, CEBU
+							10286, PH
+						</p>
+						<p class="text-white">
+							<i class="fas fa-envelope me-3 text-white"></i> mealsonwheels.com
+						</p>
+						<p class="text-white">
+							<i class="fas fa-phone me-3 text-white"></i> + 09 186 562 54
+						</p>
+						<p class="text-white">
+							<i class="fas fa-print me-3 text-white"></i> + 09 825 660 09
+						</p>
+					</div>
+				</div>
+			</div>
+		</section>
+		<div class="text-center p-4 text-white"
+			style="background-color: rgba(0, 0, 0, 0.05);">
+			&copy; 2023 Copyright: <a class="text-reset fw-bold text-white"
+				href="#">mealsonwheels.com</a>
+		</div>
+	</footer>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="js/scripts.js"></script>
+	<script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+</body>
 
-        // Call the function on page load and when the window is resized
-        window.addEventListener("load", adjustFooter);
-        window.addEventListener("resize", adjustFooter);
 
-    </script>
-    <!-- Copyright -->
-</footer>
-<!-- Footer -->
+</body>
+</html>

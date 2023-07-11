@@ -91,14 +91,14 @@
                     <div class="card-body px-4 py-5 px-md-5">
                     
                      <c:url var="post_url" value="/login" />
-                    <form action="/login" method="post" class="was-validated">
+                    <form action="${post_url}" method="post" class="was-validated">
 				        <input type="hidden" name="${_csrf.parameterName}"
 				               value="${_csrf.token}" />
 				
 				        <div class="mb-3 mt-3">
-				            <label for="userName" class="form-label">Username:</label> <input
+				            <label for="username" class="form-label">Username:</label> <input
 				                type="text" class="form-control" id="userName"
-				                placeholder="Enter username" name="userName" value="" required>
+				                placeholder="Enter username" name="username" value="" required>
 				            <div class="valid-feedback">Valid.</div>
 				            <div class="invalid-feedback">Please fill out this field.</div>
 				        </div>
