@@ -91,7 +91,7 @@
     	</div>
     </div>
 
-    <!-- Side Dashboard -->
+    <!-- Order Dashboard -->
     <div class="dashboard-order" style="padding-top:90px;">
 		<div class="card-header py-3">
 			<h6 class="text-secondary fw-bold m-0"
@@ -137,10 +137,6 @@
 		<div class="card-header py-3">
 			<h6 class="text-secondary fw-bold m-0"
 				style="color: rgb(45, 237, 42);">Delivery</h6>
-
-            <div class="col-lg-6 col-xxl-4 mb-4">
-                <div id="ordersContainer" class="no-gutters"></div>
-            </div>
 		</div>
 		<div class="order-wrapper">
 		  <% List<Meal_Order> acceptedMeals = (List<Meal_Order>) request.getAttribute("acceptedMeals"); %>
@@ -151,8 +147,10 @@
                 <div class="order-detail">
                 <% mealResult = (List<Meal>) request.getAttribute("mealResults"); %>
 		       	<% for (Meal approvedMeal : mealResult) { %>
-		       	<% if (cooking.getM_id() == approvedMeal.getM_id()) { %>
+		       	<% if (cooking.getM_id() == approvedMeal.getM_id()) { %>    
+                    <img class="order-image" src="<%= approvedMeal.getPhotoPath() %>">
                     <p>Order Number: <%= cooking.getOrder_number() %></p>
+                    <p>Member ID: <%= cooking.getU_id() %></p>
                     <p>Name: <%= approvedMeal.getMeal_name() %></p>
                     <% } %>
 					<% } %>
@@ -160,16 +158,16 @@
 					<div style="display: flex;" class="pt-2">
 					  <span style="margin-right: 10px;">
 					    <form action="/assignRider" method="post" class="ms-0 col-2" style="position:relative;left:0%;">	
-					    	<input type="hidden" name="orderId" value="<%= cooking.getMo_id() %>">
+					    	<input type="hidden" name="orderId" value="<%= cooking.getMo_id() %>" placeholder="Select a rider">
 					    	 <select class="form-select rider-dropdown" name="riderId" id="riderId">
 			          		<option selected disabled>Select a rider</option>
 			            	<% List<User> rider = (List<User>) request.getAttribute("riders"); %>
 		       				<% if (rider != null && !rider.isEmpty()) { %>
 		       				<% for (User volunteers : rider) { %>
 		       			
-			          <option value="<%= volunteers.getId() %>"><%= volunteers.getName() %></option>
-			           <% } %>
-						<% } %>
+                            <option value="<%= volunteers.getId() %>"><%= volunteers.getName() %></option>
+                            <% } %>
+                            <% } %>
 			        </select>
 					    	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 					    	<button class="btn btn-success" type="submit" style="width: 80px; padding: 6px 12px;">Accept</button>

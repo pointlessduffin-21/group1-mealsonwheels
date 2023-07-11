@@ -26,6 +26,11 @@ public class UserService {
     private PasswordEncoder passwordEncoder;
 
     public String save(User user) {
+        // Check if the username already exists in the database
+        if (userRepository.findByEmail(user.getEmail()) != null) {
+            return "Username already exists";
+        }
+
         String encodedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
 
@@ -35,6 +40,7 @@ public class UserService {
 
         return "User saved successfully";
     }
+
 
     public User findLoginUser(String username) {
         return userRepository.findByUserName(username);
