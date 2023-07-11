@@ -42,7 +42,7 @@ public class LoginController {
     public String showRegistrationForm(@ModelAttribute("user") User user) {
 
 
-        return "Register";
+        return "register";
     }
 
     @PostMapping("register")
@@ -53,20 +53,41 @@ public class LoginController {
         String success_register = "Registeration Successful! ";
         model.addAttribute("success_register", success_register);
 
-        return "Register";
+        return "register";
     }
 
     @GetMapping("login_success")
-    public String logginSuccess(HttpSession session) {
+    public String loginSuccess(HttpSession session) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if (authentication != null && authentication.isAuthenticated()) {
             UserDetails loggedUser = (UserDetails) authentication.getPrincipal();
             session.setAttribute("user", loggedUser);
-            System.out.println("User has logged in as: " + loggedUser.getUsername());
-        }
 
-        return "index";
+            //Get user by username
+            User user = userService.findByUserName(loggedUser.getUsername());
+            String roleName = userService.findRoleByUid(user.getId());
+            //GetRoleByUserId
+            // If role is Administrator redirect adminpage
+            if (roleName.equals("Administrator")) {
+                System.out.println("User has logged in as: " + loggedUser.getUsername());
+            	return "redirect:/admin";
+            } else if (roleName.equals("Member")) {
+                System.out.println("User has logged in as: " + loggedUser.getUsername());
+                return "redirect:/member";
+            } else if (roleName.equals("Partner")) {
+                System.out.println("User has logged in as: " + loggedUser.getUsername());
+                return "redirect:/kitchen";
+            } else if (roleName.equals("Volunteer")) {
+                System.out.println("User has logged in as: " + loggedUser.getUsername());
+                return "redirect:/volunteer";
+            } else if (roleName.equals("Donator")) {
+                System.out.println("User has logged in as: " + loggedUser.getUsername());
+                return "redirect:/donator";
+            } else
+                return "redirect:/login_error";
+        } else
+            return "redirect:/login_error";
     }
 
     @GetMapping("/test")
