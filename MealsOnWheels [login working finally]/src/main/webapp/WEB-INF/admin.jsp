@@ -1,3 +1,7 @@
+<%@ page import="com.Group1.MealsOnWheels.Entity.Meal_Order" %>
+<%@ page import="com.Group1.MealsOnWheels.Entity.Meal" %>
+<%@ page import="com.Group1.MealsOnWheels.Entity.User" %>
+<%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
 
@@ -43,6 +47,8 @@
 						style="margin-bottom: 0px; margin-top: 16px;">
 					<h3 class="text-dark mb-0">Dashboard</h3>
 				</div>
+				<% User user = (User) request.getAttribute("loggedUser"); %>
+                
 				<div class="row">
 					<div class="col-md-6 col-xl-6 col-xxl-6 mb-4">
 						<div class="card shadow border-start-primary py-2">
@@ -53,7 +59,7 @@
 									</div>
 									<div class="col me-2 ps-3">
 										<div class="text-uppercase text-secondary fw-bold text-xs mb-1 fs-5">
-											<span>Harry Potter</span>
+											<span><%= user.getName() %></span>
 										</div>
 										<span>Admin</span>
 										<div class="text-dark fw-bold h5 mb-0"></div>
@@ -72,7 +78,7 @@
 										<span class="text-uppercase text-secondary fw-bold text-xs mb-1 fs-5 pe-3" id="totalAmount"></span>
 									</div>
 								</div>
-								<script type="text/javascript">
+								<!-- <script type="text/javascript">
 									$(document).ready(function() {
 										$.ajax({
 											url: '/api/allfunds/',
@@ -118,42 +124,106 @@
 										updateDonations();
 										setInterval(updateDonations, 10000);
 									});
-								</script>
+								</script> -->
 							</div>
 						</div>
 					</div>
 
-					<script>
-						function changeStatus(status) {
-							document.getElementById("status-btn").innerHTML = status;
-							if (status === "Available") {
-								document.getElementById("status-btn").style.backgroundColor = "#5ec58f";
-							} else if (status === "Busy") {
-								document.getElementById("status-btn").style.backgroundColor = "orange";
-							} else if (status === "Offline") {
-								document.getElementById("status-btn").style.backgroundColor = "grey";
-							}
-						}
-					</script>
-
 					<div class="row">
 
-
-
-
+								
 						<!-- Orders -->
-						<div class="col-lg-6 col-xxl-4 mb-4">
-							<div class="card shadow mb-4"></div>
-							<div class="card shadow mb-4">
-								<div class="card-header py-3">
-									<h6 class="text-secondary fw-bold m-0">Orders</h6>
+								<div class="col-lg-6 col-xxl-4 offset-xxl-0 mb-4">
+								    <div class="card shadow mb-4"></div>
+								    <div class="card shadow mb-4">
+								        <div class="card-header py-3">
+								            <h6 class="text-secondary fw-bold m-0">All Orders</h6>
+								            
+								            
+								        </div>
+								        <div class="order-wrapper" style="height:500px;">
+								            <% List<Meal_Order> ordered = (List<Meal_Order>) request.getAttribute("ordered"); %>
+								            <% if (ordered != null && !ordered.isEmpty()) { %>
+								                <% for (Meal_Order meal : ordered) { %>
+								                    <div class="order-card">
+								                        <div class="d-flex justify-content-between">
+								                            <% List<Meal> mealResult = (List<Meal>) request.getAttribute("mealResults"); %>
+								                            <% for (Meal mealOrdered : mealResult) { %>
+								                                <% if (meal.getM_id() == mealOrdered.getM_id()) { %>
+								                                    <div class="d-flex justify-content-start ms-3 mb-3">
+								                                        <img class="order-image" src="<%= mealOrdered.getPhotoPath() %>">
+								                                        <div class="order-detail ms-3">
+								                                            <p class="fw-bold mb-0" style="font-size:1em;"><%= mealOrdered.getMeal_name() %></p>
+								                                            <span style="font-size:0.8em;">Member Id: <%= meal.getU_id() %></span>
+								                                            <span style="font-size:0.8em;">| Partner Id: <%= meal.getP_id() %></span>
+								                                            <span style="font-size:0.8em;"><%= meal.getOrder_date() %></span>
+								                                        </div>
+								                                    </div>
+								                                    <input type="hidden" name="mealId" id="mealId" value="<%= meal.getM_id() %>">
+								                                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+								                                    <button class="btn btn-success float-end" data-bs-toggle="modal" data-bs-target="#adminAccept" style="height:50%" type="button">Accept</button>
+								                                	<!-- Modal -->
+																	<div class="modal fade" id="adminAccept" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+																	  <div class="modal-dialog">
+																	    <div class="modal-content">
+																	      <div class="modal-header">
+																	        <h1 class="modal-title fs-5" id="exampleModalLabel">Order Manager</h1>
+																	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+																	      </div>
+																	      <div class="modal-body">
+																	        <div class="modal-body">
+																				  <form action="adminAccepts" method="post" id="distance-form">
+																				    <label htmlFor="mealOrder">Meal Order #:</label>
+																				    <input class="form-control" type="text" id="orderId" name="orderId" value="<%= meal.getMo_id() %>"></input>
+																				    	
+																					<% List<User> partners = (List<User>) request.getAttribute("partners"); %>
+																				    <div class="dropdown mb-5">
+																				      <% if (partners != null && !partners.isEmpty()) { %>
+																				      <label htmlFor="partner">Select a Partner:</label>
+																				      <select id="selectedPartner" name="selectedPartner" class="dropdown-center dropdown-menu d-grid text-center mb-3" onchange="updateDestinationAddress(this)">
+																				        <% for (User partner : partners) { %>
+																				        <option class="dropdown-item" style="width:100%" value="<%= partner.getId()%>" data-address="<%= user.getAddress() %>">
+																				          <%= partner.getName() %>
+																				        </option>
+																				        <% } %>
+																				      </select>
+																				      <% } %>
+																				    </div>
+																				    <label htmlFor="origin">Member Location:</label>
+																				    <input disabled class="form-control" type="text" id="origin" name="origin" placeholder="Distance From" value="<%= meal.getTo_address() %>">
+																				    <label htmlFor="destination">Partner Location:</label>
+																				    <input class="form-control" type="text" id="destination" name="destination" placeholder="Choose Partner to set location.">
+																				    <div id="loading-icon" style="display: none;">Loading...</div>
+																				    <div id="distance-results"></div>
+																				    <div id="map"></div>
+																				    <input class="btn btn-warning rounded mt-3 col-12" type="submit" value="Submit">
+																				  </form>
+</div>
+																	        
+																	      </div>
+																	      <div class="modal-footer">
+																	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+																	        <button type="button" class="btn btn-primary">Save changes</button>
+																	      </div>
+																	    </div>
+																	  </div>
+																	</div>
+								                                
+								                                
+								                                <% } %>
+								                            <% } %>
+								                        </div>
+								                    </div>
+								                <% } %>
+								            <% } %>
+								        </div>
+								    </div>
 								</div>
-								<ul class="list-group list-group-flush" id="ordersContainer">
-									<!-- Orders will be dynamically added here -->
+<!-- 
+						<ul class="list-group list-group-flush order-wrapper" style="height:500px;" id="ordersContainer">
+									Orders will be dynamically added here
 								</ul>
-							</div>
-						</div>
-
+ -->
 						<!-- Orders (JSON) -->
 						<script>
 							$(document).ready(function() {
@@ -171,13 +241,13 @@
 
 										data.forEach(function(order) {
 											let orderContainer = $('<div class="card"></div>');
-											let cardBody = $('<div class="card-body"></div>');
+											let cardBody = $('<div class="row card-body"></div>');
 
-											cardBody.append($('<p class="card-text"></p>').text('Meal Id: ' + order.mo_id));
-											cardBody.append($('<p class="card-text"></p>').text('Order Number: ' + order.order_number));
-											cardBody.append($('<p class="card-text"></p>').text('Member Id: ' + order.m_id));
-											cardBody.append($('<p class="card-text"></p>').text('Date: ' + order.order_date));
-											cardBody.append($('<p class="card-text"></p>').html('Status: <strong>' + order.status + '</strong>'));
+											cardBody.append($('<p class="card-text col-6"></p>').text('Meal Id: ' + order.mo_id));
+											cardBody.append($('<p class="card-text col-6"></p>').text('Order Number: ' + order.order_number));
+											cardBody.append($('<p class="card-text col-6"></p>').text('Member Id: ' + order.m_id));
+											cardBody.append($('<p class="card-text col-6"></p>').text('Date: ' + order.order_date));
+											cardBody.append($('<p class="card-text col-6"></p>').html('Status: <strong>' + order.status + '</strong>'));
 
 											orderContainer.append(cardBody);
 											container.append(orderContainer);
@@ -194,17 +264,46 @@
 
 						<!-- All Orders -->
 						<div class="col-lg-6 col-xxl-4 offset-xxl-0 mb-4">
-							<div class="card shadow mb-4"></div>
-							<div class="card shadow mb-4">
-								<div class="card-header py-3">
-									<h6 class="text-secondary fw-bold m-0">All Orders</h6>
-								</div>
-								<ul class="list-group list-group-flush" id="allOrdersList">
-									<!-- Donations will be dynamically added here -->
-								</ul>
-							</div>
+						    <div class="card shadow mb-4"></div>
+						    <div class="card shadow mb-4">
+						        <div class="card-header py-3">
+						            <h6 class="text-secondary fw-bold m-0">All Orders</h6>
+						        </div>
+						        <div class="order-wrapper" style="height:500px;">
+						            <% List<Meal_Order> deliveredOrders = (List<Meal_Order>) request.getAttribute("deliveredOrders"); %>
+						            <% if (deliveredOrders != null && !deliveredOrders.isEmpty()) { %>
+						                <% for (Meal_Order meal : deliveredOrders) { %>
+						                    <div class="order-card">
+						                        <div class="d-flex justify-content-between">
+						                            <% List<Meal> mealResult = (List<Meal>) request.getAttribute("mealResults"); %>
+						                            <% for (Meal mealOrdered : mealResult) { %>
+						                                <% if (meal.getM_id() == mealOrdered.getM_id()) { %>
+						                                    <div class="d-flex justify-content-start ms-3 mb-3">
+						                                        <img class="order-image" src="<%= mealOrdered.getPhotoPath() %>">
+						                                        <div class="order-detail ms-3">
+						                                            <p class="fw-bold mb-0" style="font-size:1em;"><%= mealOrdered.getMeal_name() %></p>
+						                                            <span style="font-size:0.8em;">Member Id: <%= meal.getU_id() %></span>
+						                                            <span style="font-size:0.8em;">| Partner Id: <%= meal.getP_id() %></span>
+						                                            <span style="font-size:0.8em;"><%= meal.getOrder_date() %></span>
+						                                        </div>
+						                                    </div>
+						                                    <input type="hidden" name="mealId" id="mealId" value="<%= meal.getM_id() %>">
+						                                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+						                                    <button type='submit' class="order-price text-danger d-flex justify-content-end btn" style="width:113px;">
+						                                        <p style="font-size:0.8em;" class="mb-0">Status: <%= meal.getStatus() %></p>
+						                                    </button>
+						                                <% } %>
+						                            <% } %>
+						                        </div>
+						                    </div>
+						                <% } %>
+						            <% } %>
+						        </div>
+						    </div>
 						</div>
 
+					
+	        
 
 						<!-- Donations (JSON) -->
 						<script type="text/javascript">
@@ -269,24 +368,43 @@
 
 									data.forEach(function(order) {
 										let orderContainer = $('<div class="card"></div>');
-										let cardBody = $('<div class="card-body"></div>');
+										let cardBody = $('<div class="row card-body"></div>');
 
-										cardBody.append($('<p class="card-text"></p>').text('Meal Id: ' + order.mo_id));
-										cardBody.append($('<p class="card-text"></p>').text('Order Number: ' + order.order_number));
-										cardBody.append($('<p class="card-text"></p>').text('Member Id: ' + order.m_id));
-										cardBody.append($('<p class="card-text"></p>').text('Date: ' + order.order_date));
-										cardBody.append($('<p class="card-text"></p>').html('Status: <strong>' + order.status + '</strong>'));
+										cardBody.append($('<p class="col-6 card-text"></p>').text('Meal Order Id: ' + order.mo_id));
+										cardBody.append($('<p class="col-6 card-text"></p>').text('Order Number: ' + order.order_number));
+										cardBody.append($('<p class="col-6 card-text"></p>').text('Meal Id: ' + order.m_id));
+										cardBody.append($('<p class="col-6 card-text"></p>').text('Member Id: ' + order.u_id));
+										cardBody.append($('<p class="col-6 card-text"></p>').text('Date: ' + order.order_date));
+										cardBody.append($('<p class="col-6 card-text"></p>').html('Status: <strong>' + order.status + '</strong>'));
 
 										// Create the button
 										let acceptButton = $('<button class="btn btn-success float-end" type="button">Accept</button>');
 
-										acceptButton.on('click', function() {
+
+								        // Set the data attributes with the meal information
+								        acceptButton.data('meal-id', order.mo_id);
+								        acceptButton.data('order-number', order.order_number);
+								        acceptButton.data('member-id', order.m_id);
+								        acceptButton.data('from-address', order.from_address);
+								        acceptButton.data('partner-id', order.p_id);
+								        
+
+								         acceptButton.on('click', function() {
+								          // Access the meal information from the data attributes
+								          let mealId = $(this).data('meal-id');
+								          let orderNumber = $(this).data('order-number');
+								          let memberId = $(this).data('member-id');
+								          let fromAddress = $(this).data('from-address');
+								          let partnerId = $(this).data('partner-id');
 											// Create the modal
 											let modal = $('<div class="modal fade" tabindex="-1"></div>');
 											let modalDialog = $('<div class="modal-dialog"></div>');
 											let modalContent = $('<div class="modal-content"></div>');
 											let modalHeader = $('<div class="modal-header"></div>');
-											let modalBody = $('<div class="modal-body"></div>');
+											
+											<% List<User> partners = (List<User>) request.getAttribute("partners"); %>
+											//Here Dimps
+											let modalBody = $('<div class="modal-body"><form action="adminAccepts" method="post" id="distance-form"><label htmlFor="mealOrder">Meal Order #: </label><input class="form-control" type="text" id="orderId" name="orderId" value="'+ mealId +'""></input><div class="dropdown mb-5"><% if (partners != null && !partners.isEmpty()) { %><label htmlFor="partner">Select a Partner:</label><select id="selectedPartner" name="selectedPartner" class="dropdown-center dropdown-menu d-grid text-center mb-3" onchange="updateDestinationAddress(this)"><% for (User partner : partners) { %><option class="dropdown-item" style="width:100%" value="<%= partner.getId()%>" data-address="<%= user.getAddress() %>"><%= partner.getName() %></option><% } %></select><% } %></div><label htmlFor="origin">Member Location: </label><input disabled class="form-control" type="text" id="origin" name="origin" placeholder="Distance From" value="' + fromAddress + '"><label htmlFor="destination">Partner Location: </label><input class="form-control" type="text" id="destination" name="destination" placeholder="Choose Partner to set location."><div id="loading-icon" style="display: none;">Loading...</div><div id="distance-results"></div><div id="map"></div><input class="btn btn-warning rounded mt-3 col-12" type="submit" value="Submit"></form></div>');
 											let modalFooter = $('<div class="modal-footer"></div>');
 
 											// Add content to the modal
@@ -351,10 +469,8 @@
 									console.error('Error:', error);
 								}
 							});
-						});
-
+						}); 
 					</script>
-
 
 
 				</div>
@@ -362,9 +478,112 @@
 		</div>
 	</div>
 </div>
-</div>
+<script>
+    function initMap() {
+        var mapOptions = {
+            center: { lat: 0, lng: 0 }, // Default center at (0, 0)
+            zoom: 12 // Adjust the zoom level as needed
+        };
+        var map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
-<%@ include file="footer.jsp"%>
+        var marker;
+
+        map.addListener('click', function(event) {
+            placeMarker(event.latLng);
+        });
+
+        function placeMarker(location) {
+            if (marker) {
+                marker.setMap(null); // Remove the existing marker
+            }
+            marker = new google.maps.Marker({
+                position: location,
+                map: map
+            });
+            updateAddress(location);
+        }
+
+        function updateAddress(location) {
+            var geocoder = new google.maps.Geocoder();
+            geocoder.geocode({ 'latLng': location }, function(results, status) {
+                if (status === 'OK') {
+                    if (results[0]) {
+                        var address = results[0].formatted_address;
+                        document.getElementById("origin").value = address;
+                        map.setCenter(location); // Set the map center to the clicked location
+                    } else {
+                        alert('No results found');
+                    }
+                } else {
+                    alert('Geocoder failed due to: ' + status);
+                }
+            });
+        }
+    }
+    
+    function updateDestinationAddress(element) {
+    	
+    	let selectedValue = $('#selectedPartner').val();
+        $('#destination').val(selectedValue);
+
+        document.getElementById("loading-icon").style.display = "block";
+        
+        let selectedOption = element.options[element.selectedIndex];
+        let selectedAddress = selectedOption.getAttribute('data-address');
+        document.getElementById('destination').value = selectedAddress;
+
+
+        var origin = encodeURIComponent(document.getElementById("origin").value);
+        var destination = encodeURIComponent($('#destination').val());
+
+	        var xhr = new XMLHttpRequest();
+	        xhr.open("POST", "/api/" + origin + "/" + destination, true);
+	        xhr.onreadystatechange = function() {
+	            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+	                // Hide the loading icon
+	                document.getElementById("loading-icon").style.display = "none";
+
+	                var response = JSON.parse(xhr.responseText);
+	                displayDistance(response);
+	            } else if (xhr.readyState === XMLHttpRequest.DONE) {
+	                // Hide the loading icon
+	                document.getElementById("loading-icon").style.display = "none";
+
+	                alert("Error retrieving distance.");
+	            }
+	        };
+	        xhr.send();
+	        
+		}
+
+    function displayDistance(response) {
+        var distanceResults = document.getElementById("distance-results");
+        distanceResults.innerHTML = "";
+
+        var distanceFrom = document.createElement("div");
+        distanceFrom.textContent = "Distance From: " + response.From;
+        distanceResults.appendChild(distanceFrom);
+
+        var distanceTo = document.createElement("div");
+        distanceTo.textContent = "Distance To: " + response.To;
+        distanceResults.appendChild(distanceTo);
+
+        var kilometerDistance = document.createElement("div");
+        kilometerDistance.textContent = "Distance in Kilometers: " + response.Distance;
+        distanceResults.appendChild(kilometerDistance);
+
+        var timeOfArrival = document.createElement("div");
+        timeOfArrival.textContent = "Time of Arrival: " + response.Duration;
+        distanceResults.appendChild(timeOfArrival);
+
+        var foodStatus = document.createElement("div");
+        foodStatus.textContent = "Food Status: " + response.Status;
+        distanceResults.appendChild(foodStatus);
+    }
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>
+
 
 <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 <script src="assets/js/theme.js"></script>

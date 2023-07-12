@@ -23,22 +23,37 @@
     <div class="dashboard">
         <div class="dashboard-banner">
             <img src="https://i.pinimg.com/564x/25/e6/a1/25e6a1365e9a35071db3c7d2d8ea6eab.jpg">
-            <div class="banner-promo">
-                <h1><span>50% OFF</span><br>
-                Tasty Food<br> On Your Hand
+            <div class="row">
+
+            <div class="row" style="position:absolute;top:25%;left:10%">
+                <% User user = (User) request.getAttribute("loggedUser"); %>
+                <div class="col-1">
+                    <div style="height: 150px; width: 150px;" class="rounded-circle bg-primary">
+                        <div class="h-100 fs-1 text-white d-flex justify-content-center" style="width: 150px;">
+                            <span style="font-size: 2em;" class="my-auto"> <%= user.getName().charAt(0) %></span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-8 ms-5 ps-5">
+                    <h1 style="color: var(--yellow);font-weight: 800;">WELCOME!</h1>
+                    <h1 class="text-white"><%= user.getName() %> </h1>
+                    <h4 class="text-white">Partner</h4>
+            </div>
+
+            <div class="banner-promo text-end" style="position:relative;top:-150px">
+                <h1 style="position:relative;right:400px;"><span>FREE</span><br>
+                    Tasty Food<br> On Your Hand
                 </h1>
             </div>
         </div>
 
+    </div>
+        </div>
+
         <h3 class="dashboard-title">Recommended Food For You</h3>
         <div class="dashboard-menu">
-            <a href="#">Favorites</a>
-            <a href="#">Best Seller</a>
-            <a href="#">Near Me</a>
-            <a href="#">Promotion</a>
-            <a href="#">Top Rated</a>
-            <a href="#">All</a>
-            <a class="button" href="/addmeal">Home</a>
+            <a href="addmeal">Add a Meal</a>
         </div>
 
         <div class="dashboard-content">

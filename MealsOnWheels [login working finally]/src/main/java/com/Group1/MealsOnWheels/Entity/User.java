@@ -20,7 +20,7 @@ public class User {
 
     @ManyToMany
     @JoinTable( name="user_role",
-            joinColumns = @JoinColumn(name = "user_id"),
+            joinColumns = @JoinColumn(name = "id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
@@ -29,6 +29,9 @@ public class User {
     private String mobile;
 
     private String address;
+    
+
+    private String status;
 
     public User() {
 
@@ -57,7 +60,7 @@ public class User {
 
 
     public User(Long id, String name, String userName, String password, Set<Role> roles, String email, String mobile,
-                String address) {
+                String address, String status) {
         super();
         this.id = id;
         this.name = name;
@@ -67,6 +70,7 @@ public class User {
         this.email = email;
         this.mobile = mobile;
         this.address = address;
+        this.status = status;
     }
 
     public Long getId() {
@@ -135,6 +139,14 @@ public class User {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+    
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     @Override

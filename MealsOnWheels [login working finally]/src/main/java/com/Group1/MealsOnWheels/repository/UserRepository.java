@@ -32,15 +32,19 @@ public interface UserRepository extends JpaRepository<User, Long>{
      */
     
 
-    @Query(value="SELECT role.name FROM user JOIN user_role ON user.id = user_role.user_id JOIN role ON user_role.role_id = role.id WHERE user.id = :uid",
+    @Query(value="SELECT role.name FROM user JOIN user_role ON user.id = user_role.id JOIN role ON user_role.role_id = role.role_id WHERE user.id = :uid",
             nativeQuery = true)
     public String findRoleByUid(Long uid);
+    
+    @Query(value="SELECT * FROM user JOIN user_role ON user.id = user_role.id JOIN role ON user_role.role_id = role.role_id WHERE user_role.role_id = :uid",
+            nativeQuery = true)
+    public List<User> findUserByPid(Long uid);
 
-    @Query(value="SELECT user_role.role_id FROM user JOIN user_role ON user.id = user_role.user_id WHERE user.id = :uid",
+    @Query(value="SELECT user_role.role_id FROM user JOIN user_role ON user.id = user_role.id WHERE user.id = :uid",
             nativeQuery = true)
     public String findRoleIdByUid(Long uid);
 
-    @Query(value="SELECT * FROM user JOIN user_role ON user.id = user_role.user_id JOIN role ON user_role.role_id = role.id WHERE role.name = :role",
+    @Query(value="SELECT * FROM user JOIN user_role ON user.id = user_role.id JOIN role ON user_role.role_id = role.role_id WHERE role.name = :role",
             nativeQuery = true)
     public List<User> findUsersByRole(String role);
 
