@@ -1,10 +1,8 @@
 package com.Group1.MealsOnWheels.controller;
 
 import com.Group1.MealsOnWheels.Entity.Fund;
-import com.Group1.MealsOnWheels.Entity.Meal;
 import com.Group1.MealsOnWheels.Entity.Meal_Order;
 import com.Group1.MealsOnWheels.repository.FundsRepository;
-import com.Group1.MealsOnWheels.repository.MealRepository;
 import com.Group1.MealsOnWheels.repository.OrderRepository;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -23,9 +21,6 @@ import java.util.Map;
 @RequestMapping("/api")
 public class TestController {
 
-    @Autowired
-    MealRepository mealRepository;
-
     public TestController(OrderRepository orderRepository) {
         this.orderRepository = orderRepository;
     }
@@ -33,11 +28,6 @@ public class TestController {
     @GetMapping("/greeting")
     public String getGreeting() {
         return "Hello, World!";
-    }
-
-    @GetMapping("/getAllMeals")
-    public List<Meal> getAllMeals() {
-        return mealRepository.findAll();
     }
 
     private final String API_KEY = "AIzaSyBKwt4NuTqH__0QG_rq7MYeVFCNnvX4tVc";

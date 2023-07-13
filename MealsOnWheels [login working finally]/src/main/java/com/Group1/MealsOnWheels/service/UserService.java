@@ -84,7 +84,6 @@ public class UserService {
     }
 
     public void saveUser(User u, String r) {
-
         u.setRoles(new HashSet<>(roleRepository.findBySpecificRoles(r)));
 
         String encodedPassword = passwordEncoder.encode(u.getPassword());
