@@ -88,7 +88,7 @@
                 <% } %>
                 <div class="col-sm-3 pe-1">
                     <div class="dashboard-card">
-                        <img class="card-image" src="<%= meal.getPhotoPath() %>">
+                        <img class="card-image" src="<%= meal.getPhotoPath() %><%= meal.getPhoto() %>">
                         <div class="card-detail">
                             <h4><%= meal.getMeal_name() %>
                             	<span>  
@@ -141,7 +141,7 @@
 	        	<form action="/deleteFromCart" method="post">
 	        		<div class="d-flex justify-content-between">
 							<div class="d-flex justify-content-start mb-3">
-					            <img class="order-image" src="<%= meal.getPhotoPath() %>">
+					            <img class="order-image" src="<%= meal.getPhotoPath() %><%= meal.getPhoto() %>">
 					            <div class="order-detail ms-3">
 					            	<p class="fw-bold mb-0" style="font-size:1em;"><%= meal.getMeal_name() %></p>
 					                <span>x</span> <span>1</span>
@@ -194,7 +194,7 @@
 	        				<% for (Meal mealOrdered : mealResult) { %>
 	        				<% if (meal.getM_id() == mealOrdered.getM_id()) { %>
 							<div class="d-flex justify-content-start mb-3">
-					            <img class="order-image" src="<%= mealOrdered.getPhotoPath() %>">
+					            <img class="order-image" src="<%= mealOrdered.getPhotoPath() %><%= mealOrdered.getPhoto() %>">
 					            <div class="order-detail ms-3">
 					            	<p class="fw-bold mb-0" style="font-size:1em;"> <%= mealOrdered.getMeal_name() %> </p>
 					                <span style="font-size:0.8em;"><%= meal.getOrder_date() %> </span> 
