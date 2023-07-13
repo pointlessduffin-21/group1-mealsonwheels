@@ -29,7 +29,7 @@
         <div class="row">
 
             <div class="row" style="position:absolute;top:25%;left:10%">
-                <<% User user = (User) request.getAttribute("loggedUser"); %>>
+                <% User user = (User) request.getAttribute("loggedUser"); %>
                 <div class="col-1">
                     <div style="height: 150px; width: 150px;" class="rounded-circle bg-primary">
                         <div class="h-100 fs-1 text-white d-flex justify-content-center" style="width: 150px;">
@@ -128,13 +128,10 @@
 <!-- Order Dashboard -->
 <div class="dashboard-order" style="padding-top:90px;">
     <h3>Order Menu</h3>
-    <div class="order-address">
-        <p>Address Delivery</p>
-        <h4>221 B Baker Street, Philippines</h4>
-    </div>
+    
     <% String orderNumber =(String) request.getAttribute("orderNumber"); %>
     <div class="order-time gap-2">
-        <span class="fas fa-hashtag"></span><%= orderNumber %>
+       Order Number: <span class="fas fa-hashtag"></span><%= orderNumber %>
     </div>
 	    <div class="order-wrapper" style="height:80px;">
 	     <% List<Meal> cartContent = (List<Meal>) request.getAttribute("cartContent"); %>
@@ -172,8 +169,15 @@
 	     </div>
 	    </div>
 	     <% Long meal_id = (Long) request.getAttribute("meal_id"); %>
+	     
+		
+		
 		    <hr class="divider">
 				<form action="/checkout" method="post">
+				<div class="order-address mb-4">
+        <p>Address Delivery</p>
+        <input type='text' class='form-control fw-bold' id='address' name='address' value='<%= user.getAddress() %>' /></h4>
+    </div>
 				 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 				    <input type="hidden" name="mealId" id="mealId" value="<%= meal_id %>">
 				    <button type="submit" class="checkout">Checkout</button>

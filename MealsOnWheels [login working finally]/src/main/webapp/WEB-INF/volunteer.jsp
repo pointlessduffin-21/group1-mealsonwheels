@@ -39,6 +39,7 @@
 	<%@ include file="header.jsp"%>
 
 	<div id="wrapper" class="container">
+	
 		<div class="d-flex flex-column" id="content-wrapper">
 			<div id="content">
 				<div class="container-fluid">
@@ -80,18 +81,20 @@
 												<span>STATUS</span>
 											</div>
 											<div class="text-dark fw-bold h5 mb-0">
+											<% User loggedUser = (User) request.getAttribute("loggedUser"); %>
 												<div class="dropdown">
 													<button id="status-btn"
 														class="btn text-white dropdown-toggle"
 														aria-expanded="false" data-bs-toggle="dropdown"
 														type="button"
-														style="height: 41px; background: #5ec58f; font-size: 18px;">Available</button>
+														style="height: 41px; background: #5ec58f; font-size: 18px;"><%= loggedUser.getStatus() %></button>
+														
 													<div class="dropdown-menu">
-														<a class="dropdown-item" href="#"
+														<a class="dropdown-item" href="setToAvailable"
 															onclick="changeStatus('Available')" style="color: green;">Available</a>
-														<a class="dropdown-item" href="#"
+														<a class="dropdown-item" href="setToBusy"
 															onclick="changeStatus('Busy')" style="color: orange;">Busy</a>
-														<a class="dropdown-item" href="#"
+														<a class="dropdown-item" href="setToOffline"
 															onclick="changeStatus('Offline')" style="color: grey;">Offline</a>
 													</div>
 												</div>
@@ -103,6 +106,9 @@
 						</div>
 
 						<script>
+						  window.onload = function() {
+							    changeStatus("<%= loggedUser.getStatus() %>");
+						  }
 							function changeStatus(status) {
 								document.getElementById("status-btn").innerHTML = status;
 								if (status === "Available") {

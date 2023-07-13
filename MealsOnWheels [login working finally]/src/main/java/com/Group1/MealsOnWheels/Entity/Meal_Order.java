@@ -21,13 +21,15 @@ public class Meal_Order {
     private String to_address;
     private String from_address;
     private String status;
+    private String distance;
+    private String meal_status;
 
     public Meal_Order() {
 
     }
 
     public Meal_Order(Long mo_id, String order_number, Long m_id, Long u_id, String p_id, String v_id, String a_id,
-                      String order_date, String to_address, String from_address, String status) {
+                      String order_date, String to_address, String from_address, String status, String distance, String meal_status) {
         super();
         this.mo_id = mo_id;
         this.order_number = order_number;
@@ -40,6 +42,8 @@ public class Meal_Order {
         this.to_address = to_address;
         this.from_address = from_address;
         this.status = status;
+        this.distance = distance;
+        this.meal_status = meal_status;
     }
     public Long getMo_id() {
         return mo_id;
@@ -106,6 +110,18 @@ public class Meal_Order {
     }
     public void setStatus(String status) {
         this.status = status;
+    }
+    public String getDistance() {
+        return distance;
+    }
+    public void setDistance(String distance) {
+        this.distance = distance;
+    }
+    public String getMeal_status() {
+        return meal_status;
+    }
+    public void setMeal_tatus(String meal_status) {
+        this.meal_status = meal_status;
     }
 }
 
