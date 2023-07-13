@@ -12,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -39,11 +38,22 @@ public class LoginController {
         return "login";
     }
 
-    @PostMapping("/register_user")
-    public String registration(User user, @RequestParam("userRole") String role) {
-        userService.saveUser(user,role);
-        return "login" ;
+    @GetMapping("register_user")
+    public String showRegistrationForm(@ModelAttribute("user") User user) {
 
+
+        return "register";
+    }
+
+    @PostMapping("register")
+    public String registerNewUser(@ModelAttribute("user") User user, Model model) {
+
+        userService.save(user);
+
+        String success_register = "Registeration Successful! ";
+        model.addAttribute("success_register", success_register);
+
+        return "register";
     }
 
     @GetMapping("login_success")

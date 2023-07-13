@@ -19,9 +19,6 @@ public interface OrderRepository extends JpaRepository<Meal_Order, Long>{
 	@Query("SELECT o, m.meal_name FROM Meal_Order o JOIN Meal m ON o.m_id = m.m_id WHERE o.u_id = :userId")
 	public List<Meal_Order> getMealsByUId(@Param("userId") Long userId);
 
-	@Query("SELECT mo FROM Meal_Order mo WHERE mo.p_id = :partId and mo.status = 'ACCEPTED'")
-	public List<Meal_Order> getMealsByPId(@Param("partId") String partId);
-
 	@Query("SELECT o FROM Meal_Order o WHERE o.v_id = :volunteerId and o.status = :status")
 	public List<Meal_Order> getOrdersByVIdAndStatus(@Param("volunteerId") String volunteerId, @Param("status") String status);
 	

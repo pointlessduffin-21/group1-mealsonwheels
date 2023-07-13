@@ -65,7 +65,7 @@ public class MealController {
             }
 
             // Set the image path for the meal
-            meal.setPhotoPath("/images/meals/" + savedMeal.getM_id() + "/");
+            meal.setPhotoPath("/images/meals/" + savedMeal.getM_id() + "/" + savedMeal.getPhoto());
             mealRepository.save(meal);
 
             return "redirect:/kitchen";

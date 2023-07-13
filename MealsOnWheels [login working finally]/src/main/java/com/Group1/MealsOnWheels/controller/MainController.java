@@ -134,7 +134,7 @@ public class MainController {
 
                 System.out.println("LOL"+order.getStatus());
 
-                return "redirect:/volunteer";
+                return "volunteer";
 
             } else {
                 return "volunteer";
@@ -590,6 +590,7 @@ public class MainController {
         User user = userService.findByUserName(loggedUser.getUsername());
         model.addAttribute("loggedUser", user);
 
+        
         List<Meal> mealResults = mealService.getAllMeals();
         model.addAttribute("mealResults", mealResults);
 
@@ -602,8 +603,9 @@ public class MainController {
         List<Meal_Order> approvedMeals = orderService.getApproved();
         model.addAttribute("approvedMeals", approvedMeals);
 
-        List<Meal_Order> acceptedMeals = orderService.getMealsByPId(partId);
+        List<Meal_Order> acceptedMeals = orderService.getAccepted();
         model.addAttribute("acceptedMeals", acceptedMeals);
+
         List<User> volunteers = userService.listAllRider();
         model.addAttribute("riders", volunteers);
 
@@ -778,16 +780,10 @@ public class MainController {
 
 @PostMapping("/acceptOrder")
 public String acceptOrder(@RequestParam("orderId") Long orderId, HttpSession session, Model model) {
-    UserDetails loggedUser = (UserDetails) session.getAttribute("user");
-    User user = userService.findByUserName(loggedUser.getUsername());
-    Long Pid = user.getId();
-    String partId = String.valueOf(Pid);
-       
 
     Meal_Order acceptedOrder = orderService.getOrder(orderId);
 
     acceptedOrder.setStatus("ACCEPTED");
-    acceptedOrder.setP_id(partId);
 
     orderService.save(acceptedOrder);
     return "redirect:/kitchen";
@@ -824,5 +820,10 @@ public String assignRiderr(@RequestParam("orderId") Long orderId,@RequestParam("
 //	    	return "login";
 //	    }
 	    
-	
+		@PostMapping("/register_user")
+		public String registration(User user, @RequestParam("userRole") String role) {
+			userService.saveUser(user,role);
+			return "login" ;
+
+		}
 }

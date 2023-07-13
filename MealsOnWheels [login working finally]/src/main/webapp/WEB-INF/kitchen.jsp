@@ -77,7 +77,7 @@
                 <% } %>
                 <div class="col-sm-3 pe-1">
                     <div class="dashboard-card">
-                        <img class="card-image" src="<%= meal.getPhotoPath() %><%= meal.getPhoto() %>">
+                        <img class="card-image" src="<%= meal.getPhotoPath() %>">
                         <div class="card-detail">
                             <h4><%= meal.getMeal_name() %>
                             	<span>  
@@ -120,11 +120,12 @@
                 <% mealResult = (List<Meal>) request.getAttribute("mealResults"); %>
 		       	<% for (Meal approvedMeal : mealResult) { %>
 		       	<% if (order.getM_id() == approvedMeal.getM_id()) { %>
-                <img class="order-image" src="<%= approvedMeal.getPhotoPath() %><%= approvedMeal.getPhoto() %>">
+                <img class="order-image" src="<%= approvedMeal.getPhotoPath() %>">
                 <div class="order-detail">
                     <p><%= approvedMeal.getMeal_name() %></p>
                     <p>Order Number: <%= order.getOrder_number() %></p>
                     <p>Member ID: <%= order.getU_id() %></p>
+                    <p><%= order.getP_id() %></p>
 					<div style="display: flex;">
 					  <span style="margin-right: 10px;">
 						  <form action="/acceptOrder" method="post" class="ms-0 col-2" style="position:relative;left:0%;">	
@@ -162,7 +163,7 @@
                 <% mealResult = (List<Meal>) request.getAttribute("mealResults"); %>
 		       	<% for (Meal approvedMeal : mealResult) { %>
 		       	<% if (cooking.getM_id() == approvedMeal.getM_id()) { %>    
-                    <img class="order-image" src="<%= approvedMeal.getPhotoPath() %><%= approvedMeal.getPhoto() %>">
+                    <img class="order-image" src="<%= approvedMeal.getPhotoPath() %>">
                     <p>Order Number: <%= cooking.getOrder_number() %></p>
                     <p>Member ID: <%= cooking.getU_id() %></p>
                     <p>Name: <%= approvedMeal.getMeal_name() %></p>
@@ -172,18 +173,19 @@
 					<div style="display: flex;" class="pt-2">
 					  <span style="margin-right: 10px;">
 					    <form action="/assignRider" method="post" class="ms-0 col-2" style="position:relative;left:0%;">	
-					    	<input type="hidden" name="orderId" value="<%= cooking.getMo_id() %>">
-					    	 <select class="form-select rider-dropdown mb-3" name="riderId" id="riderId">
+					    	<input type="hidden" name="orderId" value="<%= cooking.getMo_id() %>" placeholder="Select a rider">
+					    	 <select class="form-select rider-dropdown" name="riderId" id="riderId">
 			          		<option selected disabled>Select a rider</option>
 			            	<% List<User> rider = (List<User>) request.getAttribute("riders"); %>
-		       				  <% if (rider != null && !rider.isEmpty()) { %>
-		       				  <% for (User volunteers : rider) { %>
-                    <option value="<%= volunteers.getId() %>"><%= volunteers.getName() %></option>
-                    <% } %>
-                    <% } %>
+		       				<% if (rider != null && !rider.isEmpty()) { %>
+		       				<% for (User volunteers : rider) { %>
+		       			
+                            <option value="<%= volunteers.getId() %>"><%= volunteers.getName() %></option>
+                            <% } %>
+                            <% } %>
 			        </select>
 					    	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-					    	<button class="btn btn-success" type="submit" style="width: 80px; padding: 6px 12px;">Assign</button>
+					    	<button class="btn btn-success" type="submit" style="width: 80px; padding: 6px 12px;">Accept</button>
 					    </form>
 					  </span>
 					</div>

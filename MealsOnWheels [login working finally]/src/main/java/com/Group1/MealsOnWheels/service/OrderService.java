@@ -26,11 +26,8 @@ public class OrderService {
         return orderRepo.getLastOrderNumber();
     }
     public List<Meal_Order> getMealsByUId(Long u_id) {
+        // TODO Auto-generated method stub
         return orderRepo.getMealsByUId(u_id);
-    }
-
-    public List<Meal_Order> getMealsByPId(String partId) {
-        return orderRepo.getMealsByPId(partId);
     }
 
     public List<Meal_Order> getOrdersByVIdAndStatus(String v_id, String status) {
