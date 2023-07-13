@@ -1,12 +1,15 @@
 package com.Group1.MealsOnWheels.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import com.google.gson.Gson;
 import java.util.Iterator;
 import java.util.List;
 
 import com.Group1.MealsOnWheels.Entity.Meal;
 import com.Group1.MealsOnWheels.Entity.Meal_Order;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,11 +19,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.Group1.MealsOnWheels.Entity.User;
 import com.Group1.MealsOnWheels.service.MealService;
 import com.Group1.MealsOnWheels.service.OrderService;
 import com.Group1.MealsOnWheels.service.UserService;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import javax.servlet.http.HttpSession;
 
@@ -138,13 +145,121 @@ public class MainController {
 	}
 	
 	@GetMapping("/volunteer")
-    public String volunteerDashboard(Model model, HttpSession session) {
+    public String volunteerDashboard(Model model, HttpSession session) throws IOException {
 
         UserDetails loggedUser = (UserDetails) session.getAttribute("user");
         User user = userService.findByUserName(loggedUser.getUsername());
         model.addAttribute("loggedUser", user);
 
         if (user != null) {
+
+            String uName = user.getName();
+            model.addAttribute("uName", uName);
+
+            String vId = user.getId().toString();
+            
+            List<Meal_Order> ookOrders = orderService.getOrdersByVIdAndStatus(vId, "OUT OF KITCHEN");
+            model.addAttribute("ookOrders", ookOrders);
+
+            List<Meal> meals = mealService.getAllMeals();
+            model.addAttribute("meals", meals);
+
+            List<User> allUsers = userService.getAllUsers();
+            model.addAttribute("users", allUsers);
+
+            List<Meal_Order> vrOrders = orderService.getOrdersByVIdAndStatus(vId, "RECEIVED");
+            model.addAttribute("vrOrders", vrOrders);
+
+            List<Meal_Order> dOrders = orderService.getOrdersByVIdAndStatus(vId, "DELIVERED");
+            model.addAttribute("dOrders", dOrders);
+            return "volunteer";
+        }
+        return "login";
+    }
+	
+	@GetMapping("/setToAvailable")
+    public String setToAvailable(Model model, HttpSession session) {
+
+        UserDetails loggedUser = (UserDetails) session.getAttribute("user");
+        User user = userService.findByUserName(loggedUser.getUsername());
+        model.addAttribute("loggedUser", user);
+
+        if (user != null) {
+        	
+        	user.setStatus("Available");
+            userService.save(user);
+
+            String uName = user.getName();
+            model.addAttribute("uName", uName);
+
+            String vId = user.getId().toString();
+
+            List<Meal_Order> ookOrders = orderService.getOrdersByVIdAndStatus(vId, "OUT OF KITCHEN");
+            model.addAttribute("ookOrders", ookOrders);
+
+            List<Meal> meals = mealService.getAllMeals();
+            model.addAttribute("meals", meals);
+
+            List<User> users = userService.getAllUsers();
+            model.addAttribute("users", users);
+
+            List<Meal_Order> vrOrders = orderService.getOrdersByVIdAndStatus(vId, "RECEIVED");
+            model.addAttribute("vrOrders", vrOrders);
+
+            List<Meal_Order> dOrders = orderService.getOrdersByVIdAndStatus(vId, "DELIVERED");
+            model.addAttribute("dOrders", dOrders);
+            return "volunteer";
+        }
+        return "login";
+    }
+	
+	@GetMapping("/setToBusy")
+    public String setToBusy(Model model, HttpSession session) {
+
+        UserDetails loggedUser = (UserDetails) session.getAttribute("user");
+        User user = userService.findByUserName(loggedUser.getUsername());
+        model.addAttribute("loggedUser", user);
+
+        if (user != null) {
+        	
+        	user.setStatus("Busy");
+            userService.save(user);
+
+            String uName = user.getName();
+            model.addAttribute("uName", uName);
+
+            String vId = user.getId().toString();
+
+            List<Meal_Order> ookOrders = orderService.getOrdersByVIdAndStatus(vId, "OUT OF KITCHEN");
+            model.addAttribute("ookOrders", ookOrders);
+
+            List<Meal> meals = mealService.getAllMeals();
+            model.addAttribute("meals", meals);
+
+            List<User> users = userService.getAllUsers();
+            model.addAttribute("users", users);
+
+            List<Meal_Order> vrOrders = orderService.getOrdersByVIdAndStatus(vId, "RECEIVED");
+            model.addAttribute("vrOrders", vrOrders);
+
+            List<Meal_Order> dOrders = orderService.getOrdersByVIdAndStatus(vId, "DELIVERED");
+            model.addAttribute("dOrders", dOrders);
+            return "volunteer";
+        }
+        return "login";
+    }
+	
+	@GetMapping("/setToOffline")
+    public String setToOffline(Model model, HttpSession session) {
+
+        UserDetails loggedUser = (UserDetails) session.getAttribute("user");
+        User user = userService.findByUserName(loggedUser.getUsername());
+        model.addAttribute("loggedUser", user);
+
+        if (user != null) {
+        	
+        	user.setStatus("Offline");
+            userService.save(user);
 
             String uName = user.getName();
             model.addAttribute("uName", uName);
@@ -406,10 +521,64 @@ public class MainController {
     }
 
     @GetMapping("/admin")
-    public String adminPage() {
+    public String adminPage(Model model, HttpSession session){
+    	UserDetails loggedUser = (UserDetails) session.getAttribute("user");
+        User user = userService.findByUserName(loggedUser.getUsername());
+        model.addAttribute("loggedUser", user);
+        
+        List<Meal_Order> deliveredOrders = orderService.getOrdersByStatus("DELIVERED");
+        model.addAttribute("deliveredOrders", deliveredOrders);
+        
+        List<Meal_Order> ordered = orderService.getOrdersByStatus("ORDERED");
+        model.addAttribute("ordered", ordered);
+
+        
+        List<Meal> mealResults = mealService.getAllMeals();
+        model.addAttribute("mealResults", mealResults);
+        
+        Long pId = Long.valueOf(5);
+
+        List<User> partners = userService.findUserByPid(pId);
+        model.addAttribute("partners", partners);
+
         return "admin";
     }
+    
+    @PostMapping("/adminAccepts")
+    public String adminAccepts(Model model, HttpSession session,@RequestParam("orderId") String orderId, @RequestParam("selectedPartner") String partnerId, @RequestParam("destination") String address){
+    	UserDetails loggedUser = (UserDetails) session.getAttribute("user");
+        User user = userService.findByUserName(loggedUser.getUsername());
+        model.addAttribute("loggedUser", user);
+        String adminId = String.valueOf(user.getId());
+        
+        List<Meal_Order> ordered = orderService.getOrdersByStatus("ORDERED");
+        model.addAttribute("ordered", ordered);
+        
 
+        List<Meal_Order> deliveredOrders = orderService.getOrdersByStatus("DELIVERED");
+        model.addAttribute("deliveredOrders", deliveredOrders);
+        
+        List<Meal> mealResults = mealService.getAllMeals();
+        model.addAttribute("mealResults", mealResults);
+
+        Meal_Order order = orderService.getOrder(Long.valueOf(orderId));
+        
+        order.setA_id(adminId);
+        order.setTo_address(address);
+        order.setP_id(partnerId);
+        order.setStatus("ACCEPTED");
+        orderService.save(order);
+        
+
+        Long pId = Long.valueOf(5);
+
+        List<User> partners = userService.findUserByPid(pId);
+        model.addAttribute("partners", partners);
+
+        return "admin";
+    }
+    
+   
     @GetMapping("/donator")
     public String donatePage() {
         return "donator";
@@ -417,11 +586,9 @@ public class MainController {
 
     @GetMapping("/kitchen")
     public String kitPage(Model model, HttpSession session) {
-        UserDetails loggedUser = (UserDetails) session.getAttribute("user");
+    	UserDetails loggedUser = (UserDetails) session.getAttribute("user");
         User user = userService.findByUserName(loggedUser.getUsername());
         model.addAttribute("loggedUser", user);
-        Long Pid = user.getId();
-        String partId = String.valueOf(Pid);
 
         List<Meal> mealResults = mealService.getAllMeals();
         model.addAttribute("mealResults", mealResults);
@@ -556,12 +723,14 @@ public class MainController {
 
 
     @PostMapping("/checkout")
-    public String checkout(@RequestParam("mealId") String mealId, Model model, HttpSession session) throws Exception {
+    public String checkout(@RequestParam("mealId") String mealId, @RequestParam("address") String address, Model model, HttpSession session) throws Exception {
         try {
+        	System.out.print("address");
             UserDetails loggedUser = (UserDetails) session.getAttribute("user");
             User user = userService.findByUserName(loggedUser.getUsername());
             model.addAttribute("loggedUser", user);
 	        Long userId = user.getId();
+	
 
 	        List<Meal> mealResults = mealService.getAllMeals();
 	        model.addAttribute("mealResults", mealResults);
@@ -570,7 +739,7 @@ public class MainController {
 	        List<Meal_Order> myOrders = orderService.getMealsByUId(user.getId());
 	        model.addAttribute("myOrders", myOrders);
 
-	        System.out.print("hi");
+	        System.out.print(address);
             String orderNumberString = orderService.getLastOrderNumber();
             int orderNumber = orderNumberString != null ? Integer.parseInt(orderNumberString) : 0;
             int incrementedOrderNumber = orderNumber + 1;
@@ -578,6 +747,11 @@ public class MainController {
 
             for (Long item : selectedItems) {
                 Meal_Order order = new Meal_Order();
+                
+                user.setAddress(address);
+                userService.save(user);
+                
+                order.setFrom_address(address);
                 order.setU_id(userId);
                 order.setOrder_number(incrementedOrderNumberString);
                 order.setOrder_date(java.time.LocalDate.now().toString());

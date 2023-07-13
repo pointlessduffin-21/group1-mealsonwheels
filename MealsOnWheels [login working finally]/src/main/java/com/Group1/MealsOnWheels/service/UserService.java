@@ -148,5 +148,11 @@ public class UserService {
         // TODO Auto-generated method stub
         return userRepository.findByEmail(email);
     }
+    
+    public List<User> findUserByPid(Long pid) {
+        // TODO Auto-generated method stub
+        return userRepository.findUserByPid(pid);
+    }
+
 
 }

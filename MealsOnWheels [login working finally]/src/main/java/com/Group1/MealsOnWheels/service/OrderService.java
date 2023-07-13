@@ -36,6 +36,10 @@ public class OrderService {
     public List<Meal_Order> getOrdersByVIdAndStatus(String v_id, String status) {
         return orderRepo.getOrdersByVIdAndStatus(v_id, status);
     }
+    
+    public List<Meal_Order> getOrdersByStatus(String status) {
+        return orderRepo.getOrdersByStatus(status);
+    }
 
     public List<Meal_Order> getAcceptedOrders() {
 		return orderRepo.getAccepted();
