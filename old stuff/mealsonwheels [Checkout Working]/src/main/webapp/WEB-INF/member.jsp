@@ -1,5 +1,6 @@
-
+<%@ page import="com.merrymeals.mealsonwheels.Entity.Meal_Order" %>
 <%@ page import="com.merrymeals.mealsonwheels.Entity.Meal" %>
+<%@ page import="com.merrymeals.mealsonwheels.Entity.User" %>
 <%@ page import="java.util.List" %>
 
 
@@ -28,22 +29,22 @@
     <div class="dashboard-banner">
         <img src="https://i.pinimg.com/564x/25/e6/a1/25e6a1365e9a35071db3c7d2d8ea6eab.jpg">
         <div class="row">
-
+<%-- 
             <div class="row" style="position:absolute;top:25%;left:10%">
+                <% User user = (User) request.getAttribute("loggedUser"); %>
                 <div class="col-1">
                     <div style="height: 150px; width: 150px;" class="rounded-circle bg-primary">
                         <div class="h-100 fs-1 text-white d-flex justify-content-center" style="width: 150px;">
-                            <span style="font-size: 2em;" class="my-auto">J</span>
-                            <span style="font-size: 2em;" class="my-auto">D</span>
+                            <span style="font-size: 2em;" class="my-auto"> <%= user.getName().charAt(0) %></span>
                         </div>
                     </div>
                 </div>
+                
                 <div class="col-8 ms-5 ps-5">
                     <h1 style="color: var(--yellow);font-weight: 800;">WELCOME!</h1>
-                    <h1 class="text-white">John Doe</h1>
-                    <h4 class="text-white">Member</h4>
-                </div>
-            </div>
+                    <h1 class="text-white"><%= user.getName() %> </h1>
+                    <h4 class="text-white"><%= user.getU_id() %></h4>
+            </div> --%>
 
             <div class="banner-promo text-end">
                 <h1><span>FREE</span><br>
@@ -89,16 +90,21 @@
                 <% } %>
                 <div class="col-sm-3 pe-1">
                     <div class="dashboard-card">
-                        <img class="card-image" src="https://hips.hearstapps.com/hmg-prod/images/classic-cheese-pizza-recipe-2-64429a0cb408b.jpg?crop=0.6666666666666667xw:1xh;center,top&resize=1200:*">
+                        <img class="card-image" src="<%= meal.getPhotoPath() %>">
                         <div class="card-detail">
                             <h4><%= meal.getMeal_name() %>
                             	<span>  
-                            		<form action="addToCart" method="post" class="ms-0 col-2" style="position:relative;left:0%;">
-									    <input type="hidden" name="mealId" id="mealId" value="<%= meal.getM_id() %>">
+                            		<form action="/addToCart" method="post" class="ms-0 col-2" style="position:relative;left:0%;">
+									    <input type="hidden" name="mealId" value="<%= meal.getM_id() %>">
+									    <!-- Insert the CSRF token input field here -->
+									    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 									    <button type="submit" class="btn btn-outline-danger" style="width:100px;font-size:0.5em;">Add to Cart</button>
 									</form>
 
+
 								</span>
+								<p><%= meal.getDescription() %></p>
+                            	<p class="card-time"><span class="fas fa-clock"></span> <%= meal.getDuration() %></p>
 							</h4>
 							
                             <%-- <p>Nutrition: <%= meal.getNutrition() %></p>
@@ -140,7 +146,7 @@
 	        	<form action="/deleteFromCart" method="post">
 	        		<div class="d-flex justify-content-between">
 							<div class="d-flex justify-content-start mb-3">
-					            <img class="order-image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLY5j-0GxBdLWv53oNAH6KKQszBRTDWstPXg&usqp=CAU">
+					            <img class="order-image" src="<%= meal.getPhotoPath() %>">
 					            <div class="order-detail ms-3">
 					            	<p class="fw-bold mb-0" style="font-size:1em;"><%= meal.getMeal_name() %></p>
 					                <span>x</span> <span>1</span>
@@ -148,6 +154,7 @@
 					        </div>
 				        <div>
 				           <input type="hidden" name="mealId" id="mealId" value="<%= meal.getM_id() %>">
+				            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 				            <button type='submit' class="order-price text-danger d-flex justify-content-end me-3 btn"><i class="fas fa-times"></i></button>
 						</div>
 					</div>
@@ -169,22 +176,48 @@
 	     <% Long meal_id = (Long) request.getAttribute("meal_id"); %>
 		    <hr class="divider">
 				<form action="/checkout" method="post">
+				 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 				    <input type="hidden" name="mealId" id="mealId" value="<%= meal_id %>">
 				    <button type="submit" class="checkout">Checkout</button>
 				</form>
 	     <h3 class="mt-3"
 	     >Order History</h3>
-	      <% String errMsg =(String) request.getAttribute("errMsg"); %>
-	     <%= errMsg %>
-	      <% List<Long> selectedItems = (List<Long>) request.getAttribute("selectedItems"); %>
-	       <%= selectedItems %>
-	       <% Long item = (Long) request.getAttribute("item"); %>
-	       <%= item %>
+	     <div class="order-wrapper" style="height:300px;">
+	     <% List<Meal_Order> myOrders = (List<Meal_Order>) request.getAttribute("myOrders"); %>
+	    <% if (myOrders != null && !myOrders.isEmpty()) { %>
+	            <% for (Meal_Order meal : myOrders) { %>
+	        <div class="order-card">
+	        		<div class="d-flex justify-content-between">
+	        		        <% mealResult = (List<Meal>) request.getAttribute("mealResults"); %>
+	        				<% for (Meal mealOrdered : mealResult) { %>
+	        				<% if (meal.getM_id() == mealOrdered.getM_id()) { %>
+							<div class="d-flex justify-content-start mb-3">
+					            <img class="order-image" src="<%= mealOrdered.getPhotoPath() %>">
+					            <div class="order-detail ms-3">
+					            	<p class="fw-bold mb-0" style="font-size:1em;"> <%= mealOrdered.getMeal_name() %> </p>
+					                <span style="font-size:0.8em;"><%= meal.getOrder_date() %> </span> 
+					            </div>
+					        </div>
+					        <% } %>
+					        <% } %>
+				        <div>
+				           <input type="hidden" name="mealId" id="mealId" value="<%= meal.getM_id() %>">
+				            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+				            <button type='submit' class="order-price text-danger d-flex justify-content-end btn" style="width:113px;">
+				            	<p style="font-size:0.8em;" class="mb-0">Status: <%= meal.getStatus() %>
+				            </button>
+						</div>
+					</div>
+	        </div>
+	     <% } %>
+	     <% }  %>
+	  
+	     </div>
 </div>
 
-
+<%-- 
 <%@ include file="footer.jsp"%>
-
+ --%>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <script src="https://cdn.reflowhq.com/v2/toolkit.min.js"></script>
 <script src="assets/js/bs-init.js"></script>

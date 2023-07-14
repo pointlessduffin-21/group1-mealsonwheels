@@ -18,6 +18,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.UUID;
+
 @Controller
 public class MealController {
 
@@ -40,7 +41,7 @@ public class MealController {
     public ResponseEntity<String> addNewMeal(@RequestParam("picture") MultipartFile image,
                                              @ModelAttribute Meal meal) {
       try {
-        String imageName = UUID.randomUUID().toString() + "_" + StringUtils.cleanPath(image.getOriginalFilename());
+        String imageName = StringUtils.cleanPath(image.getOriginalFilename());
 
         // Set meal details
         meal.setPhoto(imageName);
@@ -64,7 +65,7 @@ public class MealController {
         }
    
         // Set the image path for the meal
-        meal.setPhotoPath("/images/meals/" + savedMeal.getM_id() + "/" + savedMeal.getMeal_name());
+        meal.setPhotoPath("/images/meals/" + savedMeal.getM_id() + "/" + savedMeal.getPhoto());
         mealRepository.save(meal);
 
         return ResponseEntity.ok("Meal successfully added");

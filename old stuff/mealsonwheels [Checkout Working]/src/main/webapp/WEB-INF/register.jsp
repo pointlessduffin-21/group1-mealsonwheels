@@ -22,17 +22,17 @@
         </div>
 
         <form class='m-2' action="/register_user" method="post">
-
-            <div class="dropdown-center col-3 mx-auto d-grid text-center mb-3">
-                <label htmlFor='userRole'>Choose a Role:</label>
-                <select name="userRole" class="form-control">
-                    <option value="Member">Member</option>
-                    <option value="Donator">Donator</option>
-                    <option value="Volunteer/Rider">Volunteer/Rider</option>
-                    <option value="Caregiver">Caregiver</option>
-                    <option value="Kitchen">Kitchen</option>
-                </select>
-            </div>
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+		
+			<div class="dropdown-center col-3 mx-auto d-grid text-center mb-3">
+			    <label htmlFor='userRole'>Choose a Role:</label>
+			    <select name="userRole" class="form-control" id="userRole">
+			        <option value="Member">Member</option>
+			        <option value="Donator">Donator</option>
+			        <option value="Volunteer">Volunteer/Rider</option>
+			        <option value="Partner">Kitchen</option>
+			    </select>
+			</div>
 
 
             <div class='row'>
@@ -47,12 +47,12 @@
                 </div>
 
                 <div class='form-group mb-3 col-6'>
-                    <label htmlFor='username'>Username</label>
+                    <label htmlFor='userName'>Username</label>
                     <input
                             type='text'
                             class='form-control'
-                            id='username'
-                            name='username'
+                            id='userName'
+                            name='userName'
                     />
                 </div>
             </div>

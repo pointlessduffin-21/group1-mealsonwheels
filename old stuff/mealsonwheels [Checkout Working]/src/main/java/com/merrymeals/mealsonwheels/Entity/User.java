@@ -2,18 +2,18 @@ package com.merrymeals.mealsonwheels.Entity;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.Objects;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.merrymeals.mealsonwheels.Entity.Role;
 
 @Entity
@@ -25,23 +25,34 @@ public class User {
 	private String email;
 	private String password;
 	private String name;
+	
+	@Column(name="user_name")
 	private String userName;
+	
 	private String address;
 	private String contact;
 	private String age;
 
-	@ManyToMany
-	@JoinTable( name="user_role",
-			joinColumns = @JoinColumn(name = "u_id"),
-			inverseJoinColumns = @JoinColumn(name = "r_id"))
-	private Set<Role> roles = new HashSet<>();
+	 @JsonIgnore
+	    @ManyToMany
+	    @JoinTable(
+	        name = "user_role",
+	        joinColumns = @JoinColumn(name = "u_id"),
+	        inverseJoinColumns = @JoinColumn(name = "r_id")
+	    )
+	    private Set<Role> roles = new HashSet<>();
+	 
+	 public Set<Role> getRoles() {
+	        return roles;
+	    }
+
 
 	public User() {
 
 	}
 
 	public User(Long u_id, String email, String password, String name, String userName, String address, String contact,
-				String age, Set<Role> roles, Set<Health_Issue> issues, Set<Partner> partner) {
+				String age, Set<Role> roles) {
 		super();
 		this.u_id = u_id;
 		this.email = email;
@@ -102,10 +113,6 @@ public class User {
 
 	public void setAge(String age) {
 		this.age = age;
-	}
-
-	public Set<Role> getRoles(){
-		return roles;
 	}
 
 	public void setRoles(Set<Role> roles) {

@@ -40,5 +40,13 @@ public class MealService {
 	public List<Meal> getAllMeals() {
 		return mealRepo.findAll();
 	}
+	
+	public List<Meal> getMealsByUId(Long userId){
+		return mealRepo.getMealsByUId(userId);
+	}
+	
+	public Meal getMealByUId(Long mealId){
+		return mealRepo.getMealByUId(mealId);
+	}
 
 }

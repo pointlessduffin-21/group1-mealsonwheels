@@ -19,4 +19,15 @@ public interface MealRepository extends JpaRepository<Meal, Long>{
 	
 	@Query("SELECT o FROM Meal o WHERE o.m_id = :mealId")
 	public Long getMealIdById(@Param("mealId") Long mealId);
+	
+	@Query("SELECT m, o.status, o.order_date FROM Meal m JOIN Meal_Order o ON m.m_id = o.m_id WHERE o.u_id = :userId")
+	public List<Meal> getMealsByUId(@Param("userId") Long userId);
+	
+	@Query("SELECT m FROM Meal m WHERE m.m_id = :mealId")
+	public Meal getMealByUId(@Param("mealId") Long mealId);
+
+	
+//	SELECT * FROM meal JOIN meal_order o ON meal.m_id = o.m_id WHERE o.u_id = 1
+
+
 }

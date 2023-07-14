@@ -1,9 +1,9 @@
 package com.merrymeals.mealsonwheels.Entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -15,22 +15,30 @@ public class Funds {
 
     private Long f_id;
     private String name;
-    private double amount;
+    private String amount;
     private LocalDateTime dateTime;
+    private Long donor_id;
+    private String Paypal;
 
     public Funds() {
 
     }
 
-    public Funds(Long f_id, String name, double amount, LocalDateTime dateTime) {
-        super();
-        this.f_id = f_id;
-        this.name = name;
-        this.amount = amount;
-        this.dateTime = dateTime;
-    }
+    
 
-    public Long getF_id() {
+    public Funds(Long f_id, String name, String amount, LocalDateTime dateTime, Long donor_id, String paypal) {
+		super();
+		this.f_id = f_id;
+		this.name = name;
+		this.amount = amount;
+		this.dateTime = dateTime;
+		this.donor_id = donor_id;
+		Paypal = paypal;
+	}
+
+
+
+	public Long getF_id() {
         return f_id;
     }
 
@@ -46,11 +54,11 @@ public class Funds {
         this.name = name;
     }
 
-    public double getAmount() {
+    public String getAmount() {
         return amount;
     }
 
-    public void setAmount(double amount) {
+    public void setAmount(String amount) {
         this.amount = amount;
     }
 
@@ -61,14 +69,40 @@ public class Funds {
     public void setDateTime(LocalDateTime dateTime) {
         this.dateTime = dateTime;
     }
+    
+    
 
-    public Funds(String name, double amount, LocalDateTime dateTime) {
+    public Long getDonor_id() {
+		return donor_id;
+	}
+
+
+
+	public void setDonor_id(Long donor_id) {
+		this.donor_id = donor_id;
+	}
+
+
+
+	public String getPaypal() {
+		return Paypal;
+	}
+
+
+
+	public void setPaypal(String paypal) {
+		Paypal = paypal;
+	}
+
+
+
+	public Funds(String name, String amount, LocalDateTime dateTime) {
         this.name = name;
         this.amount = amount;
         this.dateTime = dateTime;
     }
 
-    public Funds(String name, double amount) {
+    public Funds(String name, String amount) {
         this.name = name;
         this.amount = amount;
     }
@@ -82,9 +116,16 @@ public class Funds {
         this.dateTime = dateTime;
     }
 
-    public String toString() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        String formattedDate = dateTime.format(formatter);
-        return "Funds [f_id=" + f_id + ", name=" + name + ", amount=" + amount + ", date=" + formattedDate + "]";
-    }
+	@Override
+	public String toString() {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		String formattedDate = dateTime.format(formatter);
+		return "Funds [f_id=" + f_id + ", name=" + name + ", amount=" + amount + ", dateTime=" + dateTime
+				+ ", donor_id=" + donor_id + ", Paypal=" + Paypal + ", formatter=" + formatter + ", formattedDate="
+				+ formattedDate + "]";
+	}
+
+    
+    
+    
 }

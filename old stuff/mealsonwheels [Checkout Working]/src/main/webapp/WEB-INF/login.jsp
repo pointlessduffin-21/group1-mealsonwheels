@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1"%>
+         <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,8 +15,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
     <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
     <!-- Favicon-->
@@ -61,9 +60,6 @@
             backdrop-filter: saturate(200%) blur(25px);
         }
     </style>
-
-
-
 </head>
 <body>
 
@@ -93,7 +89,34 @@
 
                 <div class="card bg-glass">
                     <div class="card-body px-4 py-5 px-md-5">
-                        <form action="/login" method="POST">
+                    
+                     <c:url var="post_url" value="/login" />
+                    <form action="/loginTa" method="post" class="was-validated">
+				        <input type="hidden" name="${_csrf.parameterName}"
+				               value="${_csrf.token}" />
+				
+				        <div class="mb-3 mt-3">
+				            <label for="userName" class="form-label">Username:</label> <input
+				                type="text" class="form-control" id="userName"
+				                placeholder="Enter username" name="userName" value="" required>
+				            <div class="valid-feedback">Valid.</div>
+				            <div class="invalid-feedback">Please fill out this field.</div>
+				        </div>
+				        <div class="mb-3">
+				            <label for="password" class="form-label">Password:</label> <input
+				                type="password" class="form-control" id="password"
+				                placeholder="Enter password" name="password" value="" required>
+				            <div class="valid-feedback">Valid.</div>
+				            <div class="invalid-feedback">Please fill out this field.</div>
+				        </div>
+				
+				        <input type="submit" name="Login" value="Sign In"
+				               class="btn btn-primary"></input>
+				    </form>
+                    <%-- 
+                        <c:url var="post_url" value="/login" /> --%>
+						<%-- <form action="/login" method="post" class=""> 
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
                             <h1 class="mb-2 fw-bold ls-tight text-center" style="color: rgb(64, 59, 59)">
                                 Sign In <br />
                                 <!-- <span style="color: hsl(218, 81%, 75%)">for your business</span> -->
@@ -101,17 +124,16 @@
 
                             <!-- Email input -->
                             <div class="form-outline mb-4">
-                                <label class="form-label" for="form3Example3">Email</label>
-                                <input type="email" id="email" name="email" class="form-control" />
-                            </div>
+							    <label class="form-label" for="userName">Username</label>
+							    <input type="text" id="userName" name="userName" class="form-control" />
+							</div>
+
 
                             <!-- Password input -->
                             <div class="form-outline mb-4">
-                                <label class="form-label" for="form3Example4">Password</label>
+                                <label class="form-label" for="password">Password</label>
                                 <input type="password" id="password" name="password" class="form-control" />
                             </div>
-
-                            <input type="hidden" id="error-message" value="${error}" />
 
                             <div class="d-flex justify-content-center">
                                 <button type="submit" class="btn btn-secondary btn-block mb-4">
@@ -130,7 +152,18 @@
                                     <i class="fab fa-google" style="color: #6C757D;"></i>
                                 </button>
                             </div>
-                        </form>
+                            
+                             <c:choose>
+        <c:when test="${empty error_msg}">
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+            <button type="submit" formaction="/login_success">Login</button>
+        </c:when>
+        <c:otherwise>
+            <button type="submit" formaction="/login_error">Login</button>
+        </c:otherwise>
+    </c:choose>
+    
+                        </form> --%>
                     </div>
                 </div>
             </div>
@@ -140,18 +173,12 @@
 <!-- Section: Design Block -->
 
 <%@ include file="footer.jsp"%>
-<script>
-    // Get the error message from the hidden input field
-    var errorMessage = document.getElementById('error-message').value;
 
-    // Check if an error message is present
-    if (errorMessage) {
-        // Display the alert box
-        alert(errorMessage);
-    }
-</script>
-
-
-
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"
+        integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS"
+        crossorigin="anonymous"></script>
 </body>
 </html>

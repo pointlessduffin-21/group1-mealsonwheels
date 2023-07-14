@@ -5,13 +5,13 @@ package com.merrymeals.mealsonwheels.Entity;
 import java.util.HashSet;
 import java.util.Set;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Partner {
@@ -24,6 +24,7 @@ public class Partner {
 	private String name;
 	private String address;
 	private String contact;
+	private String status;
 
 	@ManyToMany
 	@JoinTable( name="partner_role",
@@ -36,8 +37,10 @@ public class Partner {
 	}
 
 
-	public Partner(Long p_id, String email, String password, String name, String userName, String address,
-				   String contact, Set<Role> roles) {
+	
+
+	public Partner(Long p_id, String email, String password, String name, String address, String contact, String status,
+			Set<Role> roles) {
 		super();
 		this.p_id = p_id;
 		this.email = email;
@@ -45,8 +48,12 @@ public class Partner {
 		this.name = name;
 		this.address = address;
 		this.contact = contact;
+		this.status = status;
 		this.roles = roles;
 	}
+
+
+
 
 	public Long getP_id() {
 		return p_id;
@@ -96,6 +103,15 @@ public class Partner {
 		this.contact = contact;
 	}
 	
+	
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
 	public Set<Role> getRoles() {
 		return roles;
@@ -106,9 +122,14 @@ public class Partner {
 	}
 
 
+
+
 	@Override
 	public String toString() {
-		return "Partner [p_id=" + p_id + ", email=" + email + ", password=" + password + ", name=" + name
-				+  ", address=" + address + ", contact=" + contact + ", roles=" + roles + "]";
+		return "Partner [p_id=" + p_id + ", email=" + email + ", password=" + password + ", name=" + name + ", address="
+				+ address + ", contact=" + contact + ", status=" + status + ", roles=" + roles + "]";
 	}
+
+
+	
 }

@@ -1,9 +1,9 @@
 package com.merrymeals.mealsonwheels.Entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
 public class Meal_Order {
@@ -13,10 +13,10 @@ public class Meal_Order {
 	private Long mo_id;
 	private String order_number;
 	private Long m_id;
-	private String u_id;
-	private String p_id;
-	private String v_id;
-	private String a_id;
+	private Long u_id;
+	private Long p_id;
+	private Long v_id;
+	private Long a_id;
 	private String order_date;
 	private String to_address;
 	private String from_address;
@@ -26,7 +26,7 @@ public class Meal_Order {
 		
 	}
 	
-	public Meal_Order(Long mo_id, String order_number, Long m_id, String u_id, String p_id, String v_id, String a_id,
+	public Meal_Order(Long mo_id, String order_number, Long m_id, Long u_id, Long p_id, Long v_id, Long a_id,
 			String order_date, String to_address, String from_address, String status) {
 		super();
 		this.mo_id = mo_id;
@@ -59,28 +59,28 @@ public class Meal_Order {
 	public void setM_id(Long m_id) {
 		this.m_id = m_id;
 	}
-	public String getU_id() {
+	public Long getU_id() {
 		return u_id;
 	}
-	public void setU_id(String u_id) {
+	public void setU_id(Long u_id) {
 		this.u_id = u_id;
 	}
-	public String getP_id() {
+	public Long getP_id() {
 		return p_id;
 	}
-	public void setP_id(String p_id) {
+	public void setP_id(Long p_id) {
 		this.p_id = p_id;
 	}
-	public String getV_id() {
+	public Long getV_id() {
 		return v_id;
 	}
-	public void setV_id(String v_id) {
+	public void setV_id(Long v_id) {
 		this.v_id = v_id;
 	}
-	public String getA_id() {
+	public Long getA_id() {
 		return a_id;
 	}
-	public void setA_id(String a_id) {
+	public void setA_id(Long a_id) {
 		this.a_id = a_id;
 	}
 	public String getOrder_date() {
@@ -107,4 +107,7 @@ public class Meal_Order {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
+    public void setPartner_id(Long partnerId) {
+    }
 }
